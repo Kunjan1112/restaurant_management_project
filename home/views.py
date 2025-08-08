@@ -9,6 +9,8 @@ def name(request):
 def index(request):
     return render(request,'home/home.html')
 
-def login(request):
-    return render(request,'home/login.html')
+def 404_view(request):
+    return render(request,'home/404.html')
 
+def login_view(request):
+    return render(request,'home/login.html')
