@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
+from .forms import RestaurantForm 
 
 # Create your views here.
 
@@ -14,3 +15,5 @@ def 404_view(request):
 
 def login_view(request):
     return render(request,'home/login.html')
+
+
