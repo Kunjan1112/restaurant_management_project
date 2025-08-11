@@ -17,4 +17,7 @@ def 404_view(request):
 def login_view(request):
     return render(request,'home/login.html')
 
+def about_restaurant(request):
+    return render(request,'home/about.html')
+
 
