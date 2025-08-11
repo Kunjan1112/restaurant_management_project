@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
-from .forms import RestaurantForm 
+# from .forms import RestaurantForm 
 
 # Create your views here.
 
@@ -8,7 +8,8 @@ def name(request):
     return HttpResponse("Hello My Name is Kunjan")
 
 def index(request):
-    return render(request,'home/home.html')
+    restaurant_name = settings.RESTAURANT_NAME
+    return render(request,'home/home.html', {"restaurant_name":restaurant_name})
 
 def 404_view(request):
     return render(request,'home/404.html')
