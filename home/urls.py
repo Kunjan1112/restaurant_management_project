@@ -11,4 +11,6 @@ urlpatterns = [
     path('404_view/',view.404_view,name='404_view'),
 
     path('about_restaurant/',views.about_restaurant,name='about_restaurant'),
+
+    path('contact_view/',views.contact_view,name="contact_view"),
 ]
