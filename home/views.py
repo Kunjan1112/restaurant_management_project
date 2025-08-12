@@ -21,4 +21,8 @@ def login_view(request):
 def about_restaurant(request):
     return render(request,'home/about.html')
 
+def contact_view(request):
+    return render(request,'home/contact.html')
+    
+
 
