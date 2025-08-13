@@ -39,7 +39,11 @@
         }
 
         footer {
-            
+            text-align : center;
+            padding : 10px 0;
+            font-size : 0.9rem;
+            color : #666;
+            background-color : #f1f1f1;
         }
     </style>
 </head>
@@ -54,7 +58,10 @@
             We serve freshly prepared meals with the finest ingredients, blending traditional recipes with a modern twist.
             Whether you're here for a quick bite or a full-course meal, we promise an unforgettable dining experience.
         </p>
-
     </div>
+
+    <footer>
+        &copy; {{ now|date:"Y "}} {{ restaurant_name }}. All rights reserved.
+    </footer>
 </body>
 </html>
