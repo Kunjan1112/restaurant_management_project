@@ -44,6 +44,13 @@
             background-color : #e04343;
         }
 
+        footer {
+            position : absolute;
+            bottom : 10px;
+            font-size : 0.9rem;
+            color : #666;
+        }
+
         </style>
 
 </head>
@@ -52,5 +59,8 @@
     <h1>404</h1>
     <p>Oops! The page you're looking for doesn't exist.</p>
     <a href="/">Go Back Home</a>
+
+    <footer>
+        &copy; {{ now|date:"Y" }} {{ restaurant_name }}. All rights reserved.
 </body>
 </html>
