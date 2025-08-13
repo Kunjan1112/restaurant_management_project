@@ -17,7 +17,7 @@ def index(request):
         }
     )
 
-def 404_view(request):
+def handler404(request):
     return render(request,'home/404.html', status=404)
 
 def login_view(request):
