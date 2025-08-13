@@ -14,5 +14,5 @@ urlpatterns = [
 
     path('contact_view/',views.contact_view,name="contact_view"),
 
-    path('reservations/',views.reservations_view,name="reservations")
+    path('reservations/',views.reservations_view,name="reservations"),
 ]
