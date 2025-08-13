@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
 from django.conf import settings
-# from .forms import RestaurantForm 
+from django.db import DatabaseError
+from .models import Restaurant
 
 # Create your views here.
 
@@ -45,3 +46,13 @@ def reservations_view(request):
         "restaurant_phone":restaurant_phone
     })
 
+def restaurant_list(request):
+    try:
+        restaurants = Restaurant.objects.all()
+        return render(request,'home/restaurant_list.html', {'restaurants':restaurants})
+    except DatabaseError as e:
+        print(f"Database error: {e}")
+        return HttpResponse("Sorry, we are having trouble loading the restaurant list at the moment.", status=500)
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return HttpResponse("Something went worng. Please try again later.", status=500)
