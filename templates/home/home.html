@@ -124,7 +124,7 @@
     <section class="hero">
         <div class="container">
             <h1>Welcome to {{ restaurant_name }}</h1>
-            <p>Your Simple and secure note-taking app built with Django.</p>
+            <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
             <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
         </div>
     </section>
@@ -160,7 +160,7 @@
 
     <footer>
         <div class="container">
-            <p>All rights reserved {{ restaurant_name }}</p>
+            <p>All rights reserved {{ restaurant_name }} | Contact: {{ restaurant_phone }}</p>
         </div>
     </footer>
 
