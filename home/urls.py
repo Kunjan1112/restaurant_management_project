@@ -13,4 +13,6 @@ urlpatterns = [
     path('about_restaurant/',views.about_restaurant,name='about_restaurant'),
 
     path('contact_view/',views.contact_view,name="contact_view"),
+
+    path('reservations/',views.reservations_view,name="reservations")
 ]
