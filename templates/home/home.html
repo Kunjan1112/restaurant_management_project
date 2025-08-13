@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
@@ -154,7 +155,7 @@
     <section class="hero">
         <div class="container">
             <!-- Logo  -->
-            <img src="{% static 'images/restaurant_logo.png' %}" alt="{{ restaurant_name }} Logo" class="logo-img"
+            <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} Logo" class="logo-img"
 
             <h1>Welcome to {{ restaurant_name }}</h1>
             <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
