@@ -15,4 +15,6 @@ urlpatterns = [
     path('contact_view/',views.contact_view,name="contact_view"),
 
     path('reservations/',views.reservations_view,name="reservations"),
+
+    path('restaurant_list/',views.restaurant_list,name='restaurant_list'),
 ]
