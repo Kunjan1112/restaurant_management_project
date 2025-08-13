@@ -18,13 +18,13 @@ def index(request):
     )
 
 def 404_view(request):
-    return render(request,'home/404.html')
+    return render(request,'home/404.html', status=404)
 
 def login_view(request):
     return render(request,'home/login.html')
 
 def about_restaurant(request):
-    restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Reataurant")
+    restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE",  "Not Available")
     return render(request,'home/about.html',{
         "restaurant_name" : restaurant_name,
