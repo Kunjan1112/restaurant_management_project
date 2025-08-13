@@ -13,8 +13,8 @@ def index(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
     return render(request,'home/home.html', {
-        "restaurant_name":restaurant_name,
-        "restaurant_phone":restaurant_phone
+        "restaurant_name" : restaurant_name,
+        "restaurant_phone" : restaurant_phone
         }
     )
 
