@@ -37,5 +37,9 @@ def contact_view(request):
         "restaurant_phone" : restaurant_phone
     })
     
-
+def reservations_view(request):
+    restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
+    return render(request, 'home/reservations.html',{
+        "restaurant_name":restaurant_name
+    })
 
