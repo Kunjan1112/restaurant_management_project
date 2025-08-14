@@ -12,6 +12,7 @@ def name(request):
 def index(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
+    restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
     return render(request,'home/home.html', {
         "restaurant_name" : restaurant_name,
         "restaurant_phone" : restaurant_phone
@@ -27,6 +28,7 @@ def login_view(request):
 def about_restaurant(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE",  "Not Available")
+    restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
     return render(request,'home/about.html',{
         "restaurant_name" : restaurant_name,
         "restaurant_phone" : restaurant_phone
@@ -41,6 +43,7 @@ def contact_view(request):
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
+    restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
     return render(request, 'home/reservations.html',{
         "restaurant_name":restaurant_name,
         "restaurant_phone":restaurant_phone
