@@ -88,6 +88,31 @@
             box-shadow : 0 6px 14px rgba(0,0,0,0.2);
         }
 
+        /* Search Bar Styling */
+
+        .hero form .form-control {
+            border-radius : 30px;
+            padding : 10px 20px;
+            border : none;
+            max-width : 400px;
+        }
+
+        .hero form .btn {
+            border-radius : 30px;
+            padding :  10px 25px;
+            background-color : white;
+            color : #6c5ce7;
+            font-weight : 600;
+            border : none;
+        }
+
+        .hero form .btn.hover {
+            background-color : #f1f1f1;
+            transform : translateY(-2px);  
+        }
+
+        /* Feature Section */
+
         .features {
             padding : 80px 20px;
         }
@@ -159,6 +184,12 @@
 
             <h1>Welcome to {{ restaurant_name }}</h1>
             <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
+
+            <!-- Search Bar  -->
+            <form class="d-flex justify-content-center mt-4" method="GET" action="">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
+                <button class="btn" type="submit">Search</button>
+                
             <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
         </div>
     </section>
