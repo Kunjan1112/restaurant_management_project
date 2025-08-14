@@ -12,12 +12,13 @@
         }
 
         footer {
+            background-color : #2d3436;
             text-align : center;
-            padding : 10px 0;
+            padding : 20px 0;
             font-size : 0.9rem;
-            color : #666;
+            color : #dfe6e9;
             background-color : #f1f1f1;
-            margin-top : auto;
+            margin-top : 50px;
         }
     </style>
 
@@ -42,7 +43,7 @@
     </div>
 
     <footer>
-        &copy; {{ now|date:"Y" }} {{ restaurant_name }}. All rights reserved.
+        <p>&copy; {{ now|date:"Y" }} {{ restaurant_name }}. All rights reserved.</p>
     </footer>
 </body>
 </html>
