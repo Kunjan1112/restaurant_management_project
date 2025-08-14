@@ -45,7 +45,10 @@
         }
 
         footer {
-            position : absolute;
+            background-color : #2d3436;
+            text-align : center;
+            padding : 15px 0;
+            margin-top : 50px;
             bottom : 10px;
             font-size : 0.9rem;
             color : #666;
@@ -61,6 +64,6 @@
     <a href="/">Go Back Home</a>
 
     <footer>
-        &copy; {{ now|date:"Y" }} {{ restaurant_name }}. All rights reserved.
+        <p>&copy; {{ now|date:"Y" }} {{ restaurant_name }}. All rights reserved.</p>
 </body>
 </html>
