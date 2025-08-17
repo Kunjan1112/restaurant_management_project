@@ -6,7 +6,7 @@ from .models import *
 class ItemAdmin(admin.ModelAdmin):
     list_display = ['item_name','item_price','created_at']
 
-@api.register(Menu)
+@admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'price')
     search_fields = ('name',)
