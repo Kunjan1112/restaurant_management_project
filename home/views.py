@@ -13,10 +13,19 @@ def index(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
     restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
+    restaurant_address = getattr(settings, "RESTAURANT_ADDRESS", "123, Main Street, Ahmedabad, Gujarat, India")
+    google_map_embed_url = getattr(
+        settings,
+        "GOOGLE_MAP_EMBED_URL"
+        "https://www.google.com/maps"
+    )
+
     return render(request,'home/home.html', {
         "restaurant_name" : restaurant_name,
         "restaurant_phone" : restaurant_phone,
         "restaurant_hours" : restaurant_hours,
+        "restaurant_address" : restaurant_address,
+        "google_map_embed_url" : google_map_embed_url
         }
     )
 
