@@ -15,7 +15,8 @@ def index(request):
     restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
     return render(request,'home/home.html', {
         "restaurant_name" : restaurant_name,
-        "restaurant_phone" : restaurant_phone
+        "restaurant_phone" : restaurant_phone,
+        "restaurant_hours" : restaurant_hours,
         }
     )
 
