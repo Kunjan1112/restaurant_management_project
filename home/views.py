@@ -17,15 +17,29 @@ def index(request):
     google_map_embed_url = getattr(
         settings,
         "GOOGLE_MAP_EMBED_URL"
-        "https://www.google.com/maps"
+        "#"
     )
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            success_message = "Thank you for contacting us!"
+            form = ContactForm()
+        else:
+            success_message = None
+    else:
+        form = ContactForm()
+        success_message = None
 
     return render(request,'home/home.html', {
         "restaurant_name" : restaurant_name,
         "restaurant_phone" : restaurant_phone,
         "restaurant_hours" : restaurant_hours,
         "restaurant_address" : restaurant_address,
-        "google_map_embed_url" : google_map_embed_url
+        "google_map_embed_url" : google_map_embed_url,
+        "form" : form,
+        "success_message" : success_message,
         }
     )
 
