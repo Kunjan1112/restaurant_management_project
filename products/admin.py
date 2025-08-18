@@ -1,17 +1,8 @@
 from django.contrib import admin
-from .models import *
+from .models import MenuItem
 
-
-# Custom Admins
-class ItemAdmin(admin.ModelAdmin):
-    list_display = ['item_name','item_price','created_at']
-
-@admin.register(Menu)
-class MenuAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'price')
+@admin.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'price', 'created_at')
     search_fields = ('name',)
 
-
-# Register your models here.
-admin.site.register(Item,ItemAdmin)
-admin.site.register(MenuItem)
