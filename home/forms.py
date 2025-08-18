@@ -13,3 +13,12 @@ class FeedbackForm(forms.ModelForm):
         widgets = {
             'comments' : forms.Textarea(attrs={'rows':4, 'placeholder':"Your thots to Write Here....."}),
         }
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactSubmission
+        fields = ['name', 'email']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+        }
