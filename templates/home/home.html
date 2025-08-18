@@ -161,6 +161,9 @@
         #location h2 { color : #6c5ce7; margin-bottom : 15px; }
         #location p { font-size : 1rem; margin-bottom : 20px; }
 
+        #contact { padding : 60px 20px; background-color : #f1f1f1; }
+        #contact h2 { color : #6c5ce7; margin-bottom : 20px; }
+
     </style>
 </head>
 <body>
@@ -188,7 +191,7 @@
     <section class="hero">
         <div class="container">
             <!-- Logo  -->
-            <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} Logo" class="logo-img"
+            <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} Logo" class="logo-img">
 
             <h1>Welcome to {{ restaurant_name }}</h1>
             <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
@@ -197,6 +200,7 @@
             <form class="d-flex justify-content-center mt-4" method="GET" action="">
                 <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
                 <button class="btn" type="submit">Search</button>
+            </form>
                 
             <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
         </div>
@@ -221,7 +225,30 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Form Section  -->
     
+    <section id="contact">
+        <div class="container" style="max-width: 500px;">
+            <h2 class="text-center">Contact Us</h2>
+
+            {% if success_message %}
+                <div class="alert alert-success text-center">{{ success_messsage }}</div>
+            {% endif %}
+
+            <form method="POST" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Feature Section -->
     <section class="features">
         <div class="container">
