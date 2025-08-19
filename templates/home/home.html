@@ -163,6 +163,16 @@
         #contact { padding : 60px 20px; background-color : #f1f1f1; }
         #contact h2 { color : #6c5ce7; margin-bottom : 20px; }
 
+        #hours {
+            padding : 60px 20px;
+            background : #fff3cd;
+            text-align : center;
+        }
+
+        #hours h2 { color : #6c5ce7; margin-bottom: 20px; }
+        #hours ul { list-style : none; padding : 0; margin : 0; }
+        #hours li { font-size : 1.1rem; margin : 6px 0; }
+
     </style>
 </head>
 
@@ -221,6 +231,23 @@
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
+        </div>
+    </section>
+
+    <!-- New Opening Hours  -->
+
+    <section id="hours">
+        <div class="container">
+            <h2>Opening Hours</h2>
+            {% if restaurant_hours %}
+                <ul>
+                    {% for day, time in restaurant_hours.items %}
+                        <li><strong>{{ day }}:</strong> {{ time }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Mon-Fri: 11am - 9pm<br>Sat-Sun: 10am - 10pm</p>
+            {% endif %}
         </div>
     </section>
 
