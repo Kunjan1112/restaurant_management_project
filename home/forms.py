@@ -15,10 +15,25 @@ class FeedbackForm(forms.ModelForm):
         }
 
 class ContactForm(forms.ModelForm):
+    message = forms.CharField(
+        widget = forms.Textarea(attrs={
+            'class':'form-control',
+            'placeholder':'Your Message',
+            'rows':4
+        }),
+        required=True
+    )
+
     class Meta:
         model = ContactSubmission
-        fields = ['name', 'email']
+        fields = ['name', 'email', 'message']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+            'name':forms.TextInput(attrs={
+                'class':'form-control',
+                'placeholder':'Your Name'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class':'form-control',
+                'placeholder':'Your Email'
+            }),
         }
