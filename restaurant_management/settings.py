@@ -140,3 +140,11 @@ RESTAURANT_PHONE = "+91-98765-43210"
 RESTAURANT_HOURS = "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm"
 RESTAURANT_ADDRESS = "123, Main Street, Ahemdabad, Gujarat, India"
 GOOGLE_MAP_EMBED_URL = "https://www.google.com/maps"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'restaurant123@gmail.com'
+EMAIL_HOST_PASSWORD = 'restaurant@0987'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
