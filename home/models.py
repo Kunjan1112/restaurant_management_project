@@ -24,7 +24,7 @@ class ContactSubmission(models.Model):
     email = models.EmailField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def __str__(self): 
         return f"{self.name} - ({self.email})"
 
 class RestaurantLocation(models.Model):
