@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-{% load static %}
-<html>
+<html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{{ restaurant_name }} - HomePage</title>
 
@@ -239,10 +239,14 @@
             <form method="POST" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
+                    {{ form.name.lable_tag }}
                     {{ form.name }}
+                    {{ form.name.errors }}
                 </div>
                 <div class="mb-3">
+                    {{ form.email.lable_tag }}
                     {{ form.email }}
+                    {{ form.email.errors }}
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
