@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from django.conf import settings
 from django.db import DatabaseError
+from django.contrib import message
+from django.core.mail. import send_email
 from .models import Restaurant
+from .forms import ContactForm
 
 # Create your views here.
 
