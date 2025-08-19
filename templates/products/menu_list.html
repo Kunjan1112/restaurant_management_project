@@ -82,6 +82,15 @@
                         <h3>{{ item.name }}</h3>
                         <p>{{ item.description }}</p>
                         <p class="price">${{ item.price|floatformat:2  }}</p>
+
+                        <!-- Add to cart / Order Button  -->
+                        <form method="post" action="{% url 'add_to_order item.id %}">
+                            {% csrf_token %}
+                            <div class="input-group mb-2">
+                                <input type="number" name="quantity" value="1" min="1" class="form-control">
+                                <button type="submit" class="btn btn-success">Add to Order</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             {% empty %}
