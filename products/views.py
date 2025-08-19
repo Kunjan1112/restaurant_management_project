@@ -19,3 +19,7 @@ def menu_list_api(request):
     ]
 
     return Response(menu_items)
+
+def menu_view(request):
+    items = MenuItem.objects.all()
+    return render(request, 'menu.html', {"items":items})
