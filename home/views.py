@@ -59,11 +59,15 @@ def about_restaurant(request):
     })
 
 def contact_view(request):
-    restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
-    return render(request,'home/contact.html',{
-        "restaurant_phone" : restaurant_phone
-    })
-    
+    if request.method == "POST":
+        form = ContactForm(request.POST
+        if form.is_valid():
+            form.save()
+            return render(request, "contact_success.html", {"name" : form.cleaned_data['name']})
+    else:
+        form = ContactForm()
+    return render(request, "contact.html", {"form":form})
+
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
