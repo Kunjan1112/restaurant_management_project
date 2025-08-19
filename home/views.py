@@ -59,14 +59,30 @@ def about_restaurant(request):
     })
 
 def contact_view(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            return render(request, "contact_success.html", {"name" : form.cleaned_data['name']})
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            subject = f"New Contact Form Submission from {name}"
+            body = f"Message:\n{message}\n\nForm: {name}, Email: {email}"
+
+            send_email(
+                subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],
+                fail_silently = False,
+            )
+
+            message.success(request, "Your message has been sent successfully!")
+            return redirect("contact")
     else:
         form = ContactForm()
-    return render(request, "contact.html", {"form":form})
+    
+    return render(request, 'contact.html',{"form":form})
 
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
