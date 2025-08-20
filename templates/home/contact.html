@@ -122,6 +122,18 @@
             if (email === "") {
                 document.getElementById("emailError").textContent = "Please enter your email.";
                 valid = false;
+            } else {
+                const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+                if (!emailPattern.test(email)){
+                    document.getElementById("emailError").textContent = "Please enter a valid email address."
+                    valid = false;
+                }
+            }
+
+            const message = document.getElementById("message").value.trim();
+            if(message === "") {
+                alert("Please enter your message. ");
+                valid = false;
             }
 
             if (!valid) {
