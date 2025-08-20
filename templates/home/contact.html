@@ -91,6 +91,7 @@
 
             <label for="message">Message:</label>
             <textarea id="message" name="message" rows="4"></textarea>
+            <div id="messageError" class="error"></div>
 
             <button type="submit">Send</button>
 
@@ -114,7 +115,7 @@
             //Validate Name 
             const name = document.getElementById("name").value.trim();
             if(name === "") {
-                document.getElementById("nameError").textContent = "Please enter your name."
+                document.getElementById("nameError").textContent = "Please enter your name.";
                 valid = false;
             }
 
@@ -126,7 +127,7 @@
             } else {
                 const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
                 if (!emailPattern.test(email)){
-                    document.getElementById("emailError").textContent = "Please enter a valid email address."
+                    document.getElementById("emailError").textContent = "Please enter a valid email address.";
                     valid = false;
                 }
             }
