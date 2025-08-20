@@ -127,4 +127,7 @@ def homepage(request):
     return render(request, "home/home.html", context)
 
 def faq_view(request):
-    return render(request, 'faq.html')
+    return render(request, 'home/faq.html')
+
+def privacy_policy(request):
+    return render(request,'home/privacy.html')   
