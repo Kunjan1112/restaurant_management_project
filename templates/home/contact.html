@@ -132,8 +132,10 @@
 
             const message = document.getElementById("message").value.trim();
             if(message === "") {
-                alert("Please enter your message. ");
+                document.getElementById('messageError').textContent = "Please enter your message.";
                 valid = false;
+            } else {
+                document.getElementById("messageError").textContent = "";
             }
 
             if (!valid) {
