@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse 
+from django.http import HttpResponse
 from django.db import DatabaseError
 
 from django.conf import settings
@@ -40,6 +40,8 @@ def index(request):
     else:
         form = ContactForm()
         success_message = None
+    
+    breadcrumbs = generate_breadcrumbs(('Home','/'))
 
     return render(request,'home/home.html', {
         "restaurant_name" : restaurant_name,
@@ -92,7 +94,7 @@ def contact_view(request):
                 fail_silently = False,
             )
 
-            message.success(request, "Your message has been sent successfully!")
+            messages.success(request, "Your message has been sent successfully!")
             return redirect("contact")
     else:
         form = ContactForm()
@@ -116,7 +118,10 @@ def restaurant_list(request):
     try:
         restaurants = Restaurant.objects.all()
         breadcrumbs = generate_breadcrumbs(('Home','/'), ('Restaurant',None))
-        return render(request,'home/restaurant_list.html', {'restaurants':restaurants})
+        return render(request,'home/restaurant_list.html', {
+            'restaurants':restaurants,
+            'breadcrumbs':breadcrumbs
+        })
     except DatabaseError as e:
         print(f"Database error: {e}")
         return HttpResponse("Sorry, we are having trouble loading the restaurant list at the moment.", status=500)
