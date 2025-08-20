@@ -108,3 +108,20 @@ def restaurant_list(request):
     except Exception as e:
         print(f"Unexpected error: {e}")
         return HttpResponse("Something went worng. Please try again later.", status=500)
+
+
+def add_to_cart(request, item_id):
+    cart = request.session.get("cart", {})
+    cart[item_id] = cart.get(item_id, 0) + 1
+    request.session['cart'] = cart
+    return redirect("home")
+
+def homepage(request):
+    cart = request.session.get("cart", {})
+    cart_count = sum(cart.values())
+    context = {
+        'restaurant_name' : "My Awesome Restaurant",
+        "cart_count" : cart_count,
+    }
+
+    return render(request, "home/home.html", context)
