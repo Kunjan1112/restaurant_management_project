@@ -1,6 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
 <head>
     <meta charset="UTF-8">
     <title>{{ restaurant_name }} - HomePage</title>
@@ -193,6 +193,11 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'about_restaurant' %}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_cart' %}">
+                            Cart <span class="badge bg-primary">{{ cart_count|default:0 }}</span>
+                        </a>
+                    </li> 
                 </ul>
             </div>
         </div>
@@ -208,7 +213,7 @@
             <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
 
             <!-- Search Bar  -->
-            <form class="d-flex justify-content-center mt-4" method="GET" action="">
+            <form class="d-flex justify-content-center mt-4" method="GET" action="{% url search_menu' %}">
                 <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
                 <button class="btn" type="submit">Search</button>
             </form>
