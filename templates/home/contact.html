@@ -109,6 +109,7 @@
             // Reset errors
             document.getElementById("nameError").textContent = "";
             document.getElementById("emailError").textContent = "";
+            document.getElementById("messageError").textContent = "";
 
             //Validate Name 
             const name = document.getElementById("name").value.trim();
@@ -134,8 +135,6 @@
             if(message === "") {
                 document.getElementById('messageError').textContent = "Please enter your message.";
                 valid = false;
-            } else {
-                document.getElementById("messageError").textContent = "";
             }
 
             if (!valid) {
