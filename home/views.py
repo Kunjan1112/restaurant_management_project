@@ -125,3 +125,6 @@ def homepage(request):
     }
 
     return render(request, "home/home.html", context)
+
+def faq_view(request):
+    return render(request, 'faq.html')
