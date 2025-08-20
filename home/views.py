@@ -4,7 +4,7 @@ from django.db import DatabaseError
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_email
+from django.core.mail import send_mail
 
 from .models import Restaurant
 from .forms import ContactForm
@@ -91,7 +91,7 @@ def contact_view(request):
                 body,
                 settings.DEFAULT_FROM_EMAIL,
                 [settings.DEFAULT_FROM_EMAIL],
-                fail_silently = False,
+                fail_silently = False
             )
 
             messages.success(request, "Your message has been sent successfully!")
@@ -127,7 +127,7 @@ def restaurant_list(request):
         return HttpResponse("Sorry, we are having trouble loading the restaurant list at the moment.", status=500)
     except Exception as e:
         print(f"Unexpected error: {e}")
-        return HttpResponse("Something went worng. Please try again later.", status=500)
+        return HttpResponse("Something went wrong. Please try again later.", status=500)
 
 
 def add_to_cart(request, item_id):
@@ -154,4 +154,4 @@ def faq_view(request):
 
 def privacy_policy(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Privacy Policy',None))
-    return render(request,'home/privacy.html', {'breadcrumds':breadcrumbs})   
+    return render(request,'home/privacy.html', {'breadcrumbs':breadcrumbs})   
