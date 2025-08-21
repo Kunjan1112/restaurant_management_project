@@ -21,4 +21,6 @@ urlpatterns = [
     path('faq/',views.faq_view,name="faq"),
 
     path('privacy/',views.privacy_policy,name="privacy"),
+
+    path('thank_you_view/',views.thank_you_view,name="thank_you_view"),
 ]
