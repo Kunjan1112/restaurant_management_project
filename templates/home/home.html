@@ -229,6 +229,51 @@
         .breadcumb span {
             color : #555;
         }
+
+        /* Special Section */
+
+        .specials {
+            padding : 60px 20px;
+            background-color : #f9f9fb;
+        }
+
+        .specials h2 {
+            color : #6c5ce7;
+            margin-bottom : 30px;
+            text-align : center;
+        }
+
+        .special-card {
+            background : #fff;
+            border-radius : 15px;
+            padding : 20px;
+            text-align : center;
+            box-shadow : 0 4px 10px rgba(0,0,0,0.1);
+            transition : transform 0.3s ease-in-out;
+            height : 100%;
+        }
+
+        .special-card:hover {
+            transform : translateY(-5px);
+            box-shadow : 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .special-card h5 {
+            color : #333;
+            margin-bottom : 10px;
+        }
+
+        .special-card p {
+            font-size : 0.95rem;
+            color : #666;
+        }
+
+        .special-price {
+            font-weight : bold;
+            color : #ff6b00;
+            font-size : 1.1rem;
+            margin-top : 10px;
+        }
         
     </style>
     
@@ -266,6 +311,29 @@
             <a href="{% url 'home' %}">Home</a> &gt; <span>Dashboard</span>
         </nav>
     </div>
+
+    <!-- Specials Section  -->
+    <section class="specials">
+        <div class="container">
+            <h2>Today's Specials</h2>
+            {% if specials %}
+                <div class="row g-4">
+                    {% for special in specials %}
+                        <div class="col-md-4">
+                            <div class="special-card">
+                                <h5>{{ special.item_name }}</h5>
+                                <p>{{ special.description }}</p>
+                                <div class="special-price">${{ special.price }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted">No Specials available today.</p>
+            {% endif %}
+        </div>
+    </section>
+
 
     <!-- Hero Section -->
     <section class="hero">
