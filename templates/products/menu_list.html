@@ -69,7 +69,11 @@
 </head>
 <body>
 <div class="container">
-    <h1>{{ restaurant_name }} - Menu</h1>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>{{ restaurant_name }} - Menu</h1>
+        <a href="{% url 'view_cart' %}" class="btn btn-primary">View Cart</a>
+    </div>
+
 
     <div class="menu-list-wrapper">
         <div class="row g-4">
