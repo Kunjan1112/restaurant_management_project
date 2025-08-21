@@ -43,13 +43,29 @@
         }
 
         .hero {
-            padding : 100px 0;
-            background : linear-gradient(135deg, #6c5ce7, #a29bfe);
+            position : relative;
+            padding : 120px 0;
+            background : url("{% static 'img/hero-bg.jpg' %}") center center/cover no-repeat;
             color : white;
             text-align : center;
             border-bottom-left-radius : 50px;
             border-bottom-right-radius : 50px;
-            box-shadow : 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow : 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero::before {
+            content : "";
+            position : absolute;
+            top: 0; left: 0;
+            width : 100%; height : 100%;
+            background : rgba(0,0,0,0.45);
+            border-bottom-left-radius : 50px;
+            border-bottom-right-radius : 50px;
+        }
+
+        .hero .container {
+            position : relative;
+            z-index : 2;
         }
 
         .hero h1 {
@@ -73,6 +89,8 @@
             padding : 10px;
         }
 
+
+    
         .btn-custom {
             background-color : #fff;
             color : #6c5ce7;
@@ -128,8 +146,12 @@
 
         /* Feature Section */
 
-        .features {
-            padding : 80px 20px;
+        .features-card img {
+            max-width : 100%;
+            height : auto;
+            border-radius : 12px;
+            margin-bottom : 15px;
+            box-shadow : 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .features-card {
@@ -336,18 +358,21 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="features-card">
+                        <img src="{% static 'img/food1.jpg' %}" alt="Fresh Ingredients">
                         <h4>Easy Note Creation</h4>
                         <p>We use only the finest locally sourced produce.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="features-card">
+                        <img src="{% static 'img/food2.jpg' %}" alt="Delicious Meals">
                         <h4>Secure Login</h4>
                         <p>Your notes are protected with token-based authentication.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="features-card">
+                        <img src="{% static 'img/food3.jpg' %}" alt="Fast Delivery">
                         <h4>Mobile Friendly</h4>
                         <p>Access your notes from any device, anywhere.</p>
                     </div>
