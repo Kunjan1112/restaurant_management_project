@@ -24,6 +24,8 @@
 
         .about-section img {
             width : 100%;
+            height : auto;
+            object-fit : cover;
             border-radius : 8px;
         }
 
@@ -44,7 +46,7 @@
             text-align : center;
             padding : 20px 0;
             font-size : 0.9rem;
-            color : #666;
+            color : #ddd;
             background-color : #2d3436;
         }
         
@@ -55,8 +57,13 @@
 <body>
 
     <div class="about-section">
-        <img src="https://via.placeholder.com/900x300" alt="Restaurant Image">
-        <h1>About Our Restaurant</h1>
+        {% if restaurant.image %}
+            <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+        {% else %}
+            <img src="https://via.placeholder.com/900x300" alt="Restaurant Image">
+        {% endif %}
+        
+        <h1>About {{ restaurant.name }}</h1>
         <p>
             Welcome to <strong>Delicious Bites</strong>, where flavor meets comfort!
             We serve freshly prepared meals with the finest ingredients, blending traditional recipes with a modern twist.
