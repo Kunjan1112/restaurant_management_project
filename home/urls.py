@@ -22,5 +22,5 @@ urlpatterns = [
 
     path('privacy/',views.privacy_policy,name="privacy"),
 
-    path('thank_you_view/',views.thank_you_view,name="thank_you_view"),
+    path('thank-you/',views.thank_you_view,name="thank_you"),
 ]
