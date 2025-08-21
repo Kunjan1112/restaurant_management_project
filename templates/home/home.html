@@ -93,6 +93,16 @@
             box-shadow : 0 6px 14px rgba(0,0,0,0.2);
         }
 
+        .btn-order {
+            background-color : #ff6b00;
+            color : #fff;
+        }
+
+        .btn-order:hover {
+            background-color : #e65c00;
+            color : #fff;
+        }
+
         /* Search Bar Styling */
 
         .hero form .form-control {
@@ -249,8 +259,10 @@
                 <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
                 <button class="btn" type="submit">Search</button>
             </form>
-                
+
             <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
+            <a href="{% url 'order' %}" class="btn btn-custom btn-order mt-4 ms-2">Order Now</a>
+
         </div>
     </section>
 
