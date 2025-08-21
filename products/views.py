@@ -23,3 +23,31 @@ def menu_list_api(request):
 def menu_view(request):  
     items = MenuItem.objects.all()
     return render(request, 'menu.html', {"items":items})
+
+def add_to_cart(request, item_id):
+    item = get_object_or_404(MenuItem, id=item_id)
+    cart = request.session.get('cart', {})
+
+    if str(item_id) in cart:
+        cart[str(item_id)]['quantity'] += 1
+    else:
+        cart[str(item_id)] = {
+            'name' : item.name,
+            'price' : float(item.price),
+            'quantity' : 1
+        }
+
+    request.session['cart'] = cart
+    return redirect('view_cart')
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    total = sum(item['price'] * item[quantity] for item in cart.values())
+    return render(request, 'cart.html', {'cart':cart, 'total':total})
+
+def remove_from_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    if str(item_id) in cart:
+        del cart[str(item_id)]
+        request.session['cart'] = cart
+    return redirect('view_cart')
