@@ -95,13 +95,16 @@ def contact_view(request):
                 fail_silently = False
             )
 
-            messages.success(request, "Your message has been sent successfully!")
-            return redirect("contact")
+            return redirect("thank_you_view")
     else:
         form = ContactForm()
 
     breadcrumbs = generate_breadcrumbs(('Home','/'), ('Contact',None))
-    return render(request, 'contact.html',{"form":form, "breadcrumbs":breadcrumbs})
+    return render(request, 'home/contact.html',{"form":form, "breadcrumbs":breadcrumbs})
+
+def thank_you_view(request):
+    breadcrumbs = generate_breadcrumbs(('Home','/'),('Thank You',None))
+    return render(request, 'home/thnak_you.html',{'breadcrumbs':breadcrumbs})
 
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
@@ -162,4 +165,4 @@ def faq_view(request):
 
 def privacy_policy(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Privacy Policy',None))
-    return render(request,'home/privacy.html', {'breadcrumbs':breadcrumbs})   
+    return render(request,'home/privacy.html', {'breadcrumbs':breadcrumbs})
