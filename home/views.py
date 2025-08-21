@@ -6,8 +6,9 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 
-from .models import Restaurant
+from .models import Restaurant, Special
 from .forms import ContactForm
+from .utils import generate_breadcrumbs
 
 # Create your views here.
 
@@ -140,10 +141,12 @@ def homepage(request):
     cart = request.session.get("cart", {})
     cart_count = sum(cart.values())
     breadcrumbs = generate_breadcrumbs(('Home',None))
+    specials = Special.objects.filter(created_at=date.today())
     context = {
         'restaurant_name' : "My Awesome Restaurant",
         "cart_count" : cart_count,
-        'breadcrumbs':breadcrumbs
+        'breadcrumbs':breadcrumbs,
+        'specials':specials
     }
 
     return render(request, "home/home.html", context)
