@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special
+from .models import Restaurant, Special, OpeningHours
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
 
@@ -141,12 +141,17 @@ def homepage(request):
     cart = request.session.get("cart", {})
     cart_count = sum(cart.values())
     breadcrumbs = generate_breadcrumbs(('Home',None))
+
     specials = Special.objects.filter(created_at=date.today())
+    opening_hours = openingHour.objects.all()
+
+
     context = {
         'restaurant_name' : "My Awesome Restaurant",
         "cart_count" : cart_count,
         'breadcrumbs':breadcrumbs,
-        'specials':specials
+        'specials':specials,
+        'opening_hours':opening_hours,
     }
 
     return render(request, "home/home.html", context)
