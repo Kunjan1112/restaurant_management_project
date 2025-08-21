@@ -36,3 +36,16 @@ class RestaurantLocation(models.Model):
 
     def __str__(self):
         return f"{self.address}, {self.city}, {self.state} - {self.zip_code}"
+
+class Special(models.Model):
+    item_name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.item_name
+
