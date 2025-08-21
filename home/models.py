@@ -49,3 +49,23 @@ class Special(models.Model):
     def __str__(self):
         return self.item_name
 
+def OpeningHour(models.Model):
+    DAY_CHOICES = [
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+        ('Sunday','Sunday'),
+    ]
+
+    day = models.CharField(max_length=10, choices=DAY_CHOICES, unique=True)
+    open_time = models.TimeField()
+    close_time = models.TimeField()
+
+    class Meta:
+        ordering = ['id']
+    
+    def __str__(self):
+        return f"{self.day}: {self.open_time.strftime('%I:%M %p')} - {self.close_time.strftime('%I:%M %p')}"
