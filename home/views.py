@@ -96,6 +96,8 @@ def contact_view(request):
                 fail_silently = False
             )
 
+            message.success(request, "Thank You, Your message has been sent!")
+
             return redirect("thank_you_view")
     else:
         form = ContactForm()
