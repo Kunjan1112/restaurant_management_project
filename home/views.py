@@ -65,16 +65,17 @@ def login_view(request):
     return render(request,'home/login.html', {'breadcrumbs':breadcrumbs})
 
 def about_restaurant(request):
-    restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
-    restaurant_phone = getattr(settings, "RESTAURANT_PHONE",  "Not Available")
-    restaurant_hours = getattr(settings, "RESTAURANT_HOURS", "Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm")
+    restaurant = Restaurant.objects.first()
     breadcrumbs = generate_breadcrumbs(('Home','/'),('About',None))
 
-    return render(request,'home/about.html',{
-        "restaurant_name" : restaurant_name,
-        "restaurant_phone" : restaurant_phone,
-        'breadcrumbs' : breadcrumbs
-    })
+    context = {
+        "restaurant_name" : restaurant.name if restaurant else "My Restaurant",
+        "restaurant_phone" : getattr(settings, "RESTAURANT_PHONE", "Not Available"),
+        "restaurant_description" : getattr(restaurant.description if restaurant else "Our restaurant offers the best food in town.",
+        "breadcrumbs" : breadcrumbs
+    }
+
+    return render(request, 'home/about.html', context)
 
 def contact_view(request):
     if request.method == 'POST':
