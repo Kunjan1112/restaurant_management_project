@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Special
+from .models import Special, Chef
 
 # Register your models here.
 
@@ -11,3 +11,5 @@ class SpecialAdmin(admin.ModelAdmin):
 @admin.register(OpeningHour)
 class OpeningHourAdmin(admin.ModelAdmin):
     list_display = ("day","open_time", "close_time")
+
+admin.site.register(Chef)
