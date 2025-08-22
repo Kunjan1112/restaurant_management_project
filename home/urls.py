@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views 
 
 urlpatterns = [
@@ -13,7 +13,7 @@ urlpatterns = [
 
     path('about_restaurant/',views.about_restaurant,name='about_restaurant'),
 
-    path('contact_view/',views.contact_view,name="contact_view"),
+    path('contact/',views.contact_view,name="contact"),
 
     path('reservations/',views.reservations_view,name="reservations"),
 
