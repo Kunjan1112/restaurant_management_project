@@ -332,6 +332,38 @@
                 <p class="text-center text-muted">No Specials available today.</p>
             {% endif %}
         </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if specials.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ specials.previous_page_number }}">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                {% endif %}
+
+                {% for num in specials.pagination.page_range %}
+                    {% if special.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if specials.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ specials.next_page_number }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %} 
+        <p class="text-center text-muted">No Specials available today.</p>
+    {% endif %}
     </section>
 
 
@@ -419,6 +451,24 @@
             </form>
         </div>
     </section>
+
+    <!-- Specials Section  -->
+
+    <section class="specials">
+        <div class="container">
+            <h2>Today's Specials</h2>
+            {% if specials %}
+                <div class="row g-4">
+                    {% for special in specials %}
+                        <div class="col-md-4">
+                            <div class="special-card">
+                                <h5>{{ special.item_name }}</h5>
+                                <p>{{ special.description }}</p>
+                                <div class="special-price">${{ special.price }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
     <!-- Feature Section -->
     <section class="features">
