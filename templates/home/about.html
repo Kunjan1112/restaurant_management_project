@@ -59,9 +59,13 @@
     <div class="about-section">
 
         {% if restaurant.image %}
+
             <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+
         {% else %}
+        
             <img src="https://via.placeholder.com/900x300" alt="Restaurant Image">
+
         {% endif %}
         
         <h1>About {{ restaurant.name|default:"Our Restaurant" }}</h1>
