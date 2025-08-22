@@ -146,7 +146,12 @@ def homepage(request):
     cart_count = sum(cart.values())
     breadcrumbs = generate_breadcrumbs(('Home',None))
 
-    specials = Special.objects.filter(created_at=date.today())
+    specials_list = Special.objects.filter(created_at=date.today())
+    paginator = Paginator(specials_list, 6)
+
+    page_number = request.GET.get('page')
+    specials = paginator.get_page(page_number)
+    
     opening_hours = openingHour.objects.all()
 
 
