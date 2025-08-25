@@ -174,3 +174,6 @@ def faq_view(request):
 def privacy_policy(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Privacy Policy',None))
     return render(request,'home/privacy.html', {'breadcrumbs':breadcrumbs})
+
+def reservations_view(request):
+    return render(request, 'home/reservation.html')
