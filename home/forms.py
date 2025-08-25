@@ -1,5 +1,5 @@
 from django import forms
-from .models import Restaurant 
+from .models import Restaurant, NewsletterSubscriber
 
 class RestaurantForm(forms.ModelForm):
     class Meta:
@@ -37,3 +37,5 @@ class ContactForm(forms.ModelForm):
                 'placeholder':'Your Email'
             }),
         }
+
+class
