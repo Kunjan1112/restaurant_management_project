@@ -5,7 +5,7 @@
     
     <meta charset="UTF-8">
 
-    <title>Contact Us</title>
+    <title>Contact Us - Restaurant Name</title>
 
     <style>
 
@@ -26,67 +26,33 @@
             transition : transform 0.3s ease;
         }
 
-        .container:hover {
-            transform : translateY(-3px);
-        }
-
         h2 {
-            text-align : center;
             margin-bottom : 20px;
             color : #6c5ce7;
             font-size : 28px;
         }
 
-        label {
-            font-weight : bold;
-            display : block;
-            margin-top : 10px;
-            margin-bottom : 5px;
-            color : #444;
+        p {
+            font-size : 16px;
+            color : #555;
+            margin-bottom : 20px;
         }
 
-        input, textarea {
-            width : 100%;
-            padding : 10px;
-            margin-top : 3px;
-            border : 1px solid #ddd;
-            border-radius : 10px;
-            font-size : 15px;
-            background : #fafafa;
-            transition : border-color 0.3s ease, background 0.3s ease;
-        }
-
-        input:focus, textarea:focus {
-            border-color : #6c5ce7;
-            background : #fff;
-            outline : none;
-            box-shadow : 0 0 5px rgba(108, 92, 231, 0.2);
-        }
-
-        .error {
-            color : red;
-            font-size : 13px;
-            margin-top : 5px;
-        }
-
-        button {
-            margin-top : 20px;
-            padding : 12px;
+        a.email-link {
+            display : inline-block;
+            padding : 12px 24px;
             background : #6c5ce7;
             color : white;
             font-weight : bold;
-            border : none;
-            width : 100%;
             border-radius : 10px;
-            cursor : pointer;
+            text-decoration : none;
             font-size : 16px;
             transition : background 0.3s ease, transform 0.2s ease;
         }
 
-
-        button:hover {
+        a.email-link:hover {
             background : #574ae2;
-            transform : scale(1.02);
+            transform : scale(1.05);
         }
 
         footer {
@@ -100,7 +66,6 @@
             body {
                 padding : 20px;
             }
-
             .container {
                 padding : 20px;
             }
@@ -114,76 +79,14 @@
 
     <div class="container">
         <h2>Contact Us</h2>
-
-        <form id="contactForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <div id="nameError" class="error"></div>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <div id="emailError" class="error"></div>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4"></textarea>
-            <div id="messageError" class="error"></div>
-
-            <button type="submit">Send</button>
-
-        </form>
-
-        <div id="successMessage" class="success">
-            Thank you, your message has been sent!
-        </div>
-        
+        <p>If you have any questions or reservations, feel free to reach out to us via email:</p>
+        <a class="email-link" href="mailto:info@restaurant.com">Email Us</a>
     </div>
+
 
     <footer>
         Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm
     </footer>
-
-    <script>
-        
-        document.getElementById("contactForm").addEventListener("submit", function(event){
-            let valid = true;
-
-            // Reset errors
-            document.getElementById("nameError").textContent = "";
-            document.getElementById("emailError").textContent = "";
-            document.getElementById("messageError").textContent = "";
-
-            //Validate Name 
-            const name = document.getElementById("name").value.trim();
-            if(name === "") {
-                document.getElementById("nameError").textContent = "Please enter your name.";
-                valid = false;
-            }
-
-            //Validate Email
-            const email = document.getElementById('email').value.trim();
-            if (email === "") {
-                document.getElementById("emailError").textContent = "Please enter your email.";
-                valid = false;
-            } else {
-                const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-                if (!emailPattern.test(email)){
-                    document.getElementById("emailError").textContent = "Please enter a valid email address.";
-                    valid = false;
-                }
-            }
-
-            const message = document.getElementById("message").value.trim();
-            if(message === "") {
-                document.getElementById('messageError').textContent = "Please enter your message.";
-                valid = false;
-            }
-
-            if (!valid) {
-                event.preventDefault();
-            }
-        });
-        
-    </script>
 
 </body>
 
