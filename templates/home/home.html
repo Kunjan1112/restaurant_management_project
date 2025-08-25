@@ -278,6 +278,23 @@
             margin-top : 10px;
         }
 
+        /* New Sletter */
+
+        .newsletter-form {
+            margin-top : 40px;
+            text-align : center;
+        }
+
+        .newsletter-form input {
+            border-radius : 30px;
+            padding : 10px 20px;
+        }
+
+        .newsletter-form button {
+            border-radius : 30px;
+            padding : 10px 25px;
+        }
+
     </style>
     
 </head>
@@ -335,6 +352,26 @@
                 <p class="text-center text-muted">No Specials available today.</p>
             {% endif %}
         </div>
+
+        <!-- Newsletter  -->
+
+        <section class="newsletter">
+            <div class="container">
+                <h2 class="text-center">Subscribe to Our Newsletter</h2>
+                <form method="post" class="newsletter-form">
+                    {% csrf_token %}
+                    {{ form.email }}
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert alert-success mt-3">{{ message }}</p>
+                    {% endfor %}
+                {% endif %} 
+            </div>
+        </section>
+         
 
         <!-- Pagination -->
         <nav aria-label="Page navigation" class="mt-4">
