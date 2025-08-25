@@ -145,12 +145,12 @@ def add_to_cart(request, item_id):
 
 def homepage(request):
     cart = request.session.get("cart", {})
-    cart_count = sum(cart.values())
+    cart_count = sum(cart.values()) if isinstance(cart, dict) else 0
+
     breadcrumbs = generate_breadcrumbs(('Home',None))
 
     specials_list = Special.objects.filter(created_at=date.today())
     paginator = Paginator(specials_list, 6)
-
     page_number = request.GET.get('page')
     specials = paginator.get_page(page_number)
     
