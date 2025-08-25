@@ -24,4 +24,6 @@ urlpatterns = [
     path('privacy/',views.privacy_policy,name="privacy"),
 
     path('thank-you/',views.thank_you_view,name="thank_you"),
+
+    path('reservations/',views.reservations_view,name="reservations"),
 ]
