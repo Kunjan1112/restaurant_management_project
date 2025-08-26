@@ -177,3 +177,6 @@ def privacy_policy(request):
 
 def reservations_view(request):
     return render(request, 'home/reservation.html')
+
+def our_story(request):
+    return render(request, "home/our_story.html")
