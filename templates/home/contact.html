@@ -30,29 +30,71 @@
             margin-bottom : 20px;
             color : #6c5ce7;
             font-size : 28px;
+            text-align : center;
         }
 
         p {
             font-size : 16px;
             color : #555;
             margin-bottom : 20px;
+            text-align : center;
         }
 
-        a.email-link {
-            display : inline-block;
-            padding : 12px 24px;
+        form label {
+            display : block;
+            font-weight : bold;
+            margin-bottom : 6px;
+            color : #444;
+        }
+
+        form input, form textarea {
+            width : 100%;
+            padding : 12px;
+            border : 1px solid #ccc;
+            border-radius : 8px;
+            margin-bottom : 15px;
+            font-size : 15px;
+        }
+
+        form textarea {
+            resize : vertical;
+            min-height : 120px;
+        }
+
+        button {
             background : #6c5ce7;
             color : white;
-            font-weight : bold;
+            padding : 12px 24px;
+            border : none;
             border-radius : 10px;
-            text-decoration : none;
             font-size : 16px;
+            font-weight : bold;
+            cursor : pointer;
             transition : background 0.3s ease, transform 0.2s ease;
         }
 
-        a.email-link:hover {
+        button:hover {
             background : #574ae2;
             transform : scale(1.05);
+        }
+
+        .message {
+            margin-bottom : 15px;
+            padding : 12px;
+            border-radius : 8px;
+            font-size : 14px;
+        }
+
+        .message.success {
+            background : #e6ffed;
+            color : #2d7a46;
+            border : 1px solid #b2f5bc;
+        }
+
+        .message.error {
+            background : #ffe6e6;
+            color : #a12c2c;
+            border : 1px solid #f5b2b2;
         }
 
         footer {
@@ -78,10 +120,30 @@
 <body>
     <div class="container">
         <h2>Contact Us</h2>
-        <p>If you have any questions or reservations, feel free to reach out to us via email:</p>
-        <a class="email-link" href="mailto:info@restaurant.com">Email Us</a>
-    </div>
+        <p>If you have any questions or reservations, please fill out the form below.</p>
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <label for="id_name">Name</label>
+            {{ form.name }}
+
+            <label for="id_email">Email</label>
+            {{ form.email }}
+
+            <label for="id_message">Message</label>
+            {{ form.message }}
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
 
     <footer>
         Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm
