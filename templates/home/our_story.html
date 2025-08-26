@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Our Story - {{ restaurant_name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+
+        .story-section {
+            padding : 60px 20px;
+            background-color : #f9f9fb;
+            text-align : center;
+        }
+
+        .story-section h1 {
+            color : #6c5ce7;
+            margin-bottom : 20px;
+        }
+
+        .story-section p {
+            max-width : 800px;
+            margin : 0 auto;
+            font-size : 1.1rem;
+            color : #444;
+            line-height : 1.7;
+        }
+
+    </style>
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <section class="story-section">
+        <div class="container">
+            <h1>Our Story</h1>
+            <p>
+                Established in 2010 in the heart of Ahmedabad, {{ restaurant_name }} has been 
+                serving families and friends with delicious meals made from the freshest local
+                ingredients. Our journey began with a small kitchen and a big dream - to create
+                a space where food brings people together. Over the years, we've grown into one 
+                of the city's favorite dining spots, offering a mix of traditional recipes and 
+                modern flavors.
+            </p>
+        </div>
+    </section>
+
+    <footer class="text-center p-3 bg-dark text-light">
+        <p>&copy; {% now "Y" %} {{ restaurant_name }}. All rights reserved.</p>
+    </footer>
+</body>
+</html>
