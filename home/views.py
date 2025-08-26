@@ -196,3 +196,29 @@ def reservations_view(request):
 
 def our_story(request):
     return render(request, "home/our_story.html")
+
+def staff_view(request):
+    staff_members = [
+        {
+            'name' : 'John Deo',
+            'role' : 'Head Chef',
+            'image' : 'image/staff1.jpg',
+            'description' : 'John is our head chef with 15 years of culinary experinece.'
+        },
+
+        {
+            'name' : 'Jane Smith',
+            'role' : 'Sous Chef',
+            'image' : 'image/staff2.jpg',
+            'description' : 'Jane assists in the kitchen and specializes in desserts.'
+        },
+
+        {
+            'name' : 'Mike Johnson',
+            'role' : "Manager",
+            'image' : 'image/staff3.jpg',
+            'description' : 'Mike ensures that everything runs smoothly at our restaurant.'
+        }
+    ]
+
+    return render(request, "home/staff.html", {"staff_members":staff_members})
