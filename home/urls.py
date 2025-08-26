@@ -26,4 +26,6 @@ urlpatterns = [
     path('thank-you/',views.thank_you_view,name="thank_you"),
 
     path('reservations/',views.reservations_view,name="reservations"),
+
+    path('our-story/',views.our_story,name="our_story"),
 ]
