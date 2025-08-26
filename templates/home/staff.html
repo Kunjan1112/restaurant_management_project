@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Our Staff- Restaurant</title>
+        <style>
+
+            body {
+                font-family : Arial, sans-serif;
+                margin : 0;
+                padding : 0;
+                background-color : #fafafa;
+                color : #333;
+            }
+
+            header {
+                background-color : #333;
+                color : white;
+                text-align : center;
+                padding : 20px 0;
+            }
+
+            h1 {
+                margin : 0;
+                font-size : 2rem;
+            }
+
+            .container {
+                max-width : 1100px;
+                margin : 30px auto;
+                padding : 0 20px;
+            }
+
+            .staff-grid {
+                display : grid;
+                grid-template-columns : repeat(auto-fit, minmax(250px, 1fr));
+                gap : 20px;
+            }
+
+            .staff-card {
+                background : white;
+                border-radius : 10px;
+                overflow : hidden;
+                box-shadow : 0 2px 6px rgba(0,0,0,0.1);
+                text-align : center;
+                transition : transform 0.2s ease-in-out;
+            }
+
+            .staff-card:hover {
+                transform : scale(1.05);
+            }
+
+            .staff-card img {
+                width : 100%;
+                height : 220px;
+                object-fit : cover;
+            }
+
+            .staff-info {
+                padding : 15px;
+            }
+
+            .staff-info h3 {
+                margin : 10px 0 5px;
+                font-size : 1.2rem;
+                color : #222;
+            }
+
+            .staff-info p {
+                font-size : 0.95rem;
+                color : #555;
+                margin : 5px 0;
+            }
+
+            footer {
+                background : #333;
+                color : white;
+                text-align : center;
+                padding : 15px;
+                margin-top : 30px;
+            }
+
+        </style>
+    </head>
+<body>
+    <header>
+        <h1>Meet Our Staff</h1>
+    </header>
+
+    <div class="container">
+        <div class="staff-grid">
+            <div class="staff-card">
+                <img src="https://via.placeholder.com/400x300" alt="Chef John">
+                <div class="staff-info">
+                    <h3>Chef John Deo</h3>
+                    <p>Head Chef</p>
+                    <p>Expert in Italian cuisine with over 15 years of culinary experience.</p>
+                </div>
+            </div>
+
+            <div class="staff-card">
+                <img src="https://via.placeholder.com/400x300" alt="Manager Jane">
+                <div class="staff-info">
+                    <h3>Jane Smith</h3>
+                    <p>Restaurant Manager</p>
+                    <p>Ensures top-quality service and a welcoming atmosphere for all guests.</p>
+                </div>
+            </div>
+
+            <div class="staff-card">
+                <img src="https://via.placeholder.com/400x300" alt="Sous Chef Alex">
+                <div class="staff-info">
+                    <h3>Alex Johnson</h3>
+                    <p>Sous Chef</p>
+                    <p>Creative with modern dishes and passionate about local fresh ingrediants.</p>
+                </div>
+            </div>
+
+            <div class="staff-card">
+                <img src="https://via.placeholder.com/400x300" alt="Waiter Emma">
+                <div class="staff-info">
+                    <h3>Emma Williams</h3>
+                    <p>Senior Waitress</p>
+                    <p>Always ready with a smile and ensures every customer has a great experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Our Restaurant. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear()
+    </script>
+
+</body>
+</html>
