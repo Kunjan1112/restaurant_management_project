@@ -96,7 +96,23 @@ def contact_view(request):
                 fail_silently = False
             )
 
-            message.success(request, "Thank You, Your message has been sent!")
+            confirm_subject = "Thank you for contacting us!"
+            confirm_body = (
+                f"Hi {name},\n\n"
+                "Thank you for reaching out to us. We have received your message "
+                "and will get back to you soon.\n\n"
+                "Best regards,\nYour Restaurant Team"
+            )
+
+            send_email(
+                confirm_subject,
+                confirm_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+
+            message.success(request, "Thank You, Your message has been sent.")
 
             return redirect("thank_you_view")
     else:
