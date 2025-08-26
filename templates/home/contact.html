@@ -97,12 +97,34 @@
             border : 1px solid #f5b2b2;
         }
 
+        .hours {
+            margin-top : 25px;
+            padding : 15px;
+            background : #f8f8ff;
+            border-left : 5px solid #6c5ce7;
+            border-radius : 10px;
+        }
+
+        .hours h3 {
+            margin : 0 0 10px;
+            font-size : 18px;
+            color : #6c5ce7;    
+        }
+
+        .hours p {
+            margin : 4px 0;
+            font-size : 15px;
+            color : #777;
+            text-align : left;
+        }
+
         footer {
             text-align : center;
             margin-top : 30px;
             color : #777;
             font-size : 14px;
         }
+
 
         @media (max-width : 600px) {
             body {
@@ -124,7 +146,7 @@
 
         {% if messages %}
             {% for message in messages %}
-                <div class="messages {{ message.tags }}">{{ message }}</div>
+                <div class="message {{ message.tags }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
 
@@ -143,11 +165,21 @@
 
             <button type="submit">Send Message</button>
         </form>
+
+        <div class="hours">
+            <h3>Opening Hours</h3>
+            <p><strong>Mon - Fri:</strong> 11:00 AM - 9:00 PM</p>
+            <p><strong>Sat - Sun:</strong> 10:00 AM - 10:00 PM</p>
+        </div>
     </div>
 
     <footer>
-        Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm
+        &copy; <span id="year"></span> Restaurant Name. All Rights Reserved.
     </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear()
+    </script>
 </body>
 
 </html>
