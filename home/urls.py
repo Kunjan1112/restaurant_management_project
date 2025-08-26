@@ -28,4 +28,5 @@ urlpatterns = [
     path('reservations/',views.reservations_view,name="reservations"),
 
     path('our-story/',views.our_story,name="our_story"),
+    
 ]
