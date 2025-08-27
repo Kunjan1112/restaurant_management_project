@@ -35,10 +35,29 @@
             color : #333;
         }
 
+        .about-section h2 {
+            margin-top : 20px;
+            font-size : 2rem;
+            color : #333;
+        }
+
         .about-section p {
             font-size : 1.1rem;
             line-height : 1.6;
             color : #555;
+        }
+
+        .highlights {
+            margin-top : 20px;
+            padding : 15px;
+            background : #f1f3f6;
+            border-left : 4px solid #6c63ff;
+            border-radius : 6px;
+        }
+
+        .highlights ul {
+            margin : 0;
+            padding-left : 18px;
         }
 
         footer {
@@ -56,9 +75,10 @@
 
 <body>
 
-    <nav aria-label="breadcrumb" class="breadcrumb-container">
+    <nav aria-label="breadcrumb" class="bg-light p-2">
         <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
+            <li class="breadcrumb-item" aria-current="page">Home</li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
         </ol>
     </nav>
 
@@ -69,9 +89,23 @@
             <img src="https://via.placeholder.com/900x300" alt="Restaurant Image">
         {% endif %}
         <h1>About {{ restaurant.name|default:"Our Restaurant" }}</h1>
-        
         <p>{{ restaurant_description }}</p>
+
+        <h2>Our History</h2>
+        <p>Founded in <em>2010</em>, our restaurant began as a small family-run eatery with a vision to serve authentic flavors using fresh, locally sourced ingredients. What started with a handful of tables has grown into a welcoming space where hundreds of guests gather each week to enjoy memorable meals.</p>
         
+        <h2>Our Mission</h2>
+        <p>At {{ restaurant.name|default:"Our Restaurant" }}, we aim to bring people together over food that feels like home. We're committed to sustainability, quality, and a warm hospitality experience that makes every guest feel like family.</p>
+
+        <h2>Why Choose Us</h2>
+        <div class="highlights">
+            <ul>
+                <li>Fresh, locally sourced ingredients</li>
+                <li>A warm, family-friendly atmosphere</li>
+                <li>Signature dishes blending tradition & innovation</li>
+                <li>Passionate chefs and attentive staff</li>
+            </ul>
+        </div>
     </div>
 
     <footer>
