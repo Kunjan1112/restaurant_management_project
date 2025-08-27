@@ -29,4 +29,7 @@ urlpatterns = [
     path('our-story/',views.our_story,name="our_story"),
     
     path('staff/',views.staff_view,name='staff'),
+
+    path('restaurant-gallery/',views.restaurant_gallery,name='restaurant_gallery'),
+    
 ]
