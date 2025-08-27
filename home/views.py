@@ -223,5 +223,7 @@ def staff_view(request):
 
     return render(request, "home/staff.html", {"staff_members":staff_members})
 
+def restaurant_gallery(request):
+    return render(request,'home/gallery.html')
 
-
+ 
