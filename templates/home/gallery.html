@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Restaurant Gallery</title>
+        <link rel="stylesheet" href="{% static 'home/gallery.css' %}">
+        <style>
+            body{
+                font-family : Arial, sans-serif;
+                background-color : #f8f8f8;
+                margin : 0;
+                padding : 0;
+            }
+
+            .container {
+                width : 90%;
+                margin : 0 auto;
+                padding : 20px 0;
+                text-align : center;   
+            }
+
+            h1 {
+                color : #333;
+                margin-bottom : 30px;
+            }
+
+            .gallery {
+                display : hidden;
+                grid-template-columns : repeat(auto-fit, minmax(200px, 1fr));
+                gap : 20px;
+            }
+
+            .gallery-item {
+                overflow : hidden;
+                border-radius : 10px;
+                box-shadow : 0 4px 6px rgba(0,0,0,0.1);
+                transition : transform 0.3s, box-shadow 0.3s;
+            }
+
+            .gallery-item img {
+                width : 100%;
+                heigth : 100%;
+                object-fit : cover;
+                display : block;
+            }
+
+            .gallery-item:hover {
+                transform : scale(1.05);
+            }
+
+            .back-home {
+                margin-top : 30px;
+            }
+
+            .back-home a {
+                text-decoration : none;
+                color : white;
+                background-color : #007BFF;
+                padding : 10px 20px;
+                border-radius : 5px;
+                transition : background-color 0.3s;
+            }
+
+            .back-home a:hover {
+                background-color : #0056b3;
+            }
+        </style>
+
+    </head>
+<body>
+    <div class="container">
+        <h1>Restaurant Gallery</h1>
+        <div class="gallery">
+            {% for img in images %}
+            <div class="gallery-item">
+                <img src="{{ img }}" alt="Restaurant Image">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="back-home">
+            <a href="{% url 'home' %}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html> 
