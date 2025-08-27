@@ -28,4 +28,5 @@ urlpatterns = [
 handler403 = views.custom_permission_denied_view
 
 if settings.DEBUG:
+    from django.conf.urls.static import static
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
