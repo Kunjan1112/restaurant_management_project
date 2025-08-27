@@ -223,6 +223,5 @@ def staff_view(request):
 
     return render(request, "home/staff.html", {"staff_members":staff_members})
 
-def custom_permission_denied_view(request, exception=None):
-    return render(request, "403.html", status=403)
+
 
