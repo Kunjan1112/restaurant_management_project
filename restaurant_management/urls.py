@@ -25,7 +25,7 @@ urlpatterns = [
     path('api/orders/',include('orders.urls')),
 ]
 
+handler403 = views.custom_permission_denied_view
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-handler403 = views.custom_permission_denied_view
