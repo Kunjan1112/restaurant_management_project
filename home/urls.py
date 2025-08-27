@@ -31,5 +31,4 @@ urlpatterns = [
     path('staff/',views.staff_view,name='staff'),
 
     path('restaurant-gallery/',views.restaurant_gallery,name='restaurant_gallery'),
-    
 ]
