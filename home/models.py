@@ -50,7 +50,7 @@ class Special(models.Model):
     def __str__(self):
         return self.item_name
 
-def OpeningHour(models.Model):
+class OpeningHour(models.Model):
     DAY_CHOICES = [
         ('Monday', 'Monday'),
         ('Tuesday', 'Tuesday'),
@@ -81,9 +81,24 @@ class Chef(models.Model):
     def __str__(self):
         return self.name
 
-def NewSletterSubscriber(models.Model):
+class NewSletterSubscriber(models.Model):
     email = models.EmailField(unique=True)
     subscribed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+class RestaurantInfo(models.Model):
+    name = models.CharField(max_length=200, default="Delicious Bites Restaurant")
+    city = models.CharField(max_length=100, default="Ahmedabad")
+    address = models.TextField(default="123, SG Highway, Ahmedabad, Gujarat 380015")
+    phone = models.CharField(max_length=20, default="+91 98765 43210")
+    email = models.EmailField(blank=True, null=True)
+    google_map_embed_url = models.TextField(
+        default="https://www.google.com/maps/embed?pb=YOUR_MAP_URL"
+    )
+
+    hours = models.JSONField(default=dict, blank=True)
+
+    def __str__(self):
+        return self.name
