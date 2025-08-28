@@ -13,3 +13,5 @@ class OpeningHourAdmin(admin.ModelAdmin):
     list_display = ("day","open_time", "close_time")
 
 admin.site.register(Chef)
+
+admin.site.register(RestaurantInfo)
