@@ -174,12 +174,28 @@
             <button type="submit">Send Message</button>
         </form>
 
+        <!-- Restaurant Email Section  -->
+
+        {% if restaurant.email %}
+        <div class="contact-email" style="margin-top:20px; text-align:center; font-size:16px;">
+            <p><strong>Email us at:</strong>
+                <a href="mailto:{{ restaurant.email }}" style="color:#6c5ce7; text-decoration:none;">
+                    {{ restaurant.email }}
+                </a>
+            </p>
+        </div>
+        {% endif %}
+
+        <!-- Hours  -->
+
         <div class="hours">
             <h3>Opening Hours</h3>
             <p><strong>Mon - Fri:</strong> 11:00 AM - 9:00 PM</p>
             <p><strong>Sat - Sun:</strong> 10:00 AM - 10:00 PM</p>
         </div>
     </div>
+
+    <!-- Footer -->
 
     <footer>
         <p>&copy; <span id="year"></span> Restaurant Name. All Rights Reserved.</p>
