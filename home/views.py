@@ -233,3 +233,7 @@ def menu(request):
     else:
         items = MenuItem.objects.all()
     return render(request, "home/menu.html", {"items":items, "query":query})
+
+def location(request):
+    restaurant = Restaurant.objects.first()
+    return render(request, 'home/location.html', {"restaurant":restaurant})
