@@ -226,4 +226,10 @@ def staff_view(request):
 def restaurant_gallery(request):
     return render(request,'home/gallery.html')
 
- 
+def menu(request):
+    query = request.GET.get('q')
+    if query:
+        items = MenuItem.objects.filter(name_icontains=query)
+    else:
+        items = MenuItem.objects.all()
+    return render(request, "home/menu.html", {"items":items, "query":query})
