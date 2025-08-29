@@ -1,701 +1,701 @@
-{% load static %} 
-{% load tz %} 
+    {% load static %} 
+    {% load tz %} 
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html lang="en">
-<head>
-    
-    <meta charset="UTF-8">
-
-    <title>Delicious Bites Restaurant - Ahmedabad | Best Family Dining</title>
-
-    <meta name="description" content="Enjoy authentic meals at {{ restaurant_name }} in {{ restaurant_city }}. Explore our menu, make reservations, and experience fine dining with family and friends.">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    
-    <style>
-
-        body {
-            font-family : 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color : #f9f9fb;
-            margin : 0;
-            padding : 0;
-            color : #333;
-            line-height : 1.6;
-        }
-
-        /* Navbar */
-
-        .navbar {
-            padding : 15px 0;
-        } 
- 
-        .navbar-brand {
-            font-weight : 700;
-            color : #6c5ce7 !important;
-        }
-
-        .nav-link {
-            font-weight : 500;
-            color : #444 !important;
-        }
-
-        .nav-link:hover {
-            color : #6c5ce7 !important;
-        }
-
-        /* Hero */
-
-        .hero {
-            position : relative;
-            padding : 120px 0;
-            background : url("{% static 'img/hero-bg.jpg' %}") center center/cover no-repeat;
-            color : white;
-            text-align : center;
-            border-bottom-left-radius : 50px;
-            border-bottom-right-radius : 50px;
-            box-shadow : 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        .hero::before {
-            content : "";
-            position : absolute;
-            top: 0; left: 0;
-            width : 100%; height : 100%;
-            background : rgba(0,0,0,0.45);
-            border-bottom-left-radius : 50px;
-            border-bottom-right-radius : 50px;
-        }
-
-        .hero .container {
-            position : relative;
-            z-index : 2;
-        }
-
-        .hero h1 {
-            font-size : 3rem;
-            font-weight : bold;
-            margin-bottom : 15px;
-        }
-
-        .hero p {
-            font-size : 1.2rem;
-            opacity : 0.9;
-        }
+    <html lang="en">
+    <head>
         
-        .logo-img {
-            max-width : 180px;
-            height : auto;
-            margin-bottom : 20px;
-            border-radius : 50%;
-            box-shadow : 0 4px 15px rgba(0,0,0,0.2);
-            background-color : white;
-            padding : 10px;
-        }
+        <meta charset="UTF-8">
 
+        <title>Delicious Bites Restaurant - Ahmedabad | Best Family Dining</title>
 
+        <meta name="description" content="Enjoy authentic meals at {{ restaurant_name }} in {{ restaurant_city }}. Explore our menu, make reservations, and experience fine dining with family and friends.">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        
+        <style>
+
+            body {
+                font-family : 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color : #f9f9fb;
+                margin : 0;
+                padding : 0;
+                color : #333;
+                line-height : 1.6;
+            }
+
+            /* Navbar */
+
+            .navbar {
+                padding : 15px 0;
+            } 
     
-        .btn-custom {
-            background-color : #fff;
-            color : #6c5ce7;
-            border : none;
-            padding : 12px 28px;
-            border-radius : 30px;
-            font-weight : 600;
-            transition : all 0.3s ease-in-out;
-            box-shadow : 0 4px 10px rgba(0,0,0,0.1);
-            margin-top : 20px;
-            display : inline-block;
-            text-decoration : none;
-        }
+            .navbar-brand {
+                font-weight : 700;
+                color : #6c5ce7 !important;
+            }
 
-        .btn-custom:hover {
-            background-color : #f1f1f1;
-            transform : translateY(-3px);
-            box-shadow : 0 6px 14px rgba(0,0,0,0.2);
-        }
+            .nav-link {
+                font-weight : 500;
+                color : #444 !important;
+            }
 
-        .btn-order {
-            background-color : #ff6b00;
-            color : #fff;
-        }
+            .nav-link:hover {
+                color : #6c5ce7 !important;
+            }
 
-        .btn-order:hover {
-            background-color : #e65c00;
-            color : #fff;
-        }
+            /* Hero */
 
-        /* Search Bar Styling */
+            .hero {
+                position : relative;
+                padding : 120px 0;
+                background : url("{% static 'img/hero-bg.jpg' %}") center center/cover no-repeat;
+                color : white;
+                text-align : center;
+                border-bottom-left-radius : 50px;
+                border-bottom-right-radius : 50px;
+                box-shadow : 0 4px 20px rgba(0,0,0,0.15);
+            }
 
-        .hero form .form-control {
-            border-radius : 30px;
-            padding : 10px 20px;
-            border : none;
-            max-width : 400px;
-        }
+            .hero::before {
+                content : "";
+                position : absolute;
+                top: 0; left: 0;
+                width : 100%; height : 100%;
+                background : rgba(0,0,0,0.45);
+                border-bottom-left-radius : 50px;
+                border-bottom-right-radius : 50px;
+            }
 
-        .hero form .btn {
-            border-radius : 30px;
-            padding :  10px 25px;
-            background-color : white;
-            color : #6c5ce7;
-            font-weight : 600;
-            border : none;
-        }
+            .hero .container {
+                position : relative;
+                z-index : 2;
+            }
 
-        .hero form .btn:hover {
-            background-color : #f1f1f1;
-            transform : translateY(-2px);  
-        }
+            .hero h1 {
+                font-size : 3rem;
+                font-weight : bold;
+                margin-bottom : 15px;
+            }
 
-        /* Feature Section */
+            .hero p {
+                font-size : 1.2rem;
+                opacity : 0.9;
+            }
+            
+            .logo-img {
+                max-width : 180px;
+                height : auto;
+                margin-bottom : 20px;
+                border-radius : 50%;
+                box-shadow : 0 4px 15px rgba(0,0,0,0.2);
+                background-color : white;
+                padding : 10px;
+            }
 
-        .features-card img {
-            max-width : 100%;
-            height : auto;
-            border-radius : 12px;
-            margin-bottom : 15px;
-            box-shadow : 0 4px 12px rgba(0,0,0,0.1);
-        }
 
-        .features-card {
-            padding : 30px;
-            background-color : #ffffff;
-            border-radius : 15px;
-            box-shadow : 0 4px 8px rgba(0,0,0,0.05);
-            text-align : center;
-            height : 100%;
-            transition : transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
+        
+            .btn-custom {
+                background-color : #fff;
+                color : #6c5ce7;
+                border : none;
+                padding : 12px 28px;
+                border-radius : 30px;
+                font-weight : 600;
+                transition : all 0.3s ease-in-out;
+                box-shadow : 0 4px 10px rgba(0,0,0,0.1);
+                margin-top : 20px;
+                display : inline-block;
+                text-decoration : none;
+            }
 
-        .features-card h4{
-            font-size : 1.3rem;
-            margin-bottom : 15px;
-            color : #6c5ce7;
-        }
+            .btn-custom:hover {
+                background-color : #f1f1f1;
+                transform : translateY(-3px);
+                box-shadow : 0 6px 14px rgba(0,0,0,0.2);
+            }
 
-        .features-card:hover{
-            background-color : #dfe6e9;
-            transform : translateY(-5px);
-            box-shadow : 0 8px 20px rgba(0,0,0,0.1);
-        }
+            .btn-order {
+                background-color : #ff6b00;
+                color : #fff;
+            }
 
-        .features-card p{
-            color : #555;
-        }
+            .btn-order:hover {
+                background-color : #e65c00;
+                color : #fff;
+            }
 
-        /* Footer */
+            /* Search Bar Styling */
 
-        footer {
-            background-color : #2d3436;
-            color : #dfe6e9;
-            text-align : center;
-            padding : 20px 0;
-            margin-top : 60px;
-            font-size : 0.9rem;
-            letter-spacing : 0.5px;
-        }
+            .hero form .form-control {
+                border-radius : 30px;
+                padding : 10px 20px;
+                border : none;
+                max-width : 400px;
+            }
 
-        footer a {
-            color : #dfe6e9;
-            text-decoration : none;
-            margin : 0 5px;
-        }
+            .hero form .btn {
+                border-radius : 30px;
+                padding :  10px 25px;
+                background-color : white;
+                color : #6c5ce7;
+                font-weight : 600;
+                border : none;
+            }
 
-        footer a:hover {
-            text-decoration : underline;
-        }
+            .hero form .btn:hover {
+                background-color : #f1f1f1;
+                transform : translateY(-2px);  
+            }
 
-        footer .fa-facebook:hover {
-            color : #3b5998;
-        }
+            /* Feature Section */
 
-        footer .fa-instagram:hover {
-            color : #e4405f;
-        }
+            .features-card img {
+                max-width : 100%;
+                height : auto;
+                border-radius : 12px;
+                margin-bottom : 15px;
+                box-shadow : 0 4px 12px rgba(0,0,0,0.1);
+            }
 
-        footer .fa-twitter:hover {
-            color : #1da1f2;
-        }
+            .features-card {
+                padding : 30px;
+                background-color : #ffffff;
+                border-radius : 15px;
+                box-shadow : 0 4px 8px rgba(0,0,0,0.05);
+                text-align : center;
+                height : 100%;
+                transition : transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
 
-        /* Location */
+            .features-card h4{
+                font-size : 1.3rem;
+                margin-bottom : 15px;
+                color : #6c5ce7;
+            }
 
-        #location {
-            padding : 60px 20px;
-            background-color : #f5f5f5;
-        }
+            .features-card:hover{
+                background-color : #dfe6e9;
+                transform : translateY(-5px);
+                box-shadow : 0 8px 20px rgba(0,0,0,0.1);
+            }
 
-        #location h2 { color : #6c5ce7; margin-bottom : 15px; }
-        #location p { font-size : 1rem; margin-bottom : 20px; }
+            .features-card p{
+                color : #555;
+            }
 
-        #contact { padding : 60px 20px; background-color : #f1f1f1; }
-        #contact h2 { color : #6c5ce7; margin-bottom : 20px; }
+            /* Footer */
 
-        #hours {
-            padding : 60px 20px;
-            background : #fff3cd;
-            text-align : center;
-        }
+            footer {
+                background-color : #2d3436;
+                color : #dfe6e9;
+                text-align : center;
+                padding : 20px 0;
+                margin-top : 60px;
+                font-size : 0.9rem;
+                letter-spacing : 0.5px;
+            }
 
-        #hours h2 { color : #6c5ce7; margin-bottom: 20px; }
-        #hours ul { list-style : none; padding : 0; margin : 0; }
-        #hours li { font-size : 1.1rem; margin : 6px 0; }
+            footer a {
+                color : #dfe6e9;
+                text-decoration : none;
+                margin : 0 5px;
+            }
 
-        .breadcumb {
-            background-color : transparent; 
-            padding : 10px 0;
-            margin-bottom : 20px;
-        }
+            footer a:hover {
+                text-decoration : underline;
+            }
 
-        .breadcumb a {
-            text-decoration : none; 
-            color : #6c5ce7;
-        }
+            footer .fa-facebook:hover {
+                color : #3b5998;
+            }
 
-        .breadcumb a:hover {
-            text-decoration : underline;
-        }
+            footer .fa-instagram:hover {
+                color : #e4405f;
+            }
 
-        .breadcumb span {
-            color : #555;
-        }
+            footer .fa-twitter:hover {
+                color : #1da1f2;
+            }
 
-        /* Special Section */
+            /* Location */
 
-        .specials {
-            padding : 60px 20px;
-            background-color : #f9f9fb;
-        }
+            #location {
+                padding : 60px 20px;
+                background-color : #f5f5f5;
+            }
 
-        .specials h2 {
-            color : #6c5ce7;
-            margin-bottom : 30px;
-            text-align : center;
-        }
+            #location h2 { color : #6c5ce7; margin-bottom : 15px; }
+            #location p { font-size : 1rem; margin-bottom : 20px; }
 
-        .special-card {
-            background : #fff;
-            border-radius : 15px;
-            padding : 20px;
-            text-align : center;
-            box-shadow : 0 4px 10px rgba(0,0,0,0.1);
-            transition : transform 0.3s ease-in-out;
-            height : 100%;
-        }
+            #contact { padding : 60px 20px; background-color : #f1f1f1; }
+            #contact h2 { color : #6c5ce7; margin-bottom : 20px; }
 
-        .special-card:hover {
-            transform : translateY(-5px);
-            box-shadow : 0 6px 16px rgba(0,0,0,0.15);
-        }
+            #hours {
+                padding : 60px 20px;
+                background : #fff3cd;
+                text-align : center;
+            }
 
-        .special-card h5 {
-            color : #333;
-            margin-bottom : 10px;
-        }
+            #hours h2 { color : #6c5ce7; margin-bottom: 20px; }
+            #hours ul { list-style : none; padding : 0; margin : 0; }
+            #hours li { font-size : 1.1rem; margin : 6px 0; }
 
-        .special-card p {
-            font-size : 0.95rem;
-            color : #666;
-        }
+            .breadcumb {
+                background-color : transparent; 
+                padding : 10px 0;
+                margin-bottom : 20px;
+            }
 
-        .special-price {
-            font-weight : bold;
-            color : #ff6b00;
-            font-size : 1.1rem;
-            margin-top : 10px;
-        }
+            .breadcumb a {
+                text-decoration : none; 
+                color : #6c5ce7;
+            }
 
-        /* New Sletter */
+            .breadcumb a:hover {
+                text-decoration : underline;
+            }
 
-        .newsletter-form {
-            margin-top : 40px;
-            text-align : center;
-        }
+            .breadcumb span {
+                color : #555;
+            }
 
-        .newsletter-form input {
-            border-radius : 30px;
-            padding : 10px 20px;
-        }
+            /* Special Section */
 
-        .newsletter-form button {
-            border-radius : 30px;
-            padding : 10px 25px;
-        }
+            .specials {
+                padding : 60px 20px;
+                background-color : #f9f9fb;
+            }
 
-    </style>
-    
-</head>
+            .specials h2 {
+                color : #6c5ce7;
+                margin-bottom : 30px;
+                text-align : center;
+            }
 
-<body>
-    <!-- Navigation Bar  -->
+            .special-card {
+                background : #fff;
+                border-radius : 15px;
+                padding : 20px;
+                text-align : center;
+                box-shadow : 0 4px 10px rgba(0,0,0,0.1);
+                transition : transform 0.3s ease-in-out;
+                height : 100%;
+            }
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">{{ restaurant_name }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            .special-card:hover {
+                transform : translateY(-5px);
+                box-shadow : 0 6px 16px rgba(0,0,0,0.15);
+            }
+
+            .special-card h5 {
+                color : #333;
+                margin-bottom : 10px;
+            }
+
+            .special-card p {
+                font-size : 0.95rem;
+                color : #666;
+            }
+
+            .special-price {
+                font-weight : bold;
+                color : #ff6b00;
+                font-size : 1.1rem;
+                margin-top : 10px;
+            }
+
+            /* New Sletter */
+
+            .newsletter-form {
+                margin-top : 40px;
+                text-align : center;
+            }
+
+            .newsletter-form input {
+                border-radius : 30px;
+                padding : 10px 20px;
+            }
+
+            .newsletter-form button {
+                border-radius : 30px;
+                padding : 10px 25px;
+            }
+
+        </style>
+        
+    </head>
+
+    <body>
+        <!-- Navigation Bar  -->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">{{ restaurant_name }}</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+
+                        <!-- Main Links  -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about_restaurant' %}">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                        
+                        <!-- Extra Section  -->
+                        <li class="nav-item"><a class="nav-link" href="#">Reservations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Specials</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'our_story' %}">Our Story</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
+
+                        <!-- Cart  -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_cart' %}">
+                                Cart <span class="badge bg-primary">{{ cart_count|default:0 }}</span>
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Carousel -->
+
+        <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width:1100px; margin:20px auto;">
+            <div class="carousel-inner rounded shadow">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1555992336-03a23c0c5b11?auto=format&fit=crop&w=1200&q=80"
+                        class="d-block w-100" alt="Restaurant Interior">
+                </div>
+            
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022dal?auto=format&fit=crop&w=1200&q=80"
+                        class="d-block w-100" alt="Fine Dining">
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://images.unplash.com/photo-1504674900247-0877df9cc863?auto=format&fit=crop&w=1200&q=80"
+                        class="d-block w-100" alt="Delicious Food">
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target='#restaurantCarousel' data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-
-                    <!-- Main Links  -->
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about_restaurant' %}">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    
-                    <!-- Extra Section  -->
-                    <li class="nav-item"><a class="nav-link" href="#">Reservations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Specials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'our_story' %}">Our Story</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
-
-                    <!-- Cart  -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'view_cart' %}">
-                            Cart <span class="badge bg-primary">{{ cart_count|default:0 }}</span>
-                        </a>
-                    </li> 
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Carousel -->
-
-    <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width:1100px; margin:20px auto;">
-        <div class="carousel-inner rounded shadow">
-            <div class="carousel-item active">
-                <img src="https://images.unsplash.com/photo-1555992336-03a23c0c5b11?auto=format&fit=crop&w=1200&q=80"
-                    class="d-block w-100" alt="Restaurant Interior">
-            </div>
-        
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022dal?auto=format&fit=crop&w=1200&q=80"
-                    class="d-block w-100" alt="Fine Dining">
-            </div>
-
-            <div class="carousel-item">
-                <img src="https://images.unplash.com/photo-1504674900247-0877df9cc863?auto=format&fit=crop&w=1200&q=80"
-                    class="d-block w-100" alt="Delicious Food">
-            </div>
+            <button class="carousel-control-next" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target='#restaurantCarousel' data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
+        <!-- Breadcumb -->
 
-        <button class="carousel-control-next" type="button" data-bs-target="#restaurantCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <!-- Breadcumb -->
-
-    <div class="container">
-        <nav class="breadcrumb">
-            <a href="{% url 'home' %}">Home</a> &gt; <span>Dashboard</span>
-        </nav>
-    </div>
-
-    <!-- Specials Section  -->
-    <section class="specials">
         <div class="container">
-            <h2>Today's Specials</h2>
-            {% if specials %}
-                <div class="row g-4">
-                    {% for special in specials %}
-                        <div class="col-md-4">
-                            <div class="special-card">
-                                <h5>{{ special.item_name }}</h5>
-                                <p>{{ special.description }}</p>
-                                <div class="special-price">${{ special.price }}</div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p class="text-center text-muted">No Specials available today.</p>
-            {% endif %}
+            <nav class="breadcrumb">
+                <a href="{% url 'home' %}">Home</a> &gt; <span>Dashboard</span>
+            </nav>
         </div>
 
-        <!-- Newsletter  -->
-
-        <section class="newsletter">
+        <!-- Specials Section  -->
+        <section class="specials">
             <div class="container">
-                <h2 class="text-center">Subscribe to Our Newsletter</h2>
-                <form method="post" class="newsletter-form">
-                    {% csrf_token %}
-                    {{ form.email }}
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                <h2>Today's Specials</h2>
+                {% if specials %}
+                    <div class="row g-4">
+                        {% for special in specials %}
+                            <div class="col-md-4">
+                                <div class="special-card">
+                                    <h5>{{ special.item_name }}</h5>
+                                    <p>{{ special.description }}</p>
+                                    <div class="special-price">${{ special.price }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-center text-muted">No Specials available today.</p>
+                {% endif %}
+            </div>
+
+            <!-- Newsletter  -->
+
+            <section class="newsletter">
+                <div class="container">
+                    <h2 class="text-center">Subscribe to Our Newsletter</h2>
+                    <form method="post" class="newsletter-form">
+                        {% csrf_token %}
+                        {{ form.email }}
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="alert alert-success mt-3">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %} 
+                </div>
+            </section>
+            
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if specials.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ specials.previous_page_number }}">Previous</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    {% endif %}
+
+                    {% for num in specials.pagination.page_range %}
+                        {% if special.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if specials.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ specials.next_page_number }}">Next</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">Next</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% else %} 
+            <p class="text-center text-muted">No Specials available today.</p>
+        {% endif %}
+        </section>
+
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <!-- Logo  -->
+                <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} logo - Authentic dining in {{ restaurant_city }}" class="logo-img">
+    
+                <h1>Welcome to {{ restaurant_name }}</h1>
+                <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
+
+                <!-- Search Bar  -->
+                <form class="d-flex justify-content-center mt-4" method="GET" action="">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
+                    <button class="btn" type="submit">Search</button>
                 </form>
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="alert alert-success mt-3">{{ message }}</p>
-                    {% endfor %}
-                {% endif %} 
+                <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
+                <a href="{% url 'order' %}" class="btn btn-custom btn-order mt-4 ms-2">Order Now</a>
+
             </div>
         </section>
-         
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-                {% if specials.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ specials.previous_page_number }}">Previous</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                {% endif %}
+        <!-- Location Sections  -->
 
-                {% for num in specials.pagination.page_range %}
-                    {% if special.number == num %}
-                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                    {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                {% endfor %}
-
-                {% if specials.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ specials.next_page_number }}">Next</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled"><span class="page-link">Next</span></li>
-                {% endif %}
-            </ul>
-        </nav>
-    {% else %} 
-        <p class="text-center text-muted">No Specials available today.</p>
-    {% endif %}
-    </section>
-
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <!-- Logo  -->
-            <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} logo - Authentic dining in {{ restaurant_city }}" class="logo-img">
- 
-            <h1>Welcome to {{ restaurant_name }}</h1>
-            <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
-
-            <!-- Search Bar  -->
-            <form class="d-flex justify-content-center mt-4" method="GET" action="">
-                <input class="form-control me-2" type="search" name="q" placeholder="Search menu items..." aria-label="Search">
-                <button class="btn" type="submit">Search</button>
-            </form>
-
-            <a href="{% url 'login' %}" class="btn btn-custom mt-4">Get Started</a>
-            <a href="{% url 'order' %}" class="btn btn-custom btn-order mt-4 ms-2">Order Now</a>
-
-        </div>
-    </section>
-
-    <!-- Location Sections  -->
-
-    <section id="location">
-        <div class="container text-center">
-            <h2>Our Location</h2>
-            <p>{{ restaurant_address }}</p> 
-            <div style="width: 100%; height : 400px;">
-                <iframe
-                    src="{{ google_map_embed_url }}"
-                    width = "100%"
-                    height= "100%"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+        <section id="location">
+            <div class="container text-center">
+                <h2>Our Location</h2>
+                <p>{{ restaurant_address }}</p> 
+                <div style="width: 100%; height : 400px;">
+                    <iframe
+                        src="{{ google_map_embed_url }}"
+                        width = "100%"
+                        height= "100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- New Opening Hours  -->
+        <!-- New Opening Hours  -->
 
-    <section id="hours">
-        <div class="container">
-            <h2>Opening Hours</h2>
-            {% if restaurant_hours %}
-                <ul>
-                    {% for day, time in restaurant_hours.items %}
-                        <li><strong>{{ day }}:</strong> {{ time }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Mon-Fri: 11am - 9pm<br>Sat-Sun: 10am - 10pm</p>
-            {% endif %}
-        </div>
-    </section>
-
-    <!-- Reservations Sections  -->
-
-    <section id="reservation" style="padding: 60px 20px; background-color: #f8f9fa;">
-        <div class="container text-center">
-            <h2 class="mb-3" style="color: #6c5ce7;">Reservations</h2>
-            <p class="mb-4" style="font-size: 1.1rem; color: #555;">
-                Planning a special evening? Reserve your table in advance to enjoy a seamless dining experience at {{ restaurant_name }}
-            </p>
-            <a href="{% url 'reservation' %}" class="btn btn-lg btn-primary" style="border-radius: 30px; padding: 12px 30px;">
-                Make a Reservation
-            </a>
-        </div>
-    </section>
-
-
-    <!-- Contact Form Section  -->
-    
-    <section id="contact">
-        <div class="container" style="max-width: 500px;">
-            <h2 class="text-center">Contact Us</h2>
-
-            {% if success_message %}
-                <div class="alert alert-success text-center">{{ success_message }}</div>
-            {% endif %}
-
-            <form method="POST" novalidate>
-                {% csrf_token %}
-                <div class="mb-3">
-                    {{ form.name.label_tag }}
-                    {{ form.name }}
-                    <div class="text-danger small">{{ form.name.errors }}</div>
-                </div>
-                <div class="mb-3">
-                    {{ form.email.label_tag }}
-                    {{ form.email }}
-                    <div class="text-danger small">{{ form.email.errors }}</div>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Specials Section  -->
-
-    <section class="specials">
-        <div class="container">
-            <h2>Today's Specials</h2>
-            {% if specials %}
-                <div class="row g-4">
-                    {% for special in specials %}
-                        <div class="col-md-4">
-                            <div class="special-card">
-                                <h5>{{ special.item_name }}</h5>
-                                <p>{{ special.description }}</p>
-                                <div class="special-price">${{ special.price }}</div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Pagination -->
-                <nav aria-label="Page navigation" class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        {% if specials.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ specials.previous_page_number }}">Previous</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                        {% endif %}
-
-                        {% for num in specials.pagination.page_range %}
-                            {% if specials.number == num %}
-                                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                            {% else %}
-                                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                            {% endif %}
+        <section id="hours">
+            <div class="container">
+                <h2>Opening Hours</h2>
+                {% if restaurant_hours %}
+                    <ul>
+                        {% for day, time in restaurant_hours.items %}
+                            <li><strong>{{ day }}:</strong> {{ time }}</li>
                         {% endfor %}
-
-                        {% if specials.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ specials.next_page_number }}">Next</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled"><span class="page-link">Next</span></li>
-                        {% endif %}
                     </ul>
-                </nav>
-            {% else %}
-                <p class="text-center text-muted">No Specials available today.</p>
-            {% endif %}
-        </div>
-    </section>
+                {% else %}
+                    <p>Mon-Fri: 11am - 9pm<br>Sat-Sun: 10am - 10pm</p>
+                {% endif %}
+            </div>
+        </section>
 
-    <!-- Feature Section -->
-    <section class="features">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="features-card">
-                        <img src="{% static 'img/food1.jpg' %}" alt="Fresh Ingredients">
-                        <h4>Easy Note Creation</h4>
-                        <p>We use only the finest locally sourced produce.</p>
+        <!-- Reservations Sections  -->
+
+        <section id="reservation" style="padding: 60px 20px; background-color: #f8f9fa;">
+            <div class="container text-center">
+                <h2 class="mb-3" style="color: #6c5ce7;">Reservations</h2>
+                <p class="mb-4" style="font-size: 1.1rem; color: #555;">
+                    Planning a special evening? Reserve your table in advance to enjoy a seamless dining experience at {{ restaurant_name }}
+                </p>
+                <a href="{% url 'reservation' %}" class="btn btn-lg btn-primary" style="border-radius: 30px; padding: 12px 30px;">
+                    Make a Reservation
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Contact Form Section  -->
+        
+        <section id="contact">
+            <div class="container" style="max-width: 500px;">
+                <h2 class="text-center">Contact Us</h2>
+
+                {% if success_message %}
+                    <div class="alert alert-success text-center">{{ success_message }}</div>
+                {% endif %}
+
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                        <div class="text-danger small">{{ form.name.errors }}</div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="features-card">
-                        <img src="{% static 'img/food2.jpg' %}" alt="Delicious Meals">
-                        <h4>Secure Login</h4>
-                        <p>Your notes are protected with token-based authentication.</p>
+                    <div class="mb-3">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        <div class="text-danger small">{{ form.email.errors }}</div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="features-card">
-                        <img src="{% static 'img/food3.jpg' %}" alt="Fast Delivery">
-                        <h4>Mobile Friendly</h4>
-                        <p>Access your notes from any device, anywhere.</p>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Specials Section  -->
+
+        <section class="specials">
+            <div class="container">
+                <h2>Today's Specials</h2>
+                {% if specials %}
+                    <div class="row g-4">
+                        {% for special in specials %}
+                            <div class="col-md-4">
+                                <div class="special-card">
+                                    <h5>{{ special.item_name }}</h5>
+                                    <p>{{ special.description }}</p>
+                                    <div class="special-price">${{ special.price }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            {% if specials.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ specials.previous_page_number }}">Previous</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                            {% endif %}
+
+                            {% for num in specials.pagination.page_range %}
+                                {% if specials.number == num %}
+                                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if specials.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ specials.next_page_number }}">Next</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled"><span class="page-link">Next</span></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% else %}
+                    <p class="text-center text-muted">No Specials available today.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Feature Section -->
+        <section class="features">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="features-card">
+                            <img src="{% static 'img/food1.jpg' %}" alt="Fresh Ingredients">
+                            <h4>Easy Note Creation</h4>
+                            <p>We use only the finest locally sourced produce.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="features-card">
+                            <img src="{% static 'img/food2.jpg' %}" alt="Delicious Meals">
+                            <h4>Secure Login</h4>
+                            <p>Your notes are protected with token-based authentication.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="features-card">
+                            <img src="{% static 'img/food3.jpg' %}" alt="Fast Delivery">
+                            <h4>Mobile Friendly</h4>
+                            <p>Access your notes from any device, anywhere.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <!-- Footer -->
 
-    <footer>
-        <div class="container">
-           <p>&copy; {% now "Y" %} {{ restaurant_name }}. All rights reserved.</p>
-           <p style="margin: 6px 0 0 0;"> 
-            Hours: {{ restaurant_hours|default:"Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm" }}
-           </p>
-
-            <!-- Social Media Icons  -->
-            <div class="mt-3">
-                <a href="https://facebook.com/placeholder" target="_blank" class="me-3 text-light">
-                    <i class="fab fa-facebook fa-lg"></i>
-                </a>
-                <a href="https://instagram.com/placeholder" target="_blank" class="me-3 text-light">
-                    <i class="fab fa-instagram fa-lg"></i>
-                </a>
-                <a href="https://twitter.com/placeholder" target="_blank" class="me-3 text-light">
-                    <i class="fab fa-twitter fa-lg"></i>
-                </a>
-            </div>
-
-            <!-- Legal Links  -->
-
-            <p class="mt-3">
-                <a href="/term-of-service" target="_blank" rel="noopener noreferrer">Terms of Serivce</a> |
-                <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        <footer>
+            <div class="container">
+            <p>&copy; {% now "Y" %} {{ restaurant_name }}. All rights reserved.</p>
+            <p style="margin: 6px 0 0 0;"> 
+                Hours: {{ restaurant_hours|default:"Mon-Fri: 11am-9pm, Sat-Sun: 10am-10pm" }}
             </p>
 
-           <p style="margin-top : 10px; font-size : 14px; color : #555;">
-                Powered by Django
-           </p>
-        </div>
-    </footer>
+                <!-- Social Media Icons  -->
+                <div class="mt-3">
+                    <a href="https://facebook.com/placeholder" target="_blank" class="me-3 text-light">
+                        <i class="fab fa-facebook fa-lg"></i>
+                    </a>
+                    <a href="https://instagram.com/placeholder" target="_blank" class="me-3 text-light">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                    <a href="https://twitter.com/placeholder" target="_blank" class="me-3 text-light">
+                        <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Legal Links  -->
 
-</body>
+                <p class="mt-3">
+                    <a href="/term-of-service" target="_blank" rel="noopener noreferrer">Terms of Serivce</a> |
+                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                </p>
 
-</html> 
+            <p style="margin-top : 10px; font-size : 14px; color : #555;">
+                    Powered by Django
+            </p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+
+    </html> 
