@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chef's Daily Specials</title>
+        <style>
+            body {
+                font-family : Arial, sans-serif;
+                margin : 0;
+                padding : 0;
+                background : #fafafa;
+            }
+
+            .specials-section {
+                background-color : #fff3e6;
+                padding : 40px 20px;
+                text-align : center;
+            }
+
+            .specials-section h2 {
+                font-size : 28px;
+                color : #d35400;
+                margin-bottom : 20px;
+                text-transform : uppercase;
+            }
+
+            .specials-container {
+                display : flex;
+                flex-wrap : wrap;
+                justify-content : center;
+                gap : 20px;
+            }
+
+            .specials-card {
+                background : #fff;
+                border : 1px solid #ddd;
+                border-radius : 8px;
+                width : 280px;
+                padding : 20px;
+                box-shadow : 0 2px 5px rgba(0,0,0,0.1);
+                transition : transform 0.2s;
+            }
+
+            .specials-card:hover {
+                transform : scale(1.05);
+            }
+
+            .specials-card img {
+                width : 100%;
+                height : 180px;
+                border-radius : 8px;
+                object-fit : cover;
+                margin-bottom : 15px;
+            }
+
+            .specials-card h3 {
+                font-size : 20px;
+                color : #333;
+                margin-bottom : 10px;
+            }
+
+            .specials-card p {
+                color : #555;
+                font-size : 15px;
+                margin-bottom : 8px;
+            }
+
+            .price {
+                font-size : 16px;
+                font-weight : bold;
+                color : #a67e22;
+            }
+        </style>
+    </head>
+<body>
+    <section class="specials-section">
+        <h2>Chef's Daily Specials</h2>
+        <div class="specials-container">
+            <div class="specials-card">
+                <img src="https://source.unsplash.com/400x300/?pasta" alt="Special Dish">
+                <h3>Spaghetti Alfredo</h3>
+                <p>Creamy Alfredo sauce with fresh herbs and Parmesan.</p>
+                <p class="price">$299</p>
+            </div>
+            <div class="special-card">
+                <img src="https://source.unsplash.com/400x300/?pizza" alt="Special Dish">
+                <h3>Classic Margherita Pizza</h3>
+                <p>Fresh mozzarella, basil, and tomato sauce.</p>
+                <p class="price">$399</p>
+            </div>
+            <div class="special-card">
+                <img src="https://source.unsplash.com/400x300/?salad" alt="Special Dish">
+                <h3>Caesar Salad</h3>
+                <p>Crisp romaine, Caesar dressing, and garlic croutons.</p>
+                <p class="price">$199</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
