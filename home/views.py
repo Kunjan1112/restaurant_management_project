@@ -237,3 +237,12 @@ def menu(request):
 def location(request):
     restaurant = Restaurant.objects.first()
     return render(request, 'home/location.html', {"restaurant":restaurant})
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    cart_count = sum(item['quantity'] for item in cart.values()) if cart else 0
+
+    return render(request, 'home/cart.html',{
+        'cart':cart,
+        'cart_count':cart_count,
+    })
