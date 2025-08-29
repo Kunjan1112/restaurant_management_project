@@ -33,4 +33,6 @@ urlpatterns = [
 
     path('restaurant-gallery/',views.restaurant_gallery,name='restaurant_gallery'),
 
+    path('cart/',views.view_cart,name='view_cart'),
+
 ]
