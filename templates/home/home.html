@@ -324,13 +324,24 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+
+                    <!-- Main Links  -->
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about_restaurant' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about_restaurant' %}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    
+                    <!-- Extra Section  -->
+                    <li class="nav-item"><a class="nav-link" href="#">Reservations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Specials</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'our_story' %}">Our Story</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
+
+                    <!-- Cart  -->
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'view_cart' %}">
                             Cart <span class="badge bg-primary">{{ cart_count|default:0 }}</span>
