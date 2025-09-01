@@ -249,3 +249,6 @@ def view_cart(request):
 
 def sitemap_view(request):
     return render(request, "sitemap.html")
+
+def careers_view(request):
+    return render(request, 'careers.html')
