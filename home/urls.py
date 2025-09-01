@@ -35,4 +35,6 @@ urlpatterns = [
 
     path('cart/',views.view_cart,name='view_cart'),
 
+    path('sitemap/',views.sitemap_view,name="sitemap"),
+
 ]
