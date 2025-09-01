@@ -37,4 +37,6 @@ urlpatterns = [
 
     path('sitemap/',views.sitemap_view,name="sitemap"),
 
+    path('careers/',views.careers_view,name="careers"),
+
 ]
