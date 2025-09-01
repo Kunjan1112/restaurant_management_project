@@ -246,3 +246,6 @@ def view_cart(request):
         'cart':cart,
         'cart_count':cart_count,
     })
+
+def sitemap_view(request):
+    return render(request, "sitemap.html")
