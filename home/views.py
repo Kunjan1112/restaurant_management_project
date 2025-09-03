@@ -327,7 +327,6 @@ def careers_view(request):
 
 def add_to_cart(request, item_id):
     item = get_object_or_404(MenuItem, id=item_id)
-
     cart = request.session.get('cart', {})
 
     if str(item_id) in cart:
