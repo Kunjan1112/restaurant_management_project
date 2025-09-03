@@ -13,8 +13,15 @@ from django.contrib import messages
 
 # Create your views here.
 
-def generate_breadcrumbs(*args):
-    return args
+def generate_breadcrumbs(cart=None):
+    if cart is None:
+        cart = {}
+
+    breadcrumbs = []
+    for item_id, details in cart.items():
+        breadcrumbs.append(f"Item {item_id} (x{details.get('quantity',1)})")
+    
+    return breadcrumbs
 
 def name(request):
     return HttpResponse("Hello My Name is Kunjan")
@@ -308,6 +315,7 @@ def checkout(request):
         return redirect("view_cart")
 
     return render(request, 'home/checkout.html', {"cart":cart})
+
 # ----------------------------------sitemap---------------------------------------
 def sitemap_view(request):
     return render(request, "sitemap.html")
