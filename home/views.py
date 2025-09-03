@@ -3,12 +3,13 @@ from django.http import HttpResponse
 from django.db import DatabaseError
 
 from django.conf import settings
-from django.contrib import messages
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
+
+from django.contrib import messages
 
 # Create your views here.
 
@@ -281,12 +282,12 @@ def update_cart(request, item_id):
         try:
             quantity = int(request.POST.get("quantity",1))
             if quantity > 0:
-                cart[item_id] = {"quantity":quantity}
+                cart[str(item_id)] = {"quantity" : quantity}
                 message.success(request, "Cart updated successfully.")
             else:
                 cart.pop(str(item_id), None)
                 message.info(request, "Item removed from cart.")
-        except ValuesError:
+        except ValueError:
             message.error(request, "Invalid quantity.")
         
         request.session['cart'] = cart
