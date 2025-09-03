@@ -238,6 +238,8 @@ def location(request):
     restaurant = Restaurant.objects.first()
     return render(request, 'home/location.html', {"restaurant":restaurant})
 
+# --------------------------view_cart-----------------------------------------
+
 def view_cart(request):
     cart = request.session.get('cart',{})
 
@@ -273,6 +275,39 @@ def view_cart(request):
 
     return render(request, "home/cart.html",context)
 
+def update_cart(request, item_id):
+    if request.method == "POST":
+        cart = request.session.get("cart",{})
+        try:
+            quantity = int(request.POST.get("quantity",1))
+            if quantity > 0:
+                cart[item_id] = {"quantity":quantity}
+                message.success(request, "Cart updated successfully.")
+            else:
+                cart.pop(str(item_id), None)
+                message.info(request, "Item removed from cart.")
+        except ValuesError:
+            message.error(request, "Invalid quantity.")
+        
+        request.session['cart'] = cart
+    return redirect("view cart")
+
+def remove_from_cart(request, item_id):
+    if request.method == "POST":
+        cart = request.session.get("cart", {})
+        cart.pop(str(item_id), None)
+        request.session["cart"] = cart
+        message.info(request, "Item removed from cart.")
+    return redirect("view_cart")
+
+def checkout(request):
+    cart = request.session.get("cart", {})
+    if not cart:
+        message.warning(request, "Your cart is empty. Please add items before chechout.")
+        return redirect("view_cart")
+
+    return render(request, 'home/checkout.html', {"cart":cart})
+# ----------------------------------sitemap---------------------------------------
 def sitemap_view(request):
     return render(request, "sitemap.html")
 
