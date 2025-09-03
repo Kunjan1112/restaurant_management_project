@@ -88,7 +88,7 @@ def contact_view(request):
             subject = f"New Contact Form Submission from {name}"
             body = f"Message:\n{message}\n\nForm: {name}, Email: {email}"
 
-            send_email(
+            send_mail(
                 subject,
                 body,
                 settings.DEFAULT_FROM_EMAIL,
@@ -112,7 +112,7 @@ def contact_view(request):
                 fail_silently=False,
             )
 
-            message.success(request, "Thank You, Your message has been sent.")
+            message.success(request, "Thank you, your message has been sent.")
 
             return redirect("thank_you_view")
     else:
@@ -123,7 +123,7 @@ def contact_view(request):
 
 def thank_you_view(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Thank You',None))
-    return render(request, 'home/thnak_you.html',{'breadcrumbs':breadcrumbs})
+    return render(request, 'home/thank_you.html',{'breadcrumbs':breadcrumbs})
 
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
