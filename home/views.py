@@ -319,7 +319,8 @@ def checkout(request):
 
 # ----------------------------------sitemap---------------------------------------
 def sitemap_view(request):
-    return render(request, "sitemap.html")
+    xml = render_to_string("sitemap.xml")
+    return HttpResponse(xml, content_type="application/xml")
 
 def careers_view(request):
     return render(request, 'careers.html')
