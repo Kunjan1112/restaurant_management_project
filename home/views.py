@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db import DatabaseError
 
@@ -322,3 +322,30 @@ def sitemap_view(request):
 
 def careers_view(request):
     return render(request, 'careers.html')
+
+# -----------------------------------Add TO Cart------------------------------------
+
+def add_to_cart(request, item_id):
+    item = get_object_or_404(MenuItem, id=item_id)
+
+    cart = request.session.get('cart', {})
+
+    if str(item_id) in cart:
+        cart[str(item_id)]['quantity'] += 1
+    else:
+        cart[str(item_id)] = {
+            'name' : item.name,
+            'price' : float(item.price),
+            'quantity' : 1
+        }
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    total = sum(v['price'] * v['quantity'] for v in cart.values())
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({'success':True, 'cart_total':total})
+
+    message.success(request, f"{item.name} added to cart!")
+    return redirect('menu')
