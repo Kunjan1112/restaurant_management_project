@@ -40,6 +40,18 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Restaurant Menu</h1>
 
+        <!-- Show Messages  -->
+
+        {% if messages %}
+            <div class="mb-3">
+                {% for message in messages %}
+                    <div class="alert alert-success text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <!-- Search Form  -->
 
         <form method="get" action="" class="mb-4">
@@ -60,6 +72,9 @@
 
                         {% if item.available %}
                             <span class="available">Available</span>
+                            <form method="post" action="{% url 'add_to_cart item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-success mt-2">Add to Cart</button>
                         {% else %}
                             <span class="coming-soon">Coming Soon</span>
                         {% endif %}
