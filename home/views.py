@@ -10,6 +10,7 @@ from .forms import ContactForm
 from .utils import generate_breadcrumbs
 
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
 
