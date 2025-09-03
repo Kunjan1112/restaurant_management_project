@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours
+from .models import Restaurant, Special, OpeningHours, MenuItem
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
 
@@ -239,13 +239,39 @@ def location(request):
     return render(request, 'home/location.html', {"restaurant":restaurant})
 
 def view_cart(request):
-    cart = request.session.get('cart', {})
-    cart_count = sum(item['quantity'] for item in cart.values()) if cart else 0
+    cart = request.session.get('cart',{})
 
-    return render(request, 'home/cart.html',{
-        'cart':cart,
-        'cart_count':cart_count,
-    })
+    items = []
+    total_price = 0
+
+    for item_id, details in cart.items():
+        try:
+            menu_item = MenuItem.objects.get(id=item_id)
+
+            if isinstance(details, dict):
+                quantity = details.get("quantity",1)
+            else:
+                quantity = details
+            
+            price = menu_item.price * quantity
+            total_price += price
+            
+            items.append({
+                "id":menu_item.id,
+                "name":menu_item.name,
+                "price":menu_item.price,
+                "quantity":quantity,
+                'subtotal':price
+            })
+        except MenuItem.DoesNotExist:
+            continue
+
+    context = {
+        'items':items,
+        'total_price':total_price,
+    }
+
+    return render(request, "home/cart.html",context)
 
 def sitemap_view(request):
     return render(request, "sitemap.html")
