@@ -158,18 +158,21 @@
 
         <!-- From  -->
         
-        <form method="post" action="">
+        <form id="contactForm" method="post" action="">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
             <label for="id_name">Name</label>
             {{ form.name }}
+            <script>document.getElementById("id_name").setAttribute("required", "true");</script>
 
             <label for="id_email">Email</label>
             {{ form.email }}
+            <script>document.getElementById("id_email").setAttribute("required", "true");</script>
 
             <label for="id_message">Message</label>
             {{ form.message }}
+            <script>document.getElementById("id_message").setAttribute("required", "true");</script>
 
             <button type="submit">Send Message</button>
         </form>
@@ -207,7 +210,23 @@
     </footer>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear()
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            let name = document.getElementById("id_name").value.trim();
+            let email = document.getElementById("id_email").value.trim();
+            let message = document.getElementById("id_message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields before submitting.");
+                event.preventDefault();
+                return;
+            }
+
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                event.preventDefaul();
+            }
+        });
     </script>
 
 </body>
