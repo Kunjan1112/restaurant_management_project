@@ -351,5 +351,7 @@ def add_to_cart(request, item_id):
     message.success(request, f"{item.name} added to cart!")
     return redirect('menu')
 
+# -------------------------------contact_thanks---------------------------------------------
+
 def contact_thanks(request):
     return render(request, "contact_thanks.html")
