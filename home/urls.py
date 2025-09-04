@@ -5,7 +5,7 @@ urlpatterns = [
 
     path('name/',views.name),
 
-    path('index',views.index,name='index'),
+    path('',views.index,name='index'),
 
     path('login_view/',views.login_view,name='login_view'),
 
@@ -41,6 +41,6 @@ urlpatterns = [
 
     path('contact/thanks',views.contact_thanks,name="contact_thanks"),
 
-    path('',views.home_view,name="home_view"),
+    path('home_view/',views.home_view,name="home_view"),
     
 ]
