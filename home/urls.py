@@ -41,6 +41,5 @@ urlpatterns = [
 
     path('contact/thanks',views.contact_thanks,name="contact_thanks"),
 
-    path('home_view/',views.home_view,name="home_view"),
-    
+    path('home-view/',views.home_view,name="home_view"),
 ]
