@@ -40,4 +40,7 @@ urlpatterns = [
     path('careers/',views.careers_view,name="careers"),
 
     path('contact/thanks',views.contact_thanks,name="contact_thanks"),
+
+    path('home_view/',views.home_view,name="home_view"),
+    
 ]
