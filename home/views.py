@@ -355,3 +355,9 @@ def add_to_cart(request, item_id):
 
 def contact_thanks(request):
     return render(request, "contact_thanks.html")
+
+
+# --------------------------------------home_view--------------------------------------------
+
+def home_view(request):
+    return HttpResponse("<h1>Welcome to Delicious Bites Restaurant!</h1><p>Enjoy authentic meals with your family and friends.</p>")
