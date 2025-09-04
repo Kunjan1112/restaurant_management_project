@@ -38,4 +38,6 @@ urlpatterns = [
     path('sitemap/',views.sitemap_view,name="sitemap"),
 
     path('careers/',views.careers_view,name="careers"),
+
+    path('contact/thanks',views.contact_thanks,name="contact_thanks"),
 ]
