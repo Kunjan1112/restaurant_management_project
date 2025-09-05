@@ -361,3 +361,14 @@ def contact_thanks(request):
 
 def home_view(request):
     return HttpResponse("<h1>Welcome to Delicious Bites Restaurant!</h1><p>Enjoy authentic meals with your family and friends.</p>")
+
+# -------------------------------------Menu View--------------------------------------
+
+def menu_view(request):
+    categories = dict(MenuItem.CATEGORY_CHOICES)
+    grouped_items = []
+
+    for key, label in categories.items():
+        grouped_items[label] = MenuItem.objects.filter(category=key)
+
+    return render(request, 'home/menu.html', {'grouped_items':grouped_items})
