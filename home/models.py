@@ -104,12 +104,25 @@ class RestaurantInfo(models.Model):
         return self.name
 
 class MenuItem(models.Model):
+    CATEGORY_CHOICES = [
+        ('appetizer', 'Appetizer'),
+        ('main_course', 'Main Course'),
+        ('dessert', 'Dessert'),
+        ('beverage', 'Beverage'),
+
+    ]
+
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
+    category = models.CharField(
+        max_length = 20,
+        choices = CATEGORY_CHOICES,
+        default = 'main_course'
+    )
 
     def __str__(self):
-        return f"{self.name} - {self.price}"
+        return f"{self.name} ({self.get_category_display()})"
 
 class ContactInfo(models.Model):
     address = models.TextField()
