@@ -88,8 +88,10 @@
                             <span class="available">Available</span>
                             <form method="post" action="{% url 'add_to_cart item.id %}">
                                 {% csrf_token %}
+
                                 <input type="number" name="quantity" value="1" min="1" class="form-control quantity-input me-2">
                                 <button type="submit" class="btn btn-sm btn-success mt-2">Add to Cart</button>
+                                
                         {% else %}
                             <span class="coming-soon">Coming Soon</span>
                         {% endif %}
