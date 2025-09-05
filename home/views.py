@@ -373,3 +373,8 @@ def menu_view(request):
         grouped_items[label] = MenuItem.objects.filter(category=key)
 
     return render(request, 'home/menu.html', {'grouped_items':grouped_items})
+
+# -------------------------------------Privacy_policy------------------------------
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
