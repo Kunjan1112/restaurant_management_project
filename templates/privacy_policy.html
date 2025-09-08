@@ -46,10 +46,12 @@
     </div>
 
     <script>
+
         const lastModified = new Date(document.lastModified);
         const options = { year : 'numeric', month : 'long', day : 'numeric'};
         document.getElementById('last-updated').textContent = 
             `Last Updated: ${lastModified.toLocaleDateString(undefined, options)}`;
+            
     </script>
 </body>
 </html> 
