@@ -378,3 +378,8 @@ def menu_view(request):
 
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
+
+# --------------------------------------Terms and Service--------------------------
+
+def terms_service(request):
+    return render(request, 'terms_service.html')
