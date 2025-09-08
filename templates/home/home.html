@@ -404,6 +404,28 @@
                 letter-spacing : 1px;
                 box-shadow : 0px 4px 6px rgba(0,0,0,0.2);
            }
+
+           /* Testimonial */
+
+            .testimonials-section {
+                padding : 60px 20px;
+                background : #f8f9fa;
+            }
+
+            .testimonials-card {
+                padding : 30px;
+                background : #fff;
+                border-radius : 12px;
+                box-shadow : 0 4px 12px rgba(0,0,0,0.05);
+                text-align : center;
+                transition : 0.3s;
+            }
+
+            .testimonials-card:hover {
+                transform : translateY(-5px);
+                box-shadow : 0 8px 20px rgba(0,0,0,0.1);
+            }
+
         </style>
         
     </head>
@@ -608,6 +630,37 @@
             <a href="{% url 'order' %}" class="btn btn-custom btn-order mt-4 ms-2">Order Now</a>
 
         </div> 
+    </section>
+
+    <!-- Testimonial Section  -->
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Customers Say</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Amazing food and excellent service! Highly recommed."</p>
+                        <h5>-- John Doe</h5>
+                        <small>Regular Customer</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"A wonderful dining experience with a cozy ambiance."</p>
+                        <h5>-- Jane Smith</h5>
+                        <small>Food Blogger</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Delicious dishes and friendly staff. Will come back soon!"</p>
+                        <h5>-- Michael Lee</h5>
+                        <small>First-time Visitor</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Location Sections  -->
