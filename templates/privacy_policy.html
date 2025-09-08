@@ -45,9 +45,9 @@
     </div>
 
     <script>
-        const lastModified = new Data(document.lastModified);
+        const lastModified = new Date(document.lastModified);
         const options = { year : 'numeric', month : 'long', day : 'numeric'};
-        document.getElementbyId('last-updated').textConent = 
+        document.getElementById('last-updated').textContent = 
             `Last Updated: ${lastModified.toLocaleDateString(undefined, options)}`;
     </script>
     
