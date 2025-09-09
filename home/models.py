@@ -130,3 +130,4 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return f"{self.address} | {self.phone_number} | {self.email}"
+
