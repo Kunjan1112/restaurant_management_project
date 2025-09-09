@@ -87,7 +87,7 @@ class NewSletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
-
+ 
 class RestaurantInfo(models.Model):
     name = models.CharField(max_length=200, default="Delicious Bites Restaurant")
     city = models.CharField(max_length=100, default="Ahmedabad")
