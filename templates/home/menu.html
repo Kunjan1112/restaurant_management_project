@@ -50,6 +50,13 @@
                 text-align : center;
             }
 
+            .last-updated {
+                margin-top : 30px;
+                text-align : center;
+                font-size : 14px;
+                color : #777;
+            }
+
         </style>
 
     </head>
@@ -140,6 +147,14 @@
             </ul>
         </nav>
         {% endif %}
+
+        <!-- Last Updated  -->
+        {% if last_updated %}
+        <div class="last-updated">
+            <em>Last Updated: {{ last_updated|date:"F j, Y" }}</em>
+        </div>
+        {% endif %}
+
     </div>
     
 </body>
