@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Server Error - Restaurant</title>
+        <style>
+            body {
+                font-family : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background : #f9f9f9;
+                color : #333;
+                text-align : center;
+                padding : 50px;
+            }
+
+            .container {
+                max-width : 600px;
+                margin : auto;
+                background : #fff;
+                padding : 30px;
+                border-radius : 12px;
+                box-shadow : 0 6px 18px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+                color : #dc3545;
+                margin-bottom : 20px;
+            }
+
+            p {
+                font-size : 16px;
+                margin-bottom : 15px;
+            }
+
+            a {
+                color : #6c5ce7;
+                text-decoration : none;
+                font-weight : bold;
+            }
+
+            a:hover {
+                color : #574ae2;
+            }
+        </style>
+    </head>
+<body>
+    <div class="container">
+        <h1>Oops! Something went wrong.</h1>
+        <p>We're sorry, but an unexpected error occurred on our server.</p>
+        <p>Please try again later. If the problem persists, contact us:</p>
+        <p><strong>Email:</strong><a href="mailto:support@restaurant.com">support@restaurant.com</a></p>
+        <p><strong>Phone:</strong> +91-9383838499</p>
+        <p><a href="{% url 'home' %}">Return to home Page</a></p>
+    </div>
+</body>
+</html>
