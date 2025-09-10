@@ -618,6 +618,12 @@
             <!-- Logo  -->
             <img src="{% static 'img/restaurant_logo.png' %}" alt="{{ restaurant_name }} logo - Authentic dining in {{ restaurant_city }}" class="logo-img">
 
+            {% if logo %}
+                <img src="{{ logo.url }}" alt="{{ restaurant_name }} Logo" style="max-height:80px;">
+            {% else %}
+                <h1>{{ restauant_name }}</h1>
+            {% endif %}
+            
             <h1>Welcome to {{ restaurant_name }}</h1>
             <p>Contact us at: <strong>{{ restaurant_phone }}</strong></p>
 
