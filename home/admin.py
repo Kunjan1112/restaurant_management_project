@@ -15,3 +15,7 @@ class OpeningHourAdmin(admin.ModelAdmin):
 admin.site.register(Chef)
 
 admin.site.register(RestaurantInfo)
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ('restaurant_name', 'logo')
