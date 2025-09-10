@@ -134,7 +134,7 @@ def contact_view(request):
 def thank_you_view(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Thank You',None))
     return render(request, 'home/thank_you.html',{'breadcrumbs':breadcrumbs})
-
+ 
 def reservations_view(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
     restaurant_phone = getattr(settings, "RESTAURANT_PHONE", "Not Available")
