@@ -182,9 +182,11 @@ def homepage(request):
     
     opening_hours = openingHour.objects.all()
 
+    settings_obj = SiteSettings.objects.first()
 
     context = {
-        'restaurant_name' : "My Awesome Restaurant",
+        'restaurant_name' : settings_obj.restaurant_name if settings_obj else "My Awesome Restaurant",
+        'logo' : settings_obj.logo if settings_obj and settings_obj.logo else None,
         "cart_count" : cart_count,
         'breadcrumbs':breadcrumbs,
         'specials':specials,
