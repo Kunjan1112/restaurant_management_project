@@ -87,7 +87,7 @@
          {% if restaurant.image %}
             <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
         {% else %}
-            <img src="https://via.placeholder.com/900x300" alt="Restaurant Image">
+            <img src="https://source.unplash.com/800x400/?restaurant,food" alt="About Us Image"  class="about-image">
         {% endif %}
 
         <h1>About {{ restaurant.name|default:"Our Restaurant" }}</h1>
