@@ -131,3 +131,10 @@ class ContactInfo(models.Model):
     def __str__(self):
         return f"{self.address} | {self.phone_number} | {self.email}"
 
+
+class SiteSettings(models.Model):
+    restaurant_name = models.CharField(max_length=200, default="My Restaurant")
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True)
+
+    def __str__(self):
+        return self.restaurant_name
