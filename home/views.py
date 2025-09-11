@@ -114,6 +114,9 @@ def contact_view(request):
                 f"Hi {name},\n\n"
                 "Thank you for reaching out to us. We have received your message "
                 "and will get back to you soon.\n\n"
+                "Address : 123 Food Street, Flavor Town\n"
+                "Phone : +91-9999999999\n"
+                "Email : support@myrestaurant.com\n\n"  
                 "Best regards,\nYour Restaurant Team"
             )
 
