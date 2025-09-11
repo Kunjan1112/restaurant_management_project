@@ -406,4 +406,7 @@ def logout_view(request):
     logout(request)
     return redirect("homepage")
 
------------------------------------------
+# -----------------------------------------news--------------------------------------
+
+def news(request):
+    return render(request, "home/news.html", {"news_items":NEWS_ITEMS})
