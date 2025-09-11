@@ -87,6 +87,8 @@ def about_restaurant(request):
 
     return render(request, 'home/about.html', context)
 
+# ------------------------------------Contact View------------------------------------------------
+
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -114,7 +116,7 @@ def contact_view(request):
                 "Best regards,\nYour Restaurant Team"
             )
 
-            send_email(
+            send_mail(
                 confirm_subject,
                 confirm_body,
                 settings.DEFAULT_FROM_EMAIL,
@@ -122,7 +124,7 @@ def contact_view(request):
                 fail_silently=False,
             )
 
-            message.success(request, "Thank you, your message has been sent.")
+            messages.success(request, "Thank you, your message has been sent.")
 
             return redirect("thank_you_view")
     else:
