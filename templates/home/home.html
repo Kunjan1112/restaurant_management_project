@@ -427,6 +427,29 @@
                 box-shadow : 0 8px 20px rgba(0,0,0,0.1);
             }
 
+            /* Review */
+
+            .reviews-section {
+                margin-top : 30px;
+                padding : 20px;
+                background : #fafafa;
+                border-radius : 10px;
+            }
+
+            .reviews-list {
+                list-style : none;
+                padding : 0;
+            }
+
+            .review {
+                border-bottom : 1px solid #ddd;
+                padding : 10px 0;
+            }
+
+            .review:last-child {
+                border-bottom : none;
+            }
+
         </style>
         
     </head>
@@ -874,6 +897,27 @@
         </div>
         
     </section>
+
+    <!-- Review  -->
+
+    <div class="reviews-secction">
+        <h3>Latest Reviews</h3>
+
+        {% if recent_reviews %}
+            <ul class="reviews-list">
+                {% for review in recent_reviews %}
+                    <li class="review">
+                        <strong>{{ review.user.username }}</strong>
+                        ({{ review.rating }}/5) <br>
+                        <em>{{ review.created_at|date:"M d, Y" }}</em>
+                        <p>{{ review.comment }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews yet. Be the first to leave one!</p>
+        {% endif %}
+    </div> 
  
     <!-- Footer -->
 
