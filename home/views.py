@@ -181,8 +181,11 @@ def homepage(request):
     specials = paginator.get_page(page_number)
     
     opening_hours = openingHour.objects.all()
-
     settings_obj = SiteSettings.objects.first()
+
+    avg_rating = Review.objects.aggregate(avg=Avg('rating'))['avg']
+
+    recent_reviews = Review.objects.order_by('created_at')[:3]
 
     context = {
         'restaurant_name' : settings_obj.restaurant_name if settings_obj else "My Awesome Restaurant",
@@ -191,6 +194,8 @@ def homepage(request):
         'breadcrumbs':breadcrumbs,
         'specials':specials,
         'opening_hours':opening_hours,
+        'avg_rating' : avg_rating,
+        'recent_reviews' : recent_reviews, 
     }
 
     return render(request, "home/home.html", context)
