@@ -202,7 +202,8 @@ def homepage(request):
         'specials':specials,
         'opening_hours':opening_hours,
         'avg_rating' : avg_rating,
-        'recent_reviews' : recent_reviews, 
+        'recent_reviews' : recent_reviews,
+
     }
 
     return render(request, "home/home.html", context)
