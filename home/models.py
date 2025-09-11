@@ -139,3 +139,17 @@ class SiteSettings(models.Model):
 
     def __str__(self):
         return self.restaurant_name
+
+
+class NewsItem:
+    def __init__(self, title, content, date):
+        self.title = title
+        self.content = content
+        self.date = date
+
+NEWS_ITEMS = [
+    NewsItem("Grand Opening!", "We are excited to announce the grand opening of our restaurant. Come and join us!", date(2025, 1, 25)),
+    NewsItem("New Menu launch", "Our chefs have crafted a brand-new seasonal menu. Try our fresh specials!", date(2025, 2, 10)),
+    NewsItem("Live Music Nights", "Join us every Friday for live music performances while you enjoy your meal.", date(2025, 3, 1)),
+    
+]
