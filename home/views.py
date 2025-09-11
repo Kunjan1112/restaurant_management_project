@@ -203,6 +203,7 @@ def homepage(request):
         'opening_hours':opening_hours,
         'avg_rating' : avg_rating,
         'recent_reviews' : recent_reviews,
+        'cuisine_type' : settings_obj.cuisine_type if settings_obj else "Cuisine Not Set",
 
     }
 
