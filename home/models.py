@@ -93,6 +93,7 @@ class RestaurantInfo(models.Model):
     address = models.TextField(default="123, SG Highway, Ahmedabad, Gujarat 380015")
     phone = models.CharField(max_length=20, default="+91 98765 43210")
     email = models.EmailField(blank=True, null=True)
+    cuisine_type = models.CharField(max_length=100, default="General")
     google_map_embed_url = models.TextField(
         default="https://www.google.com/maps/embed?pb=YOUR_MAP_URL"
     )
