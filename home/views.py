@@ -92,6 +92,7 @@ def about_restaurant(request):
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
@@ -127,6 +128,7 @@ def contact_view(request):
             messages.success(request, "Thank you, your message has been sent.")
 
             return redirect("thank_you_view")
+
     else:
         form = ContactForm()
 
