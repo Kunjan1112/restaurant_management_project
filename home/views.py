@@ -96,7 +96,7 @@ def contact_view(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            message_text = form.cleaned_data['message']
 
             subject = f"New Contact Form Submission from {name}"
             body = f"Message:\n{message}\n\nForm: {name}, Email: {email}"
@@ -132,6 +132,8 @@ def contact_view(request):
 
     breadcrumbs = generate_breadcrumbs(('Home','/'), ('Contact',None))
     return render(request, 'home/contact.html',{"form":form, "breadcrumbs":breadcrumbs})
+
+# ----------------------------------------Thank_you_view---------------------------------
 
 def thank_you_view(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('Thank You',None))
