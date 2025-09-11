@@ -491,6 +491,20 @@
                         </form>
                     </li>
 
+                    <!-- Auth Button  -->
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger ms-2">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="btn btn-outline-primary ms-2" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ms-2" href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>  
+
                     <!-- CTA Buttons  -->
 
                     <div class="cta-buttons mt-4">
