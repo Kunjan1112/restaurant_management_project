@@ -397,3 +397,9 @@ def privacy_policy(request):
 
 def terms_service(request):
     return render(request, 'terms_service.html')
+
+# ----------------------------------------Logout------------------------------------
+
+def logout_view(request):
+    logout(request)
+    return redirect("homepage")
