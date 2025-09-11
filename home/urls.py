@@ -45,6 +45,8 @@ urlpatterns = [
     
     path('privacy-policy/',views.privacy_policy,name="privacy_policy"),
 
-    path('terms-service/')
+    path('terms-service/',view.terms_service,name="terms_service"),
+
+    path('logout')
     
 ]
