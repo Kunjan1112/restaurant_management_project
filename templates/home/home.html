@@ -447,6 +447,82 @@
                 border-bottom : none;
             }
 
+            /* Average Rating */
+
+            .average-rating {
+                text-align : center;
+                margin : 40px 0;
+                padding : 15px;
+                background : #fff7e6;
+                border : 2px solid #ffd580;
+                border-radius : 10px;
+                box-shadow : 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            .average-rating h2 {
+                font-size : 1.8rem;
+                color : #e67e22;
+                font-weight : bold;
+            }
+
+            /* Recent Reviews Section */
+
+            .recent-reviews {
+                margin : 50px auto;
+                max-width : 800px;
+                padding : 20px;
+                background : #fafafa;
+                border-radius : 12px;
+                border : 1px solid #e0e0e0;
+                box-shadow : 0 2px 8px rgba(0,0,0,0.05);
+            }
+
+            .recent-reviews h3 {
+                font-size : 1.6rem;
+                color : #2c3e50;
+                margin-bottom : 20px;
+                border-bottom : 2px solid #e67e22;
+                padding-bottom : 8px;
+                display : inline-block;
+            }
+
+            .recent-reviews ul {
+                list-style : none;
+                padding : 0;
+                margin : 0;
+            }
+
+            .recent-reviews li {
+                background : #fff;
+                border-radius : 8px;
+                padding : 15px 20px;
+                margin-bottom : 15px;
+                border-left : 4px solid #e67e22;
+                transition : transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .recent-reviews li:hover {
+                transform : translateY(-3px);
+                box-shadow : 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .recent-reviews strong {
+                color : #34495e;
+                font-size : 1.1rem;
+            }
+
+            .recent_reviews small {
+                color : #888;
+                font-size : 0.9rem;
+            }
+
+            .recent-reviews p {
+                margin-top : 8px;
+                font-size : 1rem;
+                line-height : 1.4;
+                color : #555;
+            }
+
         </style>
         
     </head>
@@ -909,6 +985,33 @@
             </form>
         </div>
         
+    </section>
+
+    <!-- Average Rating  -->
+    <section class="average-rating">
+        {% if avg_rating %}
+            <h2>Average Rating : {{ avg_rating }} /5</h2>
+        {% else %}
+            <h2>No reviews yet</h2>
+        {% endif %}
+    </section>
+
+    <!-- Recent Reviews  -->
+    <section class="recent-reviews">
+        <h3>What Our Guests Say</h3>
+        {% if recent_reviews %}
+            <ul>
+                {% for review in recent_reviews %}
+                    <li>
+                        <strong>{{ "review.name }}</strong> ({{ review.rating }}/5) <br>
+                        <small>{{ review.created_at|date"M d, Y"}}</small>
+                        <p>{{ review.comment }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews available.</p>
+        {% endif %}
     </section>
 
     <!-- Review  -->
