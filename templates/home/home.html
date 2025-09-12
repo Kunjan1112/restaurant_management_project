@@ -1003,7 +1003,7 @@
             <ul>
                 {% for review in recent_reviews %}
                     <li>
-                        <strong>{{ "review.name }}</strong> ({{ review.rating }}/5) <br>
+                        <strong>{{ review.name }}</strong> ({{ review.rating }}/5) <br>
                         <small>{{ review.created_at|date"M d, Y"}}</small>
                         <p>{{ review.comment }}</p>
                     </li>
