@@ -150,6 +150,14 @@ class NewsItem:
 NEWS_ITEMS = [
     NewsItem("Grand Opening!", "We are excited to announce the grand opening of our restaurant. Come and join us!", date(2025, 1, 25)),
     NewsItem("New Menu launch", "Our chefs have crafted a brand-new seasonal menu. Try our fresh specials!", date(2025, 2, 10)),
-    NewsItem("Live Music Nights", "Join us every Friday for live music performances while you enjoy your meal.", date(2025, 3, 1)),
-    
+    NewsItem("Live Music Nights", "Join us every Friday for live music performances while you enjoy your meal.", date(2025, 3, 1)),   
 ]
+
+class Review(models.Model):
+    name = models.CharField(max_length=100)
+    rating = models.PositiveIntegerField()
+    comments = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.rating}"
