@@ -176,6 +176,8 @@ def add_to_cart(request, item_id):
     request.session['cart'] = cart
     return redirect("home")
 
+# -------------------------------------------Home-Page------------------------------------------------- 
+
 def homepage(request):
     cart = request.session.get("cart", {})
     cart_count = sum(cart.values()) if isinstance(cart, dict) else 0
@@ -191,6 +193,8 @@ def homepage(request):
     settings_obj = SiteSettings.objects.first()
 
     avg_rating = Review.objects.aggregate(avg=Avg('rating'))['avg']
+    if avg_rating is not None:
+        avg_rating = round(avg_rating, 1)
 
     recent_reviews = Review.objects.order_by('created_at')[:3]
 
@@ -208,6 +212,8 @@ def homepage(request):
     }
 
     return render(request, "home/home.html", context)
+
+# --------------------------------------------faq_view------------------------------------------------
 
 def faq_view(request):
     breadcrumbs = generate_breadcrumbs(('Home','/'),('FAQ',None))
@@ -410,3 +416,4 @@ def logout_view(request):
 
 def news(request):
     return render(request, "home/news.html", {"news_items":NEWS_ITEMS})
+
