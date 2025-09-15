@@ -9,6 +9,7 @@ except ImportError:
     COUPON_MODE_AVAILABLE = False
 
 def generate_coupon_code(length=10):
+    
     alphabet = string.ascii_uppercase + string.digits 
 
     while True:
