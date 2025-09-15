@@ -1,20 +1,23 @@
 import string 
 import secrets
 
-from .models import Coupon
+try:
+    from .models import Coupon
+    COUPON_MODE_AVAILABLE = True
+
+except ImportError:
+    COUPON_MODE_AVAILABLE = False
 
 def generate_coupon_code(length=10):
     alphabet = string.ascii_uppercase + string.digits 
 
     while True:
         code = ''.join(secrets.choice(alphabet) for _ in range(length))
-
-        try:
-            from .models import Coupon
+        
+        if COUPON_MODE_AVAILABLE:
             if not Coupon.objects.filter(code=code).exists():
                 return code
-
-        except ImportError:
+        else:
             return code
 
 def main():
@@ -22,6 +25,7 @@ def main():
     for _ in range(5):
         print(generate_coupon_code(length=12))
         
+
 
 if __name__ == "__main__":
     main()
