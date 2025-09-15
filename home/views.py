@@ -417,3 +417,12 @@ def logout_view(request):
 def news(request):
     return render(request, "home/news.html", {"news_items":NEWS_ITEMS})
 
+# ------------------------------------------MenuCategory---------------------------------
+
+from rest_framework.generics import ListAPIView
+from products.models import MenuCategory
+from .serializers import MenuCategorySerializer
+
+class MenuCategoryListAPIView(ListAPIView):
+    queryset = MenuCategory.objects.all()
+    serializer_class = MenuCategorySerializer
