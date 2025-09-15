@@ -175,6 +175,7 @@ class RestaurantReview(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.rating}"
+        
 
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
