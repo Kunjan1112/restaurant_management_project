@@ -9,7 +9,11 @@ except ImportError:
     COUPON_MODE_AVAILABLE = False
 
 def generate_coupon_code(length=10):
-    
+    """
+    Generate a unique alphanumeric coupon code.
+    If Coupon model is avilable, ensure the code is unique in the database.
+    """
+
     alphabet = string.ascii_uppercase + string.digits 
 
     while True:
