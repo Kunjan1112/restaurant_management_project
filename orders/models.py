@@ -22,7 +22,8 @@ class Order(models.Model):
         return sum(item.menu_item.price * item.quantity for item in self.order_items.all())
 
     def save(self, *args, **kwargs):
-        self.total_amount = self.calculate_total()
+        if self.pk:
+            self.total_amount = self.calculate_total()
         super().save(*args, **kwargs)
 
     def __str__(self):
