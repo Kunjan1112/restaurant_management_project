@@ -18,8 +18,15 @@ class Order(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def calculate_total(self):
+        return sum(item.menu_item.price * item.quantity for item in self.order_items.all())
+
+    def save(self, *args, **kwargs):
+        self.total_amount = self.calculate_total()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"Order {self.id} - {self.customer.username}"
+        return f"Order {self.id} - {self.customer.username} {(self.status)}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
