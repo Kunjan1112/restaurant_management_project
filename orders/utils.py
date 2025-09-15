@@ -4,6 +4,7 @@ import secrets
 try:
     from .models import Coupon
     COUPON_MODEL_AVAILABLE = True
+    
 except ImportError:
     COUPON_MODEL_AVAILABLE = False
 
