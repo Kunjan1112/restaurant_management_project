@@ -48,5 +48,7 @@ urlpatterns = [
     path('terms-service/',view.terms_service,name="terms_service"),
 
     path('logout_view/',views.logout_view,name="logout_view"),
+
+    path('api/menu-categories/',views.MenuCategoryListAPIView,name="menu-categories"),
     
 ]
