@@ -24,7 +24,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if self.pk:
             self.total_amount = self.calculate_total()
-        super().save(*args, **kwargs)
+        super(Order, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"Order {self.id} - {self.customer.username} {(self.status)}"
