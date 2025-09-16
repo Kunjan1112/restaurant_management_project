@@ -3,13 +3,16 @@ from rest_framework.permissions import AllowAny
 from .models import Menu
 from .serializers import MenuSerializer
 
-class MenuByCategoryView(ListAPIView):
+class MenuViewSet(viewsets.ModelViewSet):
+    queryset = Menu.objects.all()
     serializers_class = MenuSerializer
-    permissions_classes = [AllowAny]
+    permissions_classes = [permissions.IsAdminUser]
 
-    def get_queryset(self):
-        queryset = Menu.objects.all()
-        category = self.request.query_params.get('category')
-        if category:
-            queryset = queryset.filter(category_name_iexact=category)
-        return queryset
+    def update(self, request, *args, **kwargs):
+        try:
+            return super().update(request, *args, **kwargs)
+        except Exception as e:
+            return Response(
+                {"error":str(e)},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
