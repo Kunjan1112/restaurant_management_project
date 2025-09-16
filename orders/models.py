@@ -4,6 +4,10 @@ from products.models import Menu
 
 # Create your models here.
 
+class ActiveOrderManger(models.Manager):
+    def get_active_orders(self):
+        return self.filter(status__in=['pending','processing'])
+
 class Order(models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'Pending'),
