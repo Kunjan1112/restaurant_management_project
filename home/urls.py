@@ -50,5 +50,7 @@ urlpatterns = [
     path('logout_view/',views.logout_view,name="logout_view"),
 
     path('api/menu-categories/',views.MenuCategoryListAPIView,name="menu-categories"),
+
+    path('contact/',views.ContactSubmissionView,name="contact-form"),
     
 ]
