@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Order
 from .serializers import OrderSerializers
 from utils.email_utils import send_order_confirmation_email
+from rest_framework import status, viewsets
+from rest_framework.decorators import Response
 
 class OrderHistroyView(APIView):
     permission_classes = [IsAuthenticated]
@@ -24,3 +26,31 @@ def confirm_order(order_id):
 
     print(result)
 
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializers
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=True, methods=['delete'], url_path='cancel')
+    def cancel_order(self, request, pk=None):
+        try:
+            order = self.get_object()
+
+            if order.customer != request.user:
+                return Response(
+                    {"error":"You cannot cancel someone else's order."},
+                    status = status.HTTP_403_FORBIDDEN,
+                )
+
+            order.status = "Cancelled"
+            order.save()
+
+            return Response(
+                {"message": f"Order #{order.id} has been cancelled successfully. "},
+                status = status.HTTP_200_OK,
+            )
+
+        except Order.DoesNotExist:
+            return Response(
+                {"error":"Order not found."}, status=status.HTTP_404_NOT_FOUND
+            )
