@@ -14,6 +14,7 @@ class OrderHistroyView(APIView):
     def get(self, request):
         orders = Order.objects.filter(user=request.user).order_by("-created_at")
         serializer = OrderSerializers(orders, many=True)
+        serializer_class = OrderSerializer
         return Response(serializer.data)
 
     def post(self, request):
