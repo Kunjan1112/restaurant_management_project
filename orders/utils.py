@@ -1,36 +1,30 @@
-import string 
-import secrets
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
-try:
-    from .models import Coupon
-    COUPON_MODEL_AVAILABLE = True
+def send_email(recipient, subject, message):
+    try:
+        validate_email(recipient)
+
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [recipient],
+            fail_silently = False,
+        )
+
+        return True
+
+    except ValidationError:
+        print(f"Invalid email address: {recipient}")
+        return False
+
+    except BadHeaderError:
+        print("Invalid header found.")
+        return False
     
-except ImportError:
-    COUPON_MODEL_AVAILABLE = False
-
-def generate_coupon_code(length=10):
-    """
-    Generate a unique alphanumeric coupon code.
-    If Coupon model is avilable, ensure the code is unique in the database.
-    """
-
-    alphabet = string.ascii_uppercase + string.digits 
-
-    while True:
-        code = ''.join(secrets.choice(alphabet) for _ in range(length))
-        
-        if COUPON_MODEL_AVAILABLE:
-            if not Coupon.objects.filter(code=code).exists():
-                return code
-        else:
-            return code
-
-def main():
-    print("Generating 5 sample coupon codes:")
-    for _ in range(5):
-        print(generate_coupon_code(length=12))
-        
-
-
-if __name__ == "__main__":
-    main()
+    except Exception as e:
+        print(f"Error sending email: {str(e)}")
+        return False
