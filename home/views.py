@@ -6,7 +6,8 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem
+from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission
+from .serializers import ContactFormSubmissionSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -426,3 +427,19 @@ from .serializers import MenuCategorySerializer
 class MenuCategoryListAPIView(ListAPIView):
     queryset = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer
+
+# -------------------------------------------------------------------------------------
+
+class ContactFormSubmissionView(generics.CreateAPIView):
+    queryset = ContactFormSubmission.objects.all()
+    serializer_class = ContactFormSubmissionSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message":"Your contact form has been submitted successfully."},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
