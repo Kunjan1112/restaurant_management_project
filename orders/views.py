@@ -5,7 +5,9 @@ from rest_framework import status, viewsets, generics
 from rest_framework.decorators import action
 
 from orders.models import Order
+
 from orders.serializers import OrderSerializers
+
 from utils.email_utils import send_order_confirmation_email
 
 class OrderHistroyView(APIView):
