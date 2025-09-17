@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.decorators import action
 
 from .models import Order
@@ -65,3 +65,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             return Response(
                 {"error":"Order not found."}, status=status.HTTP_404_NOT_FOUND
             )
+
+class OrderCreateView(generics.CreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
