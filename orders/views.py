@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets, generics
 from rest_framework.decorators import action
 
-from .models import Order
-from .serializers import OrderSerializers
+from orders.models import Order
+from orders.serializers import OrderSerializers
 from utils.email_utils import send_order_confirmation_email
 
 class OrderHistroyView(APIView):
