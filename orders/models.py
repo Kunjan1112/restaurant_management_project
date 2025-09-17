@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from products.models import Menu
 
+from home.models import MenuItem
+
 # Create your models here.
 
 class ActiveOrderManger(models.Manager):
