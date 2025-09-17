@@ -9,6 +9,7 @@ from .serializers import OrderSerializers
 from utils.email_utils import send_order_confirmation_email
 
 class OrderHistroyView(APIView):
+    
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
