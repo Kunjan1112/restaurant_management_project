@@ -52,5 +52,7 @@ urlpatterns = [
     path('api/menu-categories/',views.MenuCategoryListAPIView,name="menu-categories"),
 
     path('contact/',views.ContactSubmissionView,name="contact-form"),
+
+    path("daily-specials/", views.DailySpecialsView, name="daily-specials"),
     
 ]
