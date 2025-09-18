@@ -19,3 +19,12 @@ class OrderItemSerializer(serializers.ModelSerializers):
     class Meta:
         model = Order
         fields = "__all__"
+
+class OrderStatusUpdateSerializer(serializers.Serializers):
+    order_id = serializers.IntegerField()
+    status = serializers.ChoiceField(choices=Order.STATUS_CHOICES)
+
+    def validate_order_id(self, value):
+        if not Order.objects.filter(id=value).exists():
+            raise serializers.ValidationError("Invalid order ID.")
+        return value
