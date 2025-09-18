@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission
-from .serializers import ContactFormSubmissionSerializer
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -443,3 +443,11 @@ class ContactFormSubmissionView(generics.CreateAPIView):
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# -------------------------------------------------------------------------------------
+
+class DailySpecialsView(ListAPIView):
+    serializer_class = MenuItemSerializer
+
+    def get_queryset(self):
+        return MenuItem.objects.filter(is_daily_special=True)
