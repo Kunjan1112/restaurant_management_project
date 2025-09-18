@@ -16,28 +16,92 @@ class ActiveOrderManger(models.Manager):
 
 class Order(models.Model):
     STATUS_CHOICES = [
-        ('PENDING', 'Pending'),
-        ('CONFIRMED', 'Confirmed'),
-        ('DELIVERED', 'Delivered'),
-        ('CANCELLED', 'Cancelled'),
+        ("pending", "Pending"),
+        ("completed", "Completed"),
+        ("cancelled", "Cancelled"),
     ]
 
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
-    items = models.ManyToManyField(Menu, through='OrderItem')
-    total_amount = models.DecimalField(max_digits=8, decimal_places=2)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def calculate_total(self):
-        return sum(item.menu_item.price * item.quantity for item in self.order_items.all())
-
-    def save(self, *args, **kwargs):
-        if self.pk:
-            self.total_amount = self.calculate_total()
-        super(Order, self).save(*args, **kwargs)
+    customer = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="orders"
+    )
+    order_status = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal("0.00"))
 
     def __str__(self):
-        return f"Order {self.id} - {self.customer.username} {(self.status)}"
+        return f"Order #{self.id} - {self.status}"
+
+    def calculate_total(self, save: bool = False) -> Decimal:
+        try:
+            from orders.utils import calculate_discount
+        except Exception:
+            def calculate_discount(amount, item=None):
+                return Decimal("0.00")
+
+        related_qs = None
+        for rel in ("items", "order_items", "orderitem_set"):
+            if hasattr(self, rel):
+                related_qs = getattr(self, rel).all()
+                break
+
+            if related_qs is None:
+                total = Decimal("0.00")
+                if save:
+                    self.total_price = total 
+                    self.save(update_fields=["total_price"])
+                return total
+            
+            total = Decimal("0.00")
+
+            for item in related_qs:
+                unit_price = getattr(item, "unit_price", None)
+                if unit_price is None:
+                    unit_price = getattr(item, "price", None)
+                if unit_price is None:
+                    product = getattr(item, "product", None)
+                    unit_price = getattr(product, "price", None) if product is not None else None
+                if unit_price is None:
+                    unit_price = Decimal("0.00")
+                unit_price = Decimal(unit_price)
+
+                quantity = getattr(item, "quantity", 1) or 1
+                quantity = Decimal(quantity)
+
+                line_total = unit_price * quantity
+
+                try:
+                    discount_result = calculate_discount(line_total, item=item)
+                except TypeError:
+                    try:
+                        discount_result = calculate_discount(line_total)
+                    except Exception:
+                        discount_result = None
+                except Exception:
+                    discount_result = None
+
+                if discount_result is None:
+                    discounted_line = line_total
+                else:
+                    try:
+                        discount_val = Decimal(discount_result)
+
+                        if discount_val <= line_total:
+                            discounted_line = line_total - discount_val
+                        else:
+                            discounted_line = discount_val
+                    except (TypeError, ValueError, InvalidOperation):
+                        discounted_line = line_total
+                
+                total += discounted_line
+
+            total = total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
+            if save:
+                self.total_price = total
+                self.save(update_fields=["total_price"])
+            
+            return total
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
