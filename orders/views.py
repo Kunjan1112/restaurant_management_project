@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 
 from orders.models import Order
 
-from orders.serializers import OrderSerializers
+from orders.serializers import OrderSerializers, OrderStatusUpdateSerializer
 
 from utils.email_utils import send_order_confirmation_email
 
@@ -71,3 +71,29 @@ class OrderViewSet(viewsets.ModelViewSet):
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+class UpdateOrderStatusView(APIView):
+    def put(self, request, *args, **kwargs):
+        serializer = OrderStatusUpdateSerializer(data=request.data)
+        if serializer.is_valid():
+            order_id = serializer.validated_data['order_id']
+            new_status = serializer.validated_data['status']
+
+
+            try:
+                order = Order.objects.get(id=order_id)
+            except Order.DoesNotExist:
+                return Response(
+                    {"error":"Order not found."},
+                    status = http_status.HTTP_404_NOT_FOUND
+                    )
+
+            order.status = new_status
+            order.save()
+
+            return Response(
+                {"message":"Order status update successfully.", "order_id": order.id, "new_status":order.status},
+                status=http_status.HTTP_200_OK
+            )
+
+        return Response(serializer.errors, status=http_status.HTTP_400_BAD_REQUEST)
