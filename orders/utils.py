@@ -5,8 +5,13 @@ from django.core.validators import validate_email
 
 import string
 import secrets
+import logging
+
 from .models import Order   
 
+logger = logging.getLogger(__name__)
+
+# ------------------------------------------------------------------------------
 
 def send_email(recipient, subject, message):
     try:
@@ -46,10 +51,7 @@ def generate_unique_order_id(length=8):
 
 # -----------------------------------------------------------------------------------------
 
-import logging
-from django.core.exceptions import ObjectDoesNotExist
 
-logger = logging.getLogger(__name__)
 
 def update_order_status(order_id: int, new_status: str) -> bool:
 
