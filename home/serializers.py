@@ -4,7 +4,7 @@ from products.models import MenuCategory
 
 from .models import ContactFormSubmission, MenuItem
 
-class MenuCategorySerializer(serializers.ModelSerializers):
+class MenuCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
 
