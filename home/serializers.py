@@ -2,7 +2,9 @@ from rest_framework import serializers
 
 from products.models import MenuCategory
 
-from .models import ContactFormSubmission, MenuItem, UserReview
+from .models import ContactFormSubmission, MenuItem, UserReview, Restaurant
+
+# ----------------------------------------------------------------------------------------
 
 class MenuCategorySerializer(serializers.ModelSerializer):
 
@@ -42,3 +44,10 @@ class UserReviewSerializer(serializers.ModelSerializer):
         if value < 1 or value > 5:
             raise serializers.ValidationError("Rating must be between 1 and 5.")
         return value
+
+# ---------------------------------------------------------------------------------------
+
+class RestaurantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant 
+        fields = ['id', 'name', 'address', 'phone_number', 'opening_hours', 'email', 'description']
