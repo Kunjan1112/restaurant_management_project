@@ -10,7 +10,7 @@ class MenuCategorySerializer(serializers.ModelSerializers):
 class ContactFormSubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactFormSubmission
-        fields = ['id', 'name', 'email', 'message', 'created_at']
+        fields = ['id', 'name', 'email', 'message', 'created_at'] 
         
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
