@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -506,3 +506,11 @@ def get_order_status(request, order_id):
             {"error": "Order not found"},
             status = status.HTTP_404_NOT_FOUND,
         )
+
+# ------------------------------------------------------------------------------------------
+
+class RestaurantDetailsAPIView(RetrieveAPIView):
+    serializer_class = RestaurantSerializer
+
+    def get_object(self):
+        return Restaurant.objects.first()
