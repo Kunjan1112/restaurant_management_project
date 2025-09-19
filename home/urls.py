@@ -54,5 +54,10 @@ urlpatterns = [
     path('contact/',views.ContactSubmissionView,name="contact-form"),
 
     path("daily-specials/", views.DailySpecialsView, name="daily-specials"),
+
+    path('reviews/create/', views.UserReviewCreateView, name="create-review"),
+
+    path('review/menu-item/<int:menu_item_id>/', views.MenuItemReviewListView, name="menu-item-reviews"),
+
     
 ]
