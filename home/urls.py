@@ -40,6 +40,6 @@ urlpatterns = [
 
     path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
 
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
    
 ]
