@@ -5,11 +5,12 @@ from django.core.validators import validate_email
 
 import string
 import secrets
-from .models import Order
+from .models import Order   
 
 
 def send_email(recipient, subject, message):
     try:
+
         validate_email(recipient)
 
         send_mail(
@@ -34,10 +35,37 @@ def send_email(recipient, subject, message):
         print(f"Error sending email: {str(e)}")
         return False
 
-def generate_unique_order_id(length_0):
+def generate_unique_order_id(length=8):
+
     characters = string.ascii_uppercase + string.digits 
 
     while True:
         order_id = "".join(secrets.choice(characters) for _ in range(length))
         if not Order.objects.filter(order_id=order_id).exists():
             return order_id
+
+# -----------------------------------------------------------------------------------------
+
+import logging
+from django.core.exceptions import ObjectDoesNotExist
+
+logger = logging.getLogger(__name__)
+
+def update_order_status(order_id: int, new_status: str) -> bool:
+
+    try:
+        order = Order.objects.get(id=order_id)
+        old_status = order.status
+        order.status = new_status
+        order.save()
+
+        logger.info(f"Order {order_id} status updated from '{old_status}' to '{new_status}'.")
+        return True
+
+    except ObjectDoesNotExist:
+        logger.error(f"Order with ID {order_id} not found.")
+        return False
+
+    except Exception as e:
+        logger.exception(f"Error updating status for order {order_id}: {e}")
+        return False
