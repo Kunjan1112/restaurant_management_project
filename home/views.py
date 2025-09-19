@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -514,3 +514,22 @@ class RestaurantDetailsAPIView(RetrieveAPIView):
 
     def get_object(self):
         return Restaurant.objects.first()
+
+# ------------------------------------------------------------------------------------------
+
+@api_view(['PATCH'])
+def update_menu_item_availability(request, pk):
+
+    try:
+        menu_item = MenuItem.objects.get(pk=pk)
+    except MenuItem.DoesNotExist:
+        return Response({'error': 'MenuItem not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = MenuItemAvailabilitySerializer(menu_item, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': f"MenuItem '{menu_item.name}' availability updated to {menu_item.is_available}"})
+
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
