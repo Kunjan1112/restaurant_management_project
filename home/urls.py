@@ -59,5 +59,6 @@ urlpatterns = [
 
     path('review/menu-item/<int:menu_item_id>/', views.MenuItemReviewListView, name="menu-item-reviews"),
 
-    
+    path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
+   
 ]
