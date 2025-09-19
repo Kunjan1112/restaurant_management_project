@@ -36,6 +36,7 @@ urlpatterns = [
     path("api/daily-specials/", views.DailySpecialsView.as_view(), name="daily-specials"),
     path('api/reviews/create/', views.UserReviewCreateView.as_view(), name="create-review"),
     path('api/review/menu-item/<int:menu_item_id>/', views.MenuItemReviewListView.as_view(), name="menu-item-reviews"),
+    path('api/restaurant/', RestaurantDetailsAPIView.as_view(), name="restaurant-detail"),
 
 
     path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
