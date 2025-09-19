@@ -6,7 +6,7 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview
+from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
 from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer
 
 from .forms import ContactForm
@@ -14,8 +14,17 @@ from .utils import generate_breadcrumbs
 
 from django.contrib import messages
 
-# Create your views here.
+from datetime import date
+from django.core.paginator import Paginator
+from django.db.models import Avg
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+
+# Create your views here.
+# ----------------------------------------------------------------------------------------
 def generate_breadcrumbs(cart=None):
     if cart is None:
         cart = {}
@@ -26,8 +35,12 @@ def generate_breadcrumbs(cart=None):
     
     return breadcrumbs
 
+# ------------------------------------------------------------------------------------------
+
 def name(request):
     return HttpResponse("Hello My Name is Kunjan")
+
+# ---------------------------------------------------------------------------------------
 
 def index(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
@@ -315,12 +328,12 @@ def update_cart(request, item_id):
             quantity = int(request.POST.get("quantity",1))
             if quantity > 0:
                 cart[str(item_id)] = {"quantity" : quantity}
-                message.success(request, "Cart updated successfully.")
+                messages.success(request, "Cart updated successfully.")
             else:
                 cart.pop(str(item_id), None)
-                message.info(request, "Item removed from cart.")
+                messages.info(request, "Item removed from cart.")
         except ValueError:
-            message.error(request, "Invalid quantity.")
+            messages.error(request, "Invalid quantity.")
         
         request.session['cart'] = cart
     return redirect("view cart")
@@ -330,13 +343,13 @@ def remove_from_cart(request, item_id):
         cart = request.session.get("cart", {})
         cart.pop(str(item_id), None)
         request.session["cart"] = cart
-        message.info(request, "Item removed from cart.")
+        messages.info(request, "Item removed from cart.")
     return redirect("view_cart")
 
 def checkout(request):
     cart = request.session.get("cart", {})
     if not cart:
-        message.warning(request, "Your cart is empty. Please add items before chechout.")
+        messages.warning(request, "Your cart is empty. Please add items before chechout.")
         return redirect("view_cart")
 
     return render(request, 'home/checkout.html', {"cart":cart})
@@ -471,3 +484,21 @@ class MenuItemReviewListView(generics.ListAPIView):
     def get_queryset(self):
         menu_item_id = self.kwargs.get('menu_item_id')
         return UserReview.objects.filter(menu_item_id=menu_item_id).order_by('-review_date')
+
+# ---------------------------------------------------------------------------------------
+
+@api_view(["GET"])
+def get_order_status(request, order_id):
+
+    try:
+        order = Order.objects.get(id=order_id)
+        return Response(
+            {"order_id":order.id, "status":order.status},
+            status = status.HTTP_200_OK,
+        )
+
+    except Order.DoesNotExist:
+        return Response(
+            {"error": "Order not found"},
+            status = status.HTTP_404_NOT_FOUND,
+        )
