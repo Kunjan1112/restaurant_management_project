@@ -6,8 +6,8 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer
+from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -451,3 +451,23 @@ class DailySpecialsView(ListAPIView):
 
     def get_queryset(self):
         return MenuItem.objects.filter(is_daily_special=True)
+
+# --------------------------------------------------------------------------------------
+
+class UserReviewCreateView(generics.CreateAPIView):
+    queryset =  UserReview.objects.all()
+    serializer_class = UserReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+# -------------------------------------------------------------------------------------
+
+class MenuItemReviewListView(generics.ListAPIView):
+    serializer_class = UserReviewSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        menu_item_id = self.kwargs.get('menu_item_id')
+        return UserReview.objects.filter(menu_item_id=menu_item_id).order_by('-review_date')
