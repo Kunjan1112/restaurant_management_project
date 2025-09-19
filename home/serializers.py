@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from products.models import MenuCategory
 
-from .models import ContactFormSubmission, MenuItem
+from .models import ContactFormSubmission, MenuItem 
 
 class MenuCategorySerializer(serializers.ModelSerializer):
 
