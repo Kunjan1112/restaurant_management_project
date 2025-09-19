@@ -131,7 +131,7 @@ def contact_view(request):
                 "Address : 123 Food Street, Flavor Town\n"
                 "Phone : +91-9999999999\n"
                 "Email : support@myrestaurant.com\n\n"  
-                "Best regards,\nYour Restaurant Team"
+                "Best regards,\nYour Restaurant Team"   
             )
 
             send_mail(
@@ -441,6 +441,10 @@ class MenuCategoryListAPIView(ListAPIView):
     queryset = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer
 
+class MenuCategoryViewSet(viewsets.ModelViewSet):
+    queryset = MenuCategory.objects.all()
+    serializer_class = MenuCategorySerializer
+    
 # -------------------------------------------------------------------------------------
 
 class ContactFormSubmissionView(generics.CreateAPIView):
