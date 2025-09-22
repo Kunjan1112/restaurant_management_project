@@ -25,11 +25,11 @@ class ContactFormSubmissionSerializer(serializers.ModelSerializer):
 # -----------------------------------------------------------------------------------------
 
 class MenuItemSerializer(serializers.ModelSerializer):
+    category = serializers.CharField(source='category.name')
 
     class Meta:
-        
         model = MenuItem
-        fields = ["id", "name", "description", "price", "category", "is_daily_special"]
+        fields = ["id", "name", "description", "price", "category"]
 
 # -----------------------------------------------------------------------------------------
 
