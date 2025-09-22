@@ -445,7 +445,7 @@ class MenuCategoryViewSet(viewsets.ModelViewSet):
     queryset = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer
     
-# -------------------------------------------------------------------------------------
+# --------------------------------------------ContactFormSubmissionView-----------------------------------------
 
 class ContactFormSubmissionView(generics.CreateAPIView):
     queryset = ContactFormSubmission.objects.all()
@@ -461,7 +461,7 @@ class ContactFormSubmissionView(generics.CreateAPIView):
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# -------------------------------------------------------------------------------------
+# -----------------------------------------DailySpecialsView------------------------------------
 
 class DailySpecialsView(ListAPIView):
     serializer_class = MenuItemSerializer
@@ -469,7 +469,7 @@ class DailySpecialsView(ListAPIView):
     def get_queryset(self):
         return MenuItem.objects.filter(is_daily_special=True)
 
-# --------------------------------------------------------------------------------------
+# ------------------------------------UserReviewCreateView--------------------------------------------------
 
 class UserReviewCreateView(generics.CreateAPIView):
     queryset =  UserReview.objects.all()
@@ -479,7 +479,7 @@ class UserReviewCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-# -------------------------------------------------------------------------------------
+# ------------------------------------------MenuItemReviewListView-------------------------------------------
 
 class MenuItemReviewListView(generics.ListAPIView):
     serializer_class = UserReviewSerializer
@@ -489,7 +489,7 @@ class MenuItemReviewListView(generics.ListAPIView):
         menu_item_id = self.kwargs.get('menu_item_id')
         return UserReview.objects.filter(menu_item_id=menu_item_id).order_by('-review_date')
 
-# ---------------------------------------------------------------------------------------
+# -------------------------------------------get_order_status--------------------------------------------
 
 @api_view(["GET"])
 def get_order_status(request, order_id):
@@ -507,7 +507,7 @@ def get_order_status(request, order_id):
             status = status.HTTP_404_NOT_FOUND,
         )
 
-# ------------------------------------------------------------------------------------------
+# -------------------------------------------RestaurantDetailsAPIView-----------------------------------------------
 
 class RestaurantDetailsAPIView(RetrieveAPIView):
     serializer_class = RestaurantSerializer
@@ -515,7 +515,7 @@ class RestaurantDetailsAPIView(RetrieveAPIView):
     def get_object(self):
         return Restaurant.objects.first()
 
-# ------------------------------------------------------------------------------------------
+# --------------------------------------------update_menu_item_availability----------------------------------------------
 
 @api_view(['PATCH'])
 def update_menu_item_availability(request, pk):
@@ -533,3 +533,22 @@ def update_menu_item_availability(request, pk):
 
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# ------------------------------------------MenuItemListAPIView----------------------------------------
+
+class MenuItemListAPIView(generics.ListAPIView):
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+
+    def list(self, request, *args, **kwargs):
+        
+        try: 
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)   
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"An error occurred: {str(e)}"},
+                status = status.HTTP_500_INTERNAL_SERVER_ERROR
+            ) 
