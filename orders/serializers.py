@@ -34,6 +34,11 @@ class OrderStatusUpdateSerializer(serializers.Serializers):
             raise serializers.ValidationError("Invalid order ID.")
         return value 
 
+    def validate_order_id(self, value):
+        if not Order.filter(id=value).exists():
+            raise serializers.ValidationError("Order with this ID does not exist.")
+        return value
+
 # --------------------------------------------OrderStatusSerializer------------------------------------
 
 class OrderStatusSerializer(serializers.ModelSerializers):
