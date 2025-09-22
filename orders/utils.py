@@ -71,3 +71,28 @@ def update_order_status(order_id: int, new_status: str) -> bool:
     except Exception as e:
         logger.exception(f"Error updating status for order {order_id}: {e}")
         return False
+
+
+# ---------------------------------------------------------------------------------------------
+
+def calculate_order_total(order_items):
+
+    if not order_items:
+        return 0.0
+
+    total = 0.0
+    for item in order_items:
+        quantity = item.get("quantity", 0)
+        price = item.get("price", 0.0)
+        total += quantity * price
+
+    return total
+
+
+if __name__ == "__main__":
+    order = [
+        {"quantity": 3, "price": 20.0},
+        {"quantity": 2, "price": 15.5}
+    ]
+
+    print(f"Total Order Price: {calculate_order_total(order)}")
