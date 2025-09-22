@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Order, OrderItem
 from products.models import Menu
 
+# --------------------------------------------OrderItemSerializer-----------------------------------
 
 class OrderItemSerializer(serializers.ModelSerializers):
     menu_item_name = serializers.CharField(source='menu_item.name', read_only=True)
@@ -12,6 +13,8 @@ class OrderItemSerializer(serializers.ModelSerializers):
         model = OrderItem
         fields = ["id", "menu_item_name", "menu_item_price", "quantity"]
 
+# ---------------------------------------------OrderItemSerializer-------------------------------------        
+
 class OrderItemSerializer(serializers.ModelSerializers):
     customer_username = serializers.CharField(source='customer.username', read_only=True)
     order_items = OrderItemSerializer(many=True, read_only=True)
@@ -19,6 +22,8 @@ class OrderItemSerializer(serializers.ModelSerializers):
     class Meta:
         model = Order
         fields = "__all__"
+
+# --------------------------------------------OrderStatusUpdateSerializer--------------------------------
 
 class OrderStatusUpdateSerializer(serializers.Serializers):
     order_id = serializers.IntegerField()
@@ -28,3 +33,10 @@ class OrderStatusUpdateSerializer(serializers.Serializers):
         if not Order.objects.filter(id=value).exists():
             raise serializers.ValidationError("Invalid order ID.")
         return value
+
+# --------------------------------------------OrderStatusSerializer------------------------------------
+
+class OrderStatusSerializer(serializers.ModelSerializers):
+    class Meta:
+        model = Order
+        fields = ['unique_id', 'status']
