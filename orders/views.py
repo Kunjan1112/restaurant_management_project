@@ -10,6 +10,8 @@ from orders.serializers import OrderSerializers, OrderStatusUpdateSerializer
 
 from utils.email_utils import send_order_confirmation_email
 
+# -----------------------------------------OrderHistroyView--------------------------------------------------
+
 class OrderHistroyView(APIView):
     
     permission_classes = [IsAuthenticated]
@@ -38,6 +40,8 @@ def confirm_order(order_id):
         print(result)
     except Order.DoesNotExist:
         print(f"Order with ID {order_id} not found.")
+
+# --------------------------------------------OrderViewSet----------------------------------------
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
@@ -68,9 +72,13 @@ class OrderViewSet(viewsets.ModelViewSet):
                 {"error":"Order not found."}, status=status.HTTP_404_NOT_FOUND
             )
 
+# -------------------------------------------OrderCreateView-------------------------------------
+
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+# --------------------------------------------UpdateOrderStatusView--------------------------------------
 
 class UpdateOrderStatusView(APIView):
     def put(self, request, *args, **kwargs):
