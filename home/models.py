@@ -196,7 +196,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
-class Reservtion(models.Model):
+class Reservation(models.Model):
     customer_name = models.CharField(max_length=200)
     reservation_date = models.DateField()
     start_time = models.TimeField()
