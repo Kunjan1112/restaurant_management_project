@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 
 from orders.models import Order
 
-from orders.serializers import OrderSerializers, OrderStatusUpdateSerializer
+from orders.serializers import OrderSerializers, OrderStatusUpdateSerializer, OrderStatusSerializer
 
 from utils.email_utils import send_order_confirmation_email
 
@@ -105,3 +105,24 @@ class UpdateOrderStatusView(APIView):
             )
 
         return Response(serializer.errors, status=http_status.HTTP_400_BAD_REQUEST)
+
+# -------------------------------------------OrderStatusRetrieveAPIView---------------------------------------
+
+class OrderStatusRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = OrderStatusSerializer
+    lookuo_field = 'unique_id'
+
+    def get_queryset(self):
+        return Order.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        unique_id = self.kwargs.get('unique_id')
+        try:
+            order = self.get_queryset().get(unique_id=unique_id)
+            serializer = self.get_serializer(order)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+            return Response(
+                {"error": f"No Order found with ID {unique_id}"},
+                status = status.HTTP_404_NOT_FOUND
+            )
