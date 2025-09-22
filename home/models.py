@@ -205,4 +205,4 @@ class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.customer_name} - {self.reservation_date} {self.start_time}-{self.end_time}"
+        return f"{self.customer_name} - {self.reservation_date} {self.start_time}-{self.end_time}" 
