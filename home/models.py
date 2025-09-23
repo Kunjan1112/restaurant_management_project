@@ -139,7 +139,7 @@ class MenuItem(models.Model):
         return float(self.price)
 
     def __str__(self):
-        return f"{self.name} - {self.get_final_price():.2f}"
+        return f"{self.name} - {self.get_final_price():.2f}" 
 # ----------------------------------------ContactInfo------------------------------------------
 
 class ContactInfo(models.Model):
