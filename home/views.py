@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer, ReviewSerializer
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer, ReviewSerializer, OpeningHoursSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
