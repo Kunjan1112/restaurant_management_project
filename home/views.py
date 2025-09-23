@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.db import DatabaseError
 
 from django.conf import settings
+
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
