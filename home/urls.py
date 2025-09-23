@@ -29,6 +29,7 @@ urlpatterns = [
     path('privacy-policy/',views.privacy_policy,name="privacy_policy"),
     path('terms-service/',view.terms_service,name="terms_service"),
     path('logout_view/',views.logout_view,name="logout_view"),
+    
 
 
     path('api/menu-categories/',views.MenuCategoryListAPIView.as_view(), name="menu-categories"),
@@ -38,6 +39,7 @@ urlpatterns = [
     path('api/review/menu-item/<int:menu_item_id>/', views.MenuItemReviewListView.as_view(), name="menu-item-reviews"),
     path('api/restaurant/', RestaurantDetailsAPIView.as_view(), name="restaurant-detail"),
     path('api/menu-items/', MenuItemListAPIView.as_view(), name='menu-items-list'),
+    path('review/create/', ReviewCreateView.as_view(), name='review-create'),
 
 
     path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
