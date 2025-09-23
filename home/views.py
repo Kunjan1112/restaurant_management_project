@@ -23,6 +23,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from .pagination import ReviewPagination
 
 # Create your views here.
 # ----------------------------------------------------------------------------------------
@@ -483,12 +484,9 @@ class UserReviewCreateView(generics.CreateAPIView):
 # ------------------------------------------MenuItemReviewListView-------------------------------------------
 
 class MenuItemReviewListView(generics.ListAPIView):
-    serializer_class = UserReviewSerializer
-    permission_classes = [permissions.AllowAny]
-
-    def get_queryset(self):
-        menu_item_id = self.kwargs.get('menu_item_id')
-        return UserReview.objects.filter(menu_item_id=menu_item_id).order_by('-review_date')
+    queryset = Review.objects.all().order_by('-created_at')
+    serializer_class = ReviewSerializer
+    pagination_class = ReviewPagination
 
 # -------------------------------------------get_order_status--------------------------------------------
 
