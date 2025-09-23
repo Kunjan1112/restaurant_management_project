@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import User  
 
+# --------------------------------------Home-----------------------------------
+
 class Home(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -13,12 +15,16 @@ class Home(models.Model):
     def __str__(self):
         return self.title
 
+# ------------------------------------Feedback-------------------------------------
+
 class Feedback(models.Model):
     comments = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.comments[:20]
+
+# -----------------------------------ContactSubmission--------------------------
 
 class ContactSubmission(models.Model):
     name = models.CharField(max_length=100)
@@ -29,6 +35,8 @@ class ContactSubmission(models.Model):
     def __str__(self): 
         return f"{self.name} - ({self.email})"
 
+# ---------------------------------RestaurantLocation-----------------------------
+
 class RestaurantLocation(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
@@ -38,6 +46,8 @@ class RestaurantLocation(models.Model):
 
     def __str__(self):
         return f"{self.address}, {self.city}, {self.state} - {self.zip_code}"
+
+# -----------------------------------Special--------------------------------------
 
 class Special(models.Model):
     item_name = models.CharField(max_length=100)
@@ -50,6 +60,8 @@ class Special(models.Model):
 
     def __str__(self):
         return self.item_name
+
+# ----------------------------------OpeningHour---------------------------------------
 
 class OpeningHour(models.Model):
     DAY_CHOICES = [
@@ -72,6 +84,7 @@ class OpeningHour(models.Model):
     def __str__(self):
         return f"{self.day}: {self.open_time.strftime('%I:%M %p')} - {self.close_time.strftime('%I:%M %p')}"
 
+# --------------------------------------------Chef----------------------------------------
 
 class Chef(models.Model):
     name = models.CharField(max_length=100)
@@ -82,12 +95,16 @@ class Chef(models.Model):
     def __str__(self):
         return self.name
 
+# ----------------------------------------NewSletterSubscriber------------------------------
+
 class NewSletterSubscriber(models.Model):
     email = models.EmailField(unique=True)
     subscribed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+# ---------------------------------------RestaurantInfo-------------------------------------
  
 class RestaurantInfo(models.Model):
     name = models.CharField(max_length=200, default="Delicious Bites Restaurant")
@@ -104,6 +121,8 @@ class RestaurantInfo(models.Model):
     def __str__(self):
         return self.name
 
+# ---------------------------------------MenuItem---------------------------------------------
+
 class MenuItem(models.Model):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -113,6 +132,8 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
 
+# ----------------------------------------ContactInfo------------------------------------------
+
 class ContactInfo(models.Model):
     address = models.TextField()
     phone_number = models.CharField(max_length=15)
@@ -121,6 +142,7 @@ class ContactInfo(models.Model):
     def __str__(self):
         return f"{self.address} | {self.phone_number} | {self.email}"
 
+# ----------------------------------------SiteSettings----------------------------------------
 
 class SiteSettings(models.Model):
     restaurant_name = models.CharField(max_length=200, default="My Restaurant")
@@ -130,6 +152,7 @@ class SiteSettings(models.Model):
     def __str__(self):
         return self.restaurant_name
 
+# ----------------------------------------NewsItem-------------------------------------------
 
 class NewsItem:
     def __init__(self, title, content, date):
@@ -143,6 +166,8 @@ NEWS_ITEMS = [
     NewsItem("Live Music Nights", "Join us every Friday for live music performances while you enjoy your meal.", date(2025, 3, 1)),   
 ]
 
+# ------------------------------------------------Review---------------------------------
+
 class Review(models.Model):
     name = models.CharField(max_length=100)
     rating = models.PositiveIntegerField()
@@ -151,6 +176,8 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.rating}"
+
+# --------------------------------------------RestaurantReview-------------------------------
 
 class RestaurantReview(models.Model):
     user = models.ForeignKey(
@@ -165,6 +192,7 @@ class RestaurantReview(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.rating}"
         
+# ------------------------------------------MenuCategory----------------------------------------
 
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -173,6 +201,7 @@ class MenuCategory(models.Model):
     def __str__(self):
         return self.name
 
+# ---------------------------------------UserReview--------------------------------------------
 
 class UserReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
@@ -185,6 +214,8 @@ class UserReview(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.menu_item.name} ({self.rating}/5)"
 
+# ----------------------------------------Restaurant--------------------------------------------
+
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     address = models.TextField()
@@ -195,6 +226,8 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+
+# -----------------------------------------Reservation--------------------------------------------
 
 class Reservation(models.Model):
     customer_name = models.CharField(max_length=200)
