@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer
+from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer, ReviewSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -552,3 +552,14 @@ class MenuItemListAPIView(generics.ListAPIView):
                 {"error": f"An error occurred: {str(e)}"},
                 status = status.HTTP_500_INTERNAL_SERVER_ERROR
             ) 
+
+# -----------------------------------------ReviewCreateView------------------------------------------
+
+class ReviewCreateView(generics.CreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
