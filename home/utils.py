@@ -1,3 +1,7 @@
+import re
+
+# -------------------------------------------calculate_discount---------------------------------------
+
 def calculate_discount(original_price, discount_percentage):
 
     try:
@@ -15,3 +19,13 @@ def calculate_discount(original_price, discount_percentage):
     except (ValueError, TypeError) as e:
         print(f"Error calculating discount: {e}")
         return None
+
+# ----------------------------------------Validate Email Address------------------------------------
+
+def validate_email_address(email: str) -> bool:
+
+    email_regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+
+    if re.match(email_regex, email):
+        return True
+    return False
