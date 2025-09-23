@@ -564,3 +564,11 @@ class ReviewCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+# -------------------------------------------OpeningHoursView-----------------------------------
+
+class OpeningHoursView(APIView):
+    def get(self, request):
+        hours = OpeningHours.objects.all()
+        serializer = OpeningHoursSerializer(hours, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
