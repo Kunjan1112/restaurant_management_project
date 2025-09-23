@@ -125,13 +125,21 @@ class RestaurantInfo(models.Model):
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField(blank=True)
-    category = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, related_name='menu_items')
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    discount_percentage = models.DecimalField(
+        max_digits=5, decimal_places=2, default=0.00,
+        help_text="Enter discount as a percentage (e.g., 10 for 100%)"
+    )
+
+    def get_final_price(self) -> float:
+
+        if self.discount_percentage and self.discount_percentage > 0:
+            discount = (self.discount_percentage / 100) * float(self.price)
+            return float(self.price) - discount 
+        return float(self.price)
 
     def __str__(self):
-        return self.name
-
+        return f"{self.name} - {self.get_final_price():.2f}"
 # ----------------------------------------ContactInfo------------------------------------------
 
 class ContactInfo(models.Model):
