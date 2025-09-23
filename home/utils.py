@@ -5,7 +5,6 @@ import re
 def calculate_discount(original_price, discount_percentage):
 
     try:
-        
         original_price = float(original_price)
         discount_percentage = float(discount_percentage)
 
