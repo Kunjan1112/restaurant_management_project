@@ -22,8 +22,8 @@ from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import ReviewPagination
 
-from .pagination import ReviewPagination
 
 # Create your views here.
 # ----------------------------------------------------------------------------------------
@@ -569,4 +569,16 @@ class OpeningHoursView(APIView):
         hours = OpeningHours.objects.all()
         serializer = OpeningHoursSerializer(hours, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# -------------------------------------------ReviewListView---------------------------------
+
+class ReviewPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+
+class ReviewListview(generics.ListAPIView):
+
+    queryset = Review.objects.all().order_by('-created_by')
+    serializer_class = ReviewSerializer
+    pagination_class = ReviewPagination
 
