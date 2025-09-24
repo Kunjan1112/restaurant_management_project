@@ -582,3 +582,22 @@ class ReviewListview(generics.ListAPIView):
     serializer_class = ReviewSerializer
     pagination_class = ReviewPagination
 
+# --------------------------------------------MenuItemView--------------------------------------------
+
+class MenuItemDetailsView(generics.RetrieveAPIView):
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+
+    def get(self, request, *args, **kwargs):
+        menu_item_id = kwargs.get("pk")
+
+        try:
+            menu_item = MenuItem.objects.get(id=menu_item_id)
+        except MenuItem.DoesNotExist:
+            return Response(
+                {"error": "Menu item not found."}
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        serializer = self.get_serializer(menu_item)
+        return Response(serializer.data, status=status.HTTP_200_OK)
