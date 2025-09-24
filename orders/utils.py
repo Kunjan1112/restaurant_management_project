@@ -96,3 +96,20 @@ if __name__ == "__main__":
     ]
 
     print(f"Total Order Price: {calculate_order_total(order)}")
+
+# ----------------------------------------------Calculate Discount------------------------------------
+
+def calculate_discount(order_total, discount_percentage):
+
+    try:
+        order_total = float(order_total)
+        discount_percentage = float(discount_percentage)
+
+        if discount_percentage < 0 or discount_percentage > 100:
+            raise ValueError("Discount percentage must be between 0 and 100.")
+
+        discount_amount = order_total * (discount_percentage / 100)
+        return round(discount_amount, 2)
+    
+    except (TypeError, ValueError):
+        return 0.0
