@@ -29,7 +29,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MenuItem
-        fields = ["id", "name", "description", "price", "category"]
+        fields = ["id", "name", "description", "price", "category", "image", "is_available"]
 
 # -----------------------------------------------------------------------------------------
 
@@ -77,3 +77,4 @@ class OpeningHourSerializer(serializers.ModelSerializer):
     class Meta:
         model = OpeningHour
         fields = ['day', 'open_time', 'close_time']
+
