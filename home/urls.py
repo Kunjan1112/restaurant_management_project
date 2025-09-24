@@ -45,7 +45,7 @@ urlpatterns = [
     path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
     path('menu/<int:pk>/availability/', update_menu_item_availability, name='update-menu-availability'),
     path('restatuant/opening-hours/', OpeningHoursView.as_view(), name='opening-hours'),
-    
+    path('menu-item/<int:pk>/', MenuItemDetailAPIView.as_view(), name='menu-item-detail'),
 
     path('api/', include(router.urls)),
    
