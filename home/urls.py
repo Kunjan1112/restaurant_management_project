@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/menu-items/', MenuItemListAPIView.as_view(), name='menu-items-list'),
     path('review/create/', ReviewCreateView.as_view(), name='review-create'),
 
-
+ 
     path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
     path('menu/<int:pk>/availability/', update_menu_item_availability, name='update-menu-availability'),
     path('restatuant/opening-hours/', OpeningHoursView.as_view(), name='opening-hours'),
