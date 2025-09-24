@@ -225,6 +225,7 @@ class UserReview(models.Model):
 # ----------------------------------------Restaurant--------------------------------------------
 
 class Restaurant(models.Model):
+
     name = models.CharField(max_length=255)
     address = models.TextField()
     city = models.CharField(max_length=100)
@@ -234,6 +235,10 @@ class Restaurant(models.Model):
         return self.name
 
     def get_total_menu_items(self):
+        """
+        Restaurant the total number of menu items for this restaurant.
+        """
+
         return self.menu_items.count()
 
 # -----------------------------------------Reservation--------------------------------------------
