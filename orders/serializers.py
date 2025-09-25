@@ -15,13 +15,18 @@ class OrderItemSerializer(serializers.ModelSerializers):
 
 # ---------------------------------------------OrderItemSerializer-------------------------------------        
 
-class OrderItemSerializer(serializers.ModelSerializers):
-    customer_username = serializers.CharField(source='customer.username', read_only=True)
-    order_items = OrderItemSerializer(many=True, read_only=True)
+class OrderItemSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    quantity = serializers.IntegerField()
+    price = serializers.DecimalField(max_digits=10, decimal_places=2)
+
+class OrderSerializer(serializers.ModelSerializers):
+    items = OrderItemSerializer(many=True, source='get_items', read_only=True)
 
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = ['id', 'created_at', 'items', 'total_amount', 'status']
+
 
 # --------------------------------------------OrderStatusUpdateSerializer--------------------------------
 
