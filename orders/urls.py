@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register(r'orders', OrderViewSet, basename='order')
 
 urlpatterns = [
+    
     path('history/', OrderHistroyView.as_view(), name="order-histroy"),
 
     path('api/',include(router.urls)),
@@ -15,7 +16,7 @@ urlpatterns = [
 
     path('api/order/<str:unique_id>/status/', OrderStatusRetrieveAPIView.as_view(), name='order-status'),
 
-    path('my-orders/', UserOrderHistoryView.as_view(), name="user-order-histroy"),
+    path('api/order/my-orders/', UserOrderHistoryView.as_view(), name="user-order-histroy"),
     
 ]
 
