@@ -66,3 +66,17 @@ class MenuItemPriceRangeView(ListAPIView):
             )
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+# ------------------------------------MenuItemAvailabilityView-------------------------------
+
+class MenuItemAvailabilityView(APIView):
+
+    def get(self, request, pk, format=None):
+        try:
+            menu_items = MenuItem.objects.get(pk=pk)
+            return Response({"available": menu_item.is_available})
+        except MenuItem.DoesNotExist:
+            return Response(
+                {"error": f"Menu item with ID {pk} does not exist."},
+                status = status.HTTP_404_NOT_FOUND
+            )
