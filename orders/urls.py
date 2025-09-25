@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import OrderHistroyView, OrderViewSet, UpdateOrderStatusView, OrderStatusRetrieveAPIView
+from .views import OrderHistroyView, OrderViewSet, UpdateOrderStatusView, OrderStatusRetrieveAPIView, UserOrderHistoryView
+
 
 router = DefaultRouter()
 router.register(r'orders', OrderViewSet, basename='order')
@@ -13,4 +14,8 @@ urlpatterns = [
     path('api/update-status/', UpdateOrderStatusView.as_view(), name="update-order-status"),
 
     path('api/order/<str:unique_id>/status/', OrderStatusRetrieveAPIView.as_view(), name='order-status'),
+
+    path('my-orders/', UserOrderHistoryView.as_view(), name="user-order-histroy"),
+    
 ]
+
