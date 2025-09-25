@@ -1,5 +1,7 @@
 from rest_framework import serializers 
-from .models import Menu, MenuCategory
+from .models import Menu, MenuCategory, MenuItem
+
+# -------------------------------MenuSerializers------------------------------------------------------
 
 class MenuSerializers(serializers.ModelSerializers):
     category_name = serializers.CharField(source="category.name", read_only=True)
@@ -13,9 +15,18 @@ class MenuSerializers(serializers.ModelSerializers):
         if value <= 0:
             raise serializers.validationError("Price must be a positive number.")
         return value
-# -----------------------------------------------------------------------------------------
+# ------------------------------------MenuCategorySerilizers----------------------------------------------
 
 class MenuCategorySerializer(serializers.MenuSerializers):
     class Meta:
         model = MenuCategory
         fields = ['id', 'name']
+
+# --------------------------------------MenuItemSerializer-------------------------------------------------
+
+class MenuItemSerializer(serializers.ModelSerializers):
+    class Meta:
+        model = MenuItem
+        fields = ['id', 'name', 'description', 'price']
+
+        
