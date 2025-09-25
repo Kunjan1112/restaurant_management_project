@@ -113,3 +113,13 @@ def calculate_discount(order_total, discount_percentage):
     
     except (TypeError, ValueError):
         return 0.0
+
+# ---------------------------------------------Calculate_Average_Rating-----------------------------
+
+def calculate_average_rating(review_queryset):
+
+    if not review_queryset.exists():
+        return 0.0
+
+    avg_rating = review_queryset.aggregate(Avg('rating'))['rating__avg']
+    return float(avg_rating) if avg_rating is not None else 0.0
