@@ -126,3 +126,21 @@ class OrderStatusRetrieveAPIView(generics.RetrieveAPIView):
                 {"error": f"No Order found with ID {unique_id}"},
                 status = status.HTTP_404_NOT_FOUND
             )
+
+# -----------------------------------UserOrderHistoryView---------------------------------
+
+class UserOrderHistoryView(ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).order_by('-created_at')
+
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except DatabaseError:
+            return Response(
+                {"error": "A database error occurred. Please try again later."}
+                status = status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
