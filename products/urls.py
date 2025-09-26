@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import MenuSearchViewSet, MenuCategoryListAPIView, MenuItemPriceRangeView, MenuItemAvailabilityView
+from .views import MenuSearchViewSet, MenuCategoryListAPIView, MenuItemPriceRangeView, MenuItemAvailabilityView, ReviewListView
 
 urlpatterns = [
     path('menu/search/', MenuSearchViewSet.as_view({'get':'list'}), name='menu-search'),
@@ -10,4 +10,6 @@ urlpatterns = [
     path('menu-items/price-range/', MenuItemPriceRangeView.as_view(), name="menu-items-price-range"),
 
     path('menu-items/<int:pk>/availability/', MenuItemAvailabilityView.as_view(), name="menu-item-availability"),
+
+    path('reviews/', ReviewListView.as_view(), name="review_list"),
 ]
