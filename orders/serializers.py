@@ -50,3 +50,12 @@ class OrderStatusSerializer(serializers.ModelSerializers):
     class Meta:
         model = Order
         fields = ['unique_id', 'status']
+
+# --------------------------------------------OrderSummarySerializer-----------------------------------
+
+class OrderSummarySerializer(serializers.ModelSerializers):
+    items = OrderItemSerializer(source="orderitem_set", many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['id', 'total_amount', 'status', 'items']
