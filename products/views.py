@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import Menu, MenuCategory, MenuItem
-from .serializers import MenuSerializer, MenuCategorySerializer, MenuItemSerializer
+from .models import Menu, MenuCategory, MenuItem, Review
+from .serializers import MenuSerializer, MenuCategorySerializer, MenuItemSerializer, ReviewSerializer
 
 
 # ----------------------------------------MenuPagination------------------------------------
@@ -80,3 +80,9 @@ class MenuItemAvailabilityView(APIView):
                 {"error": f"Menu item with ID {pk} does not exist."},
                 status = status.HTTP_404_NOT_FOUND
             )
+
+# -------------------------------------ReviewListView-------------------------------------------
+
+class ReviewListView(generics.ListAPIView):
+    queryset = Review.objects.all().order_by("-created_at")
+    serializer_class = ReviewSerializer
