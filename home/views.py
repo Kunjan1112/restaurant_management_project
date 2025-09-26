@@ -4,29 +4,20 @@ from django.http import HttpResponse, JsonResponse
 from django.db import DatabaseError
 
 from django.conf import settings
-
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, ContactFormSubmission, UserReview, Review, SiteSettings, Order
-from .serializers import ContactFormSubmissionSerializer, MenuItemSerializer, UserReviewSerializer, RestaurantDetailsAPIView, MenuItemAvailabilitySerializer, ReviewSerializer, OpeningHoursSerializer
+from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ
+
+from .serializers import FAQSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
 
 from django.contrib import messages
 
-from datetime import date
-from django.core.paginator import Paginator
-from django.db.models import Avg
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.pagination import ReviewPagination
-
-
 # Create your views here.
-# ----------------------------------------------------------------------------------------
+
+# --------------------------------------generate_breadcrumbs---------------------------------
 def generate_breadcrumbs(cart=None):
     if cart is None:
         cart = {}
@@ -37,12 +28,8 @@ def generate_breadcrumbs(cart=None):
     
     return breadcrumbs
 
-# ------------------------------------------------------------------------------------------
-
 def name(request):
     return HttpResponse("Hello My Name is Kunjan")
-
-# ---------------------------------------------------------------------------------------
 
 def index(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "My Restaurant")
@@ -133,7 +120,7 @@ def contact_view(request):
                 "Address : 123 Food Street, Flavor Town\n"
                 "Phone : +91-9999999999\n"
                 "Email : support@myrestaurant.com\n\n"  
-                "Best regards,\nYour Restaurant Team"   
+                "Best regards,\nYour Restaurant Team"
             )
 
             send_mail(
@@ -330,12 +317,12 @@ def update_cart(request, item_id):
             quantity = int(request.POST.get("quantity",1))
             if quantity > 0:
                 cart[str(item_id)] = {"quantity" : quantity}
-                messages.success(request, "Cart updated successfully.")
+                message.success(request, "Cart updated successfully.")
             else:
                 cart.pop(str(item_id), None)
-                messages.info(request, "Item removed from cart.")
+                message.info(request, "Item removed from cart.")
         except ValueError:
-            messages.error(request, "Invalid quantity.")
+            message.error(request, "Invalid quantity.")
         
         request.session['cart'] = cart
     return redirect("view cart")
@@ -345,13 +332,13 @@ def remove_from_cart(request, item_id):
         cart = request.session.get("cart", {})
         cart.pop(str(item_id), None)
         request.session["cart"] = cart
-        messages.info(request, "Item removed from cart.")
+        message.info(request, "Item removed from cart.")
     return redirect("view_cart")
 
 def checkout(request):
     cart = request.session.get("cart", {})
     if not cart:
-        messages.warning(request, "Your cart is empty. Please add items before chechout.")
+        message.warning(request, "Your cart is empty. Please add items before chechout.")
         return redirect("view_cart")
 
     return render(request, 'home/checkout.html', {"cart":cart})
@@ -433,171 +420,17 @@ def logout_view(request):
 def news(request):
     return render(request, "home/news.html", {"news_items":NEWS_ITEMS})
 
-# ------------------------------------------MenuCategory---------------------------------
+# ---------------------------------------FAQListView---------------------------------
 
-from rest_framework.generics import ListAPIView
-from products.models import MenuCategory
-from .serializers import MenuCategorySerializer
-
-class MenuCategoryListAPIView(ListAPIView):
-    queryset = MenuCategory.objects.all()
-    serializer_class = MenuCategorySerializer
-
-class MenuCategoryViewSet(viewsets.ModelViewSet):
-    queryset = MenuCategory.objects.all()
-    serializer_class = MenuCategorySerializer
-    
-# --------------------------------------------ContactFormSubmissionView-----------------------------------------
-
-class ContactFormSubmissionView(generics.CreateAPIView):
-    queryset = ContactFormSubmission.objects.all()
-    serializer_class = ContactFormSubmissionSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                {"message":"Your contact form has been submitted successfully."},
-                status=status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# -----------------------------------------DailySpecialsView------------------------------------
-
-class DailySpecialsView(ListAPIView):
-    serializer_class = MenuItemSerializer
-
-    def get_queryset(self):
-        return MenuItem.objects.filter(is_daily_special=True)
-
-# ------------------------------------UserReviewCreateView--------------------------------------------------
-
-class UserReviewCreateView(generics.CreateAPIView):
-    queryset =  UserReview.objects.all()
-    serializer_class = UserReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-# ------------------------------------------MenuItemReviewListView-------------------------------------------
-
-class MenuItemReviewListView(generics.ListAPIView):
-    queryset = Review.objects.all().order_by('-created_at')
-    serializer_class = ReviewSerializer
-    pagination_class = ReviewPagination
-
-# -------------------------------------------get_order_status--------------------------------------------
-
-@api_view(["GET"])
-def get_order_status(request, order_id):
-
-    try:
-        order = Order.objects.get(id=order_id)
-        return Response(
-            {"order_id":order.id, "status":order.status},
-            status = status.HTTP_200_OK,
-        )
-
-    except Order.DoesNotExist:
-        return Response(
-            {"error": "Order not found"},
-            status = status.HTTP_404_NOT_FOUND,
-        )
-
-# -------------------------------------------RestaurantDetailsAPIView-----------------------------------------------
-
-class RestaurantDetailsAPIView(RetrieveAPIView):
-    serializer_class = RestaurantSerializer
-
-    def get_object(self):
-        return Restaurant.objects.first()
-
-# --------------------------------------------update_menu_item_availability----------------------------------------------
-
-@api_view(['PATCH'])
-def update_menu_item_availability(request, pk):
-
-    try:
-        menu_item = MenuItem.objects.get(pk=pk)
-    except MenuItem.DoesNotExist:
-        return Response({'error': 'MenuItem not found.'}, status=status.HTTP_404_NOT_FOUND)
-
-    serializer = MenuItemAvailabilitySerializer(menu_item, data=request.data, partial=True)
-
-    if serializer.is_valid():
-        serializer.save()
-        return Response({'success': f"MenuItem '{menu_item.name}' availability updated to {menu_item.is_available}"})
-
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# ------------------------------------------MenuItemListAPIView----------------------------------------
-
-class MenuItemListAPIView(generics.ListAPIView):
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
+class FAQListView(generics.ListAPIView):
+    queryset = FAQ.objects.all().order_by('-created_by')
+    serializers_class = FAQSerializer
 
     def list(self, request, *args, **kwargs):
-        
-        try: 
-            queryset = self.get_queryset()
-            serializer = self.get_serializer(queryset, many=True)   
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
+        try:
+            return super().list(request, *args, **kwargs)
         except Exception as e:
             return Response(
-                {"error": f"An error occurred: {str(e)}"},
+                {"error": str(e)},
                 status = status.HTTP_500_INTERNAL_SERVER_ERROR
-            ) 
-
-# -----------------------------------------ReviewCreateView------------------------------------------
-
-class ReviewCreateView(generics.CreateAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-# -------------------------------------------OpeningHoursView-----------------------------------
-
-class OpeningHoursView(APIView):
-    def get(self, request):
-        hours = OpeningHours.objects.all()
-        serializer = OpeningHoursSerializer(hours, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-# -------------------------------------------ReviewListView---------------------------------
-
-class ReviewPagination(PageNumberPagination):
-    page_size = 5
-    page_size_query_param = 'page_size'
-
-class ReviewListview(generics.ListAPIView):
-
-    queryset = Review.objects.all().order_by('-created_by')
-    serializer_class = ReviewSerializer
-    pagination_class = ReviewPagination
-
-# --------------------------------------------MenuItemView--------------------------------------------
-
-class MenuItemDetailsView(generics.RetrieveAPIView):
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
-
-    def get(self, request, *args, **kwargs):
-        menu_item_id = kwargs.get("pk")
-
-        try:
-            menu_item = MenuItem.objects.get(id=menu_item_id)
-        except MenuItem.DoesNotExist:
-            return Response(
-                {"error": "Menu item not found."}
-                status=status.HTTP_404_NOT_FOUND
             )
-        
-        serializer = self.get_serializer(menu_item)
-        return Response(serializer.data, status=status.HTTP_200_OK)
