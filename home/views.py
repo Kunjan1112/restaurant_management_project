@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 
 from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ
 
-from .serializers import FAQSerializer
+from .serializers import FAQSerializer, MenuItemSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -429,6 +429,32 @@ class FAQListView(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         try:
             return super().list(request, *args, **kwargs)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status = status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+# ---------------------------------AvailableMenuItemView---------------------------
+
+class AvailableMenuItemView(generics.ListAPIView):
+    serializer_class = MenuItemSerializer
+
+    def get_queryset(self):
+        queryset = MenuItem.objects.all()
+
+        available = self.request.query_params.get('available')
+        if available is not None:
+            if available.lower() in ['true', '1', 'yes']:
+                queryset = queryset.filter(available=True)
+            elif available.lower() in ['false', '0', 'no']:
+                queryset = queryset.filter(available=False)
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs):
         except Exception as e:
             return Response(
                 {"error": str(e)},
