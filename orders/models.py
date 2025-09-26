@@ -14,6 +14,8 @@ class ActiveOrderManger(models.Manager):
     def get_active_orders(self):
         return self.filter(status__in=['pending','processing'])
 
+# --------------------------------------Order----------------------------------
+
 class Order(models.Model):
     STATUS_CHOICES =[
         ('pending', 'Pending'),
@@ -33,6 +35,8 @@ class Order(models.Model):
         )
         return result['total_revenue'] or 0
 
+# ------------------------------------------OrderItem----------------------------------
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product_name = models.CharField(max_length=200)
@@ -41,6 +45,8 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product_name} X {self.quantity}"
+
+# ---------------------------------------Coupon-------------------------------------
  
 class Coupon(models.Model):
     code = models.CharField(max_length=20, unique=True)
