@@ -460,3 +460,11 @@ class AvailableMenuItemView(generics.ListAPIView):
                 {"error": str(e)},
                 status = status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+# ----------------------------------------CuisineMenuItemsView-----------------------------
+
+class CuisineMenuItemsView(APIView):
+    def get(self, request, cuisine_type):
+        items = MenuItem.get_items_by_cuisine(cuisine_type)
+        serializer = MenuItemSerializer(items, many=True)
+        return Response(serializer.data)
