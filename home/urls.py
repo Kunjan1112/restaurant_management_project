@@ -1,52 +1,53 @@
 from django.urls import path, include
 from . import views
 
-router = DefaultRouter()
-router.register(r'categories', MenuCategoryViewSet, basename='menucategory')
-
 urlpatterns = [
 
     path('name/',views.name),
+
     path('',views.index,name='index'),
+
     path('login_view/',views.login_view,name='login_view'),
+
     path('404_view/',views.handler404,name='404_view'),
-    path('about_restaurant/',views.about_restaurant,name='about_restaurant'),       
+
+    path('about_restaurant/',views.about_restaurant,name='about_restaurant'),
+
     path('contact/',views.contact_view,name="contact"),
+
     path('reservations/',views.reservations_view,name="reservations"),
+
     path('restaurant_list/',views.restaurant_list,name='restaurant_list'),
+
     path('faq/',views.faq_view,name="faq"),
+
     path('privacy/',views.privacy_policy,name="privacy"),
+
     path('thank-you/',views.thank_you_view,name="thank_you"),
+
     path('reservations/',views.reservations_view,name="reservations"),
+
     path('our-story/',views.our_story,name="our_story"),
+    
     path('staff/',views.staff_view,name='staff'),
+
     path('restaurant-gallery/',views.restaurant_gallery,name='restaurant_gallery'),
+
     path('cart/',views.view_cart,name='view_cart'),
+
     path('sitemap/',views.sitemap_view,name="sitemap"),
+
     path('careers/',views.careers_view,name="careers"),
+
     path('contact/thanks',views.contact_thanks,name="contact_thanks"),
+
     path('home_view/',views.home_view,name="home_view"),
+    
     path('privacy-policy/',views.privacy_policy,name="privacy_policy"),
+
     path('terms-service/',view.terms_service,name="terms_service"),
+
     path('logout_view/',views.logout_view,name="logout_view"),
     
-
-
-    path('api/menu-categories/',views.MenuCategoryListAPIView.as_view(), name="menu-categories"),
-    path('api/contact-form/',views.ContactSubmissionView.as_view(), name="contact-form"),
-    path("api/daily-specials/", views.DailySpecialsView.as_view(), name="daily-specials"),
-    path('api/reviews/create/', views.UserReviewCreateView.as_view(), name="create-review"),
-    path('api/review/menu-item/<int:menu_item_id>/', views.MenuItemReviewListView.as_view(), name="menu-item-reviews"),
-    path('api/restaurant/', RestaurantDetailsAPIView.as_view(), name="restaurant-detail"),
-    path('api/menu-items/', MenuItemListAPIView.as_view(), name='menu-items-list'),
-    path('review/create/', ReviewCreateView.as_view(), name='review-create'),
-
- 
-    path('orders/<int:order_id>/status/', views.get_order_status, name="get_order_status"),
-    path('menu/<int:pk>/availability/', update_menu_item_availability, name='update-menu-availability'),
-    path('restatuant/opening-hours/', OpeningHoursView.as_view(), name='opening-hours'),
-    path('menu-item/<int:pk>/', MenuItemDetailAPIView.as_view(), name='menu-item-detail'),
-
-    path('api/', include(router.urls)),
-   
+    path('faqs/',views.FAQListView,name='faq-list'),
 ]
