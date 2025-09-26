@@ -52,4 +52,6 @@ urlpatterns = [
     path('faqs/',views.FAQListView,name='faq-list'),
 
     path('menu-items/', views.AvaliableMenuItemsView, name="menu-items"),
+
+    path('menu/cuisine/<str:cuisine_type>/', views.CuisineMenuItemView, name="menu-by-cuisine"),
 ]
