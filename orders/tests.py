@@ -6,6 +6,8 @@ from .models import Order, OrderItem
 
 User = get_user_model()
 
+# -------------------------------------------OrderTotalTests-----------------------------------
+
 class OrderTotalTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user("u1", password="pass")
@@ -28,3 +30,16 @@ class OrderTotalTests(TestCase):
 
         total = self.order.calculate_total()
         self.assertEqual(total, Decimal("230.00"))
+
+# -----------------------------------------OrderModelTest----------------------------------------
+
+class OrderModelTest(TestCase):
+    def setUp(self):
+        Order.objects.create(customer='Alice', total_amount=100, status="completed")
+        Order.objects.create(customer='Bob', total_amount=200, status="completed")
+        Order.objects.create(customer='Charlie', total_amount=50, status="pending")
+        Order.objects.create(customer='David', total_amount=75, status='cancelled')
+
+    def test_calculate_total_revenue(self):
+        total_revenue = Order.calculate_total_revenue()
+        self.assertEqual(total_revenue, 0)
