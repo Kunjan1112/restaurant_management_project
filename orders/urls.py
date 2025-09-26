@@ -18,6 +18,6 @@ urlpatterns = [
 
     path('api/order/my-orders/', UserOrderHistoryView.as_view(), name="user-order-histroy"),
     
-    path('orders/<int:pk>/summary/', OrderSummaryView.as_view(), name="order-summary"),
+    path('api/orders/<int:pk>/summary/', OrderSummaryView.as_view(), name="order-summary"),
 ]
 
