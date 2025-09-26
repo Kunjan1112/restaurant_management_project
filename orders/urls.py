@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import OrderHistroyView, OrderViewSet, UpdateOrderStatusView, OrderStatusRetrieveAPIView, UserOrderHistoryView
+from .views import OrderHistroyView, OrderViewSet, UpdateOrderStatusView, OrderStatusRetrieveAPIView, UserOrderHistoryView, OrderSummaryView
 
 
 router = DefaultRouter()
@@ -18,5 +18,6 @@ urlpatterns = [
 
     path('api/order/my-orders/', UserOrderHistoryView.as_view(), name="user-order-histroy"),
     
+    path('orders/<int:pk>/summary/', OrderSummaryView.as_view(), name="order-summary"),
 ]
 
