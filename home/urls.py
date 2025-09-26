@@ -50,4 +50,6 @@ urlpatterns = [
     path('logout_view/',views.logout_view,name="logout_view"),
     
     path('faqs/',views.FAQListView,name='faq-list'),
+
+    path('menu-items/', views.AvaliableMenuItemsView, name="menu-items"),
 ]
