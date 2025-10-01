@@ -25,11 +25,11 @@ class ContactFormSubmissionSerializer(serializers.ModelSerializer):
 # -----------------------------------------------------------------------------------------
 
 class MenuItemSerializer(serializers.ModelSerializer):
-    category = serializers.CharField(source='category.name')
+    category = serializers.StringRelatedField()
 
     class Meta:
         model = MenuItem
-        fields = ["id", "name", "description", "price", "category", "image", "is_available"]
+        fields = ['id', 'name', 'description', 'price', 'category']
 
 # -----------------------------------------------------------------------------------------
 
