@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import MenuItemViewSet
+from .views import MenuItemViewSet, AvaliableTablesAPIView
 
 router = DefaultRouter()
 router.register("menu-items", MenuItemViewSet, basename='menuitem') 
@@ -61,4 +61,6 @@ urlpatterns = [
     path('menu/cuisine/<str:cuisine_type>/', views.CuisineMenuItemView, name="menu-by-cuisine"),
 
     path('api/', include(router.urls)),
+
+    path('api/tables/available/', AvaliableTablesAPIView.as_view(), name='available_tables_api'),
 ]
