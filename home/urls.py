@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework.rounters import DefaultRouter
+from .views import MenuItemViewSet
 
 router = DefaultRouter()
 router.register("menu-items", MenuItemViewSet, basename='menuitem') 
@@ -58,4 +59,6 @@ urlpatterns = [
     path('menu-items/', views.AvaliableMenuItemsView, name="menu-items"),
 
     path('menu/cuisine/<str:cuisine_type>/', views.CuisineMenuItemView, name="menu-by-cuisine"),
+
+    path('api/', include(router.urls)),
 ]
