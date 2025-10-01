@@ -6,9 +6,9 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ
+from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table
 
-from .serializers import FAQSerializer, MenuItemSerializer
+from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -481,3 +481,11 @@ class MenuItemViewSet(viewset.ReadOnlyModelViewset):
         if category_id:
             queryset = queryset.filter(category__id=category_id)
         return queryset
+
+# ----------------------------------------AvailableTableAPIView----------------------------------
+
+class AvailableTableAPIView(generics.ListAPIView):
+    serializer_class = TableSerializer
+
+    def get_queryset(self):
+        return Table.objects.filter(is_available=True)
