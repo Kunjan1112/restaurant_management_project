@@ -18,7 +18,7 @@ def calculate_discount(price, discount_percentage):
 
     # Calculate discounted price
     discount_amount = (price * discount_percentage) / 100
-    discount_price = price - discount_amount
+    discounted_price = price - discount_amount
 
     return round(discounted_price, 2)
    
