@@ -50,39 +50,11 @@ class OrderItem(models.Model):
  
 class Coupon(models.Model):
     code = models.CharField(max_length=20, unique=True)
-    discount_precent = models.PositiveIntegerField(default=0)
-    active = models.BooleanField(default=True)
+    discount_percentage = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    valid_from = models.DateField(null=True, blank=True)
+    valid_until = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.code
-
-class OrderQuerySet(models.QuerySet):
-    def with_status(self, status):
-        return self.filter(status=status)
-
-    def pending(self):
-        return self.filter(status="pending")
-
-    def completed(self):
-        return self.filter(status="completed")
-
-    def cancelled(self):
-        return self.filter(status="cancelled")
-
-
-class OrderManager(models.Manager):
-    def get_queryset(self):
-        return OrderQuerySet(self.model, using=self._db)
-
-    def with_status(self, status):
-        return self.get_queryset().with_status(status)
-
-    def pending(self):
-        return self.get_queryset().pending()
-
-    def completed(self):
-        return self.get_queryset().completed()
-
-    def cancelled(self):
-        return self.get_queryset().cancelled()
+        return f"{self.code} - {self.discount_percentage}%"
