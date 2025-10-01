@@ -9,7 +9,7 @@ router.register("menu-items", MenuItemViewSet, basename='menuitem')
 urlpatterns = [
 
     path('name/',views.name),
-
+ 
     path('',views.index,name='index'),
 
     path('login_view/',views.login_view,name='login_view'),
