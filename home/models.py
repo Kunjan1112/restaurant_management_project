@@ -129,7 +129,7 @@ class MenuCategory(models.Model):
         verbose_name_plural = 'Menu Categories'
 
     def __str__(self):
-        return self.name
+        return self.name 
 
 # -----------------------------------------MenuItem------------------------------------------
 
