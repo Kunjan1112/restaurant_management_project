@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from rest_framework.rounters import DefaultRouter
+from rest_framework.routers import DefaultRouter
 from .views import MenuItemViewSet
 
 router = DefaultRouter()
