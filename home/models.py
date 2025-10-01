@@ -1,5 +1,7 @@
 from django.db import models
 
+# -------------------------------------------Home--------------------------------------
+
 class Home(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -11,12 +13,16 @@ class Home(models.Model):
     def __str__(self):
         return self.title
 
+# ------------------------------------------FeedBack--------------------------------------
+
 class Feedback(models.Model):
     comments = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.comments[:20]
+
+# -----------------------------------------ContactSubmission------------------------------
 
 class ContactSubmission(models.Model):
     name = models.CharField(max_length=100)
@@ -27,6 +33,8 @@ class ContactSubmission(models.Model):
     def __str__(self): 
         return f"{self.name} - ({self.email})"
 
+# -----------------------------------------RestaurantLocation-----------------------------
+
 class RestaurantLocation(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
@@ -36,6 +44,8 @@ class RestaurantLocation(models.Model):
 
     def __str__(self):
         return f"{self.address}, {self.city}, {self.state} - {self.zip_code}"
+
+# -----------------------------------------Special----------------------------------------
 
 class Special(models.Model):
     item_name = models.CharField(max_length=100)
@@ -48,6 +58,8 @@ class Special(models.Model):
 
     def __str__(self):
         return self.item_name
+
+# -----------------------------------------OpeningHour-----------------------------------
 
 class OpeningHour(models.Model):
     DAY_CHOICES = [
@@ -70,6 +82,7 @@ class OpeningHour(models.Model):
     def __str__(self):
         return f"{self.day}: {self.open_time.strftime('%I:%M %p')} - {self.close_time.strftime('%I:%M %p')}"
 
+# ----------------------------------------------Chef----------------------------------------------
 
 class Chef(models.Model):
     name = models.CharField(max_length=100)
@@ -80,12 +93,16 @@ class Chef(models.Model):
     def __str__(self):
         return self.name
 
+# ---------------------------------------NewSletterSubscriber-----------------------------------------
+
 class NewSletterSubscriber(models.Model):
     email = models.EmailField(unique=True)
     subscribed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+# ----------------------------------------RestaurantInfo---------------------------------------------
  
 class RestaurantInfo(models.Model):
     name = models.CharField(max_length=200, default="Delicious Bites Restaurant")
@@ -102,21 +119,29 @@ class RestaurantInfo(models.Model):
     def __str__(self):
         return self.name
 
-# -----------------------------------------MenuItem------------------------------------------
+# ------------------------------------------MenuCategory-----------------------------------------
 
-class MenuItem(models.Model):
-    name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    cuisine = models.CharField(max_length=100)
-    is_available = models.BooleanField(default=True)
+class MenuCategory(models.Model):
+
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        verbose_name_plural = 'Menu Categories'
 
     def __str__(self):
         return self.name
 
-    @classmethod
-    def get_items_by_cuisine(cls, cuisine_type:str):
+# -----------------------------------------MenuItem------------------------------------------
 
-        return cls.objects.filter(cuisine__iexact=cuisine_type)
+class MenuItem(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    image = models.ImageField(updated_to='menu_images/', blank=True, null=True)
+    category = models.Foreignkey(MenuCategory, on_delete=models.CASCADE, related_name="items")
+
+    def __str__(self):
+        return f"{self.name} - {self.price}"
 
 # -----------------------------------------------ContactInfo---------------------------------------------
 
