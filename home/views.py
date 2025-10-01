@@ -468,3 +468,16 @@ class CuisineMenuItemsView(APIView):
         items = MenuItem.get_items_by_cuisine(cuisine_type)
         serializer = MenuItemSerializer(items, many=True)
         return Response(serializer.data)
+
+# ------------------------------------------MenuItemViewSet----------------------------------
+
+class MenuItemViewSet(viewset.ReadOnlyModelViewset):
+
+    serializer_class = MenuItemSerializer
+
+    def get_queryset(self):
+        queryset = MenuItem.objects.all()
+        category_id = self.request.query_paramsg.get('category')
+        if category_id:
+            queryset = queryset.filter(category__id=category_id)
+        return queryset
