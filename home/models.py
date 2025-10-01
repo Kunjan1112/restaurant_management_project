@@ -197,3 +197,21 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+# -----------------------------------------Table-----------------------------------------------
+
+class Table(models.Model):
+    table_number = models.PositiveIntegerField(unique=True)
+    capacity = models.PositiveIntegerField(help_text="Maximum number or people the table can accommodate")
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['table_number']
+        verbose_name = "Table"
+        verbose_name_plural = "Tables"
+
+    def __str__(self):
+        status = "Available" if self.is_available else "Occupied"
+        return f"Table {self.table_number} (Capacity: {self.capacity}) - {status}"
