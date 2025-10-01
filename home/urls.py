@@ -1,5 +1,9 @@
 from django.urls import path, include
 from . import views
+from rest_framework.rounters import DefaultRouter
+
+router = DefaultRouter()
+router.register("menu-items", MenuItemViewSet, basename='menuitem') 
 
 urlpatterns = [
 
