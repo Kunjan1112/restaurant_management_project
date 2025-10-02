@@ -1,6 +1,8 @@
 import re
 import datetime
 
+from .models import Table
+
 # -------------------------------------------calculate_discount---------------------------------------
 
 def calculate_discount(price, discount_percentage):
@@ -51,3 +53,11 @@ def is_restaurant_open():
 
     else:
         return weekend_open < current_time <= weekend_close
+
+# ----------------------------------------------get_available_tables_by_capacity----------------------------------
+
+def get_available_tables_by_capacity(num:guests: int):
+    return Table.objects.filter(
+        is_available=True,
+        capacity__gte = num_guests
+    ).order_by('capacity')
