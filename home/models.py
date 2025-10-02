@@ -215,3 +215,4 @@ class Table(models.Model):
     def __str__(self):
         status = "Available" if self.is_available else "Occupied"
         return f"Table {self.table_number} (Capacity: {self.capacity}) - {status}"
+        
