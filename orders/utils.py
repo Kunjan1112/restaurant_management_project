@@ -123,3 +123,14 @@ def calculate_average_rating(review_queryset):
 
     avg_rating = review_queryset.aggregate(Avg('rating'))['rating__avg']
     return float(avg_rating) if avg_rating is not None else 0.0
+
+# -----------------------------------------Get Daily Sales Total------------------------------------
+
+def get_daily_sales_total(target_date: date) -> float:
+
+    total = (
+        Order.objects.filter(created_at__date=target_date)
+        .aggregate(total_sum=Sum('total_price'))['total_sum']
+        or 0
+    )
+    return float(total)
