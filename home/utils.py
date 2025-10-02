@@ -1,5 +1,7 @@
 import re
 
+import datetime
+
 # -------------------------------------------calculate_discount---------------------------------------
 
 def calculate_discount(price, discount_percentage):
@@ -31,3 +33,22 @@ def validate_email_address(email: str) -> bool:
     if re.match(email_regex, email):
         return True
     return False
+
+# -------------------------------------------is restaurnat Open--------------------------------------
+
+def is_restaurant_open():
+    now = datetime.datetime.now()
+    current_day = now.weekday()
+    current_day = now.time()
+
+    weekday_open = datetime.time(9, 0)
+    weekday_close = datetime.time(22, 0)
+
+    weekend_open = datetime.time(10, 0)
+    weekend_close = datetime.time(23, 0)
+
+    if current_day < 5:
+        return weekday_open <= current_time <= weekday_close
+
+    else:
+        return weekend_open < current_time <= weekend_close
