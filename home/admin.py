@@ -1,21 +1,6 @@
 from django.contrib import admin
-from .models import Special, Chef
+from .models import Table
 
-# Register your models here.
+# Register the Table model
 
-
-@admin.register(Special)
-class SpecialAdmin(admin.ModelAdmin):
-    list_display = ('item_name', 'price', 'created_at')
-
-@admin.register(OpeningHour)
-class OpeningHourAdmin(admin.ModelAdmin):
-    list_display = ("day","open_time", "close_time")
-
-admin.site.register(Chef)
-
-admin.site.register(RestaurantInfo)
-
-@admin.register(SiteSettings)
-class SiteSettingsAdmin(admin.ModelAdmin):
-    list_display = ('restaurant_name', 'logo')
+admin.site.register(Table)
