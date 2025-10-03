@@ -1,7 +1,5 @@
 import re
 
-import datetime
-
 from .models import Table
 
 # -------------------------------------------calculate_discount---------------------------------------
@@ -64,6 +62,8 @@ def get_available_tables_by_capacity(num:guests: int):
     ).order_by('capacity')
 
 # ---------------------------------------------is_restaurant_open---------------------------------------
+
+import datetime
 
 def is_restaurant_open() -> bool:
 
