@@ -16,7 +16,7 @@ class ActiveOrderManger(models.Manager):
 
 # --------------------------------------Order----------------------------------
 
-class Order(models.Model):
+class Order(models.Model): 
     STATUS_CHOICES =[
         ('pending', 'Pending'),
         ('completed', 'Completed'),
