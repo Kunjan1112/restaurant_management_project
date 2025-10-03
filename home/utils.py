@@ -61,3 +61,25 @@ def get_available_tables_by_capacity(num:guests: int):
         is_available=True,
         capacity__gte = num_guests
     ).order_by('capacity')
+
+# ---------------------------------------------is_restaurant_open---------------------------------------
+
+def is_restaurant_open() -> bool:
+
+    now = datetime.datetime.now():
+    current_day = now.weekday()
+    current_time = now.time()
+
+    opening_hours = {
+        0: (datetime.time(9,0), datetime.time(22, 0)),
+        1: (datetime.time(9,0), datetime.time(22, 0)),
+        2: (datetime.time(9,0), datetime.time(22, 0)),
+        3: (datetime.time(9,0), datetime.time(22, 0)),
+        4: (datetime.time(9,0), datetime.time(22, 0)),
+    }
+
+    if current_day not in opening_hours:
+        return False
+
+    open_time, close_time = opening_hours[current_day]
+    return open_time <= current_time <= close_time
