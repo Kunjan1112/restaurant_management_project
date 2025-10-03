@@ -66,7 +66,7 @@ def get_available_tables_by_capacity(num:guests: int):
 
 def is_restaurant_open() -> bool:
 
-    now = datetime.datetime.now():
+    now = datetime.datetime.now()
     current_day = now.weekday()
     current_time = now.time()
 
