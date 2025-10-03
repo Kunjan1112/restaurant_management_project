@@ -495,3 +495,8 @@ class AvailableTableAPIView(generics.ListAPIView):
 class TableDetailAPIView(generics.RetrieveAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
+
+# --------------------------------------TableListAPIView------------------------------------------
+class TableListAPIView(generics.ListAPIView):
+    queryset = Table.objects.all().order_by("table_number")
+    serializer_class = TableSerializer
