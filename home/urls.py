@@ -30,8 +30,6 @@ urlpatterns = [
 
     path('thank-you/',views.thank_you_view,name="thank_you"),
 
-    path('reservations/',views.reservations_view,name="reservations"),
-
     path('our-story/',views.our_story,name="our_story"),
     
     path('staff/',views.staff_view,name='staff'),
@@ -50,7 +48,7 @@ urlpatterns = [
     
     path('privacy-policy/',views.privacy_policy,name="privacy_policy"),
 
-    path('terms-service/', view.terms_service, name="terms_service"),
+    path('terms-service/', views.terms_service, name="terms_service"),
 
     path('logout_view/',views.logout_view,name="logout_view"),
     
@@ -67,4 +65,6 @@ urlpatterns = [
     path('api/tables/<int:pk>/', TableDetailAPIView.as_view(), name='table_detail'),
 
     path('api/tables/', TableListAPIView.as_view(), name='table-list'),
+
+    path('api/cuisines/', views.CuisineMenuItemView.as_view(), name='cuisine-list'),
 ]
