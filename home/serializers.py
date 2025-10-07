@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from products.models import MenuCategory
 
-from .models import ContactFormSubmission, MenuItem, UserReview, Restaurant, OpeningHour, FAQ, Table
+from .models import ContactFormSubmission, MenuItem, UserReview, Restaurant, OpeningHour, FAQ, Table, Cuisine
 
 # ----------------------------------------------------------------------------------------
 
@@ -92,5 +92,10 @@ class TableSerializer(serializers.ModelSerializer):
         model = Table
         fields = ['table_number', 'capacity', 'is_available']
         
-        
+# ---------------------------------------------CuisineSerializer-------------------------------------
+
+class CuisineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cuisine
+        fields = ['id', 'name']
 
