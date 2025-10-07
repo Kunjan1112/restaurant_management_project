@@ -6,9 +6,9 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table
+from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table, Cuisine
 
-from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer
+from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer, CuisineSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -500,3 +500,9 @@ class TableDetailAPIView(generics.RetrieveAPIView):
 class TableListAPIView(generics.ListAPIView):
     queryset = Table.objects.all().order_by("table_number")
     serializer_class = TableSerializer
+
+# --------------------------------------CuisineListView--------------------------------------------
+
+class CuisineListView(generics.ListAPIView):
+    queryset = Cuisine.objects.all()
+    serializer_class = CuisineSerializer
