@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from products.models import MenuCategory
 
-from .models import ContactFormSubmission, MenuItem, UserReview, Restaurant, OpeningHour, FAQ, Table, Cuisine, UserReview
+from .models import ContactFormSubmission, MenuItem, UserReview, Restaurant, OpeningHour, FAQ, Table, Cuisine, UserReview, Ingredient
 
 # ----------------------------------------------------------------------------------------
 
@@ -98,6 +98,13 @@ class CuisineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cuisine
         fields = ['id', 'name']
+
+# ------------------------------------------Ingredient---------------------------------------------
+
+class IngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = ['id', 'name', 'unit_of_measure']
 
 
 
