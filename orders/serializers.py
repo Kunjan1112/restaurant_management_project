@@ -65,4 +65,4 @@ class OrderSummarySerializer(serializers.ModelSerializers):
 class TableSerializer(serializers.ModelSerializers):
     class Meta:
         model = Table
-        fields = ['id', 'number', 'seats', 'is_available']
+        fields = ['id', 'number', 'seats', 'is_available'] 
