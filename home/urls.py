@@ -1,10 +1,12 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import MenuItemViewSet, AvaliableTablesAPIView, TableDetailAPIView, TableListAPIView, MenuItemReviewCreateView
+from .views import MenuItemViewSet, AvaliableTablesAPIView, TableDetailAPIView, TableListAPIView, MenuItemReviewCreateView, IngredientViewSet
 
 router = DefaultRouter()
 router.register("menu-items", MenuItemViewSet, basename='menuitem') 
+router.register(r'ingredients', IngredientViewSet, basename='ingredient')
+
 
 urlpatterns = [
 
