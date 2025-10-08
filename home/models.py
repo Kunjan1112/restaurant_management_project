@@ -1,5 +1,6 @@
 from django.db import models
 
+from datetime import date
 
 # -------------------------------------------Home--------------------------------------
 
@@ -237,3 +238,14 @@ class Restaurant(models.Model):
     def __str__(self):
         return f"{self.name} (Capacity: {self.capacity})"
         
+# -------------------------------------DailySpecial--------------------------------------------
+
+class DailySpecial(models.Model):
+    menu_item = models.ForeignKey('MenuItem', on_delete=models.CASCADE)
+    date = models.DateField()
+
+    class Meta:
+        unique_together = (('menu_item', 'date'),)
+
+    def __str__(self):
+        return f"{self.menu_item.name} - {self.date}"
