@@ -39,13 +39,13 @@ class Order(models.Model):
 # ------------------------------------------OrderItem----------------------------------
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    product_name = models.CharField(max_length=200)
-    quantity = models.PositiveIntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='items')
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    price_at_time_of_order = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return f"{self.product_name} X {self.quantity}"
+        return f"{self.quantity} x {self.menu_item.name}"
 
 # ---------------------------------------Coupon-------------------------------------
  
