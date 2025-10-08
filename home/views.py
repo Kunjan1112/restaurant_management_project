@@ -6,9 +6,9 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table, Cuisine
+from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table, Cuisine, UserReviews
 
-from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer, CuisineSerializer
+from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer, CuisineSerializer, UserReviewSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -506,3 +506,27 @@ class TableListAPIView(generics.ListAPIView):
 class CuisineListView(generics.ListAPIView):
     queryset = Cuisine.objects.all()
     serializer_class = CuisineSerializer
+
+# ------------------------------------MenuItemReviewCreateView-----------------------------------
+
+class MenuItemReviewCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, menu_item_id):
+        menu_item = get_object_or_404(MenuItem, id=menu_item_id)
+
+        rating = request.data.get('rating')
+        if rating is None or not (1 <= int(rating) <= 5):
+            return Response({'error': "Rating must be an integer between 1 and 5."}, status=status.HTTP_400_BAD_REQUEST)
+
+        comment = request.data.get("comment", "")
+
+        review = UserReviews.objects.create(
+            user = request.user,
+            menu_item = menu_item,
+            rating = rating,
+            comment = comment
+        )
+
+        serializer = UserReviewsSerializer(review)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
