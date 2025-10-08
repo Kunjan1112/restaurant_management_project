@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics, status
-from .models import Order
-from .serializers import OrderSummarySerializer
+from .models import Order, Table
+from .serializers import OrderSummarySerializer, TableSerializer
 
 # Create your views here.
 
@@ -36,3 +36,9 @@ class OrderSummarySerializer(generics.RetrieveAPIView):
 
         serializer = self.get_serializer(order)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# -------------------------------------------------TableListView------------------------------------
+
+class TableListView(generics.ListAPIView):
+    queryset = Table.objects.all()
+    serializer_class = TableSerializer
