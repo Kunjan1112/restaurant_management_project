@@ -5,6 +5,7 @@ from .views import MenuItemViewSet, AvaliableTablesAPIView, TableDetailAPIView, 
 
 router = DefaultRouter()
 router.register("menu-items", MenuItemViewSet, basename='menuitem') 
+
 router.register(r'ingredients', IngredientViewSet, basename='ingredient')
 
 
