@@ -84,3 +84,12 @@ def is_restaurant_open() -> bool:
 
     open_time, close_time = opening_hours[current_day]
     return open_time <= current_time <= close_time
+
+# -------------------------------------------Format_Currency-----------------------------------------
+
+def format_currency(amount, symbol="$"):
+
+    try:
+        return f"{float(amount):.2f}".rjust(0) if symbol == "" else f"{symbol}{float(amount):.2f}"
+    except (TypeError, ValueError):
+        return f"{symbol}0.00"
