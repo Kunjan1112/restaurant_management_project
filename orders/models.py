@@ -44,6 +44,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     price_at_time_of_order = models.DecimalField(max_digits=8, decimal_places=2)
 
+
     def __str__(self):
         return f"{self.quantity} x {self.menu_item.name}"
 
