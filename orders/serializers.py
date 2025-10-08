@@ -63,6 +63,7 @@ class OrderSummarySerializer(serializers.ModelSerializers):
 # -----------------------------------------TableSerializer--------------------------------------
 
 class TableSerializer(serializers.ModelSerializers):
+    
     class Meta:
         model = Table
         fields = '__all__'
