@@ -8,6 +8,7 @@ from home.models import MenuItem
 
 from django.conf import settings
 
+
 # Create your models here.
 
 class ActiveOrderManger(models.Manager):
