@@ -240,8 +240,19 @@ class Restaurant(models.Model):
         
 # -------------------------------------DailySpecial--------------------------------------------
 
+class MenuItem(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+    def is_daily_special(self):
+        today = date.today()
+        return DailySpecial.objects.filter(menu_item=self, date=today).exists()
+
 class DailySpecial(models.Model):
-    menu_item = models.ForeignKey('MenuItem', on_delete=models.CASCADE)
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     date = models.DateField()
 
     class Meta:
