@@ -82,4 +82,4 @@ class Table(models.Model):
     is_avaliable = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Table {self.number} ({self.seats} seats)"
+        return f"Table {self.number} ({self.seats} seats)" 
