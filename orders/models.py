@@ -39,6 +39,7 @@ class Order(models.Model):
 # ------------------------------------------OrderItem----------------------------------
 
 class OrderItem(models.Model):
+    
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='items')
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
