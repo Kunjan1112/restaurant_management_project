@@ -6,9 +6,9 @@ from django.db import DatabaseError
 from django.conf import settings
 from django.core.mail import send_mail
 
-from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table, Cuisine, UserReviews
+from .models import Restaurant, Special, OpeningHours, MenuItem, FAQ, Table, Cuisine, UserReviews, Ingredient
 
-from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer, CuisineSerializer, UserReviewSerializer
+from .serializers import FAQSerializer, MenuItemSerializer, TableSerializer, CuisineSerializer, UserReviewSerializer, IngredientSerializer
 
 from .forms import ContactForm
 from .utils import generate_breadcrumbs
@@ -530,3 +530,9 @@ class MenuItemReviewCreateView(APIView):
 
         serializer = UserReviewsSerializer(review)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# ----------------------------------------------IngredientViewSet---------------------------------------------
+
+class IngredientViewSet(viewsets.ModelViewSet):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
