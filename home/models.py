@@ -251,6 +251,7 @@ class MenuItem(models.Model):
         today = date.today()
         return DailySpecial.objects.filter(menu_item=self, date=today).exists()
 
+
 class DailySpecial(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     date = models.DateField()
