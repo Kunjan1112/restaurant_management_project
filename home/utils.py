@@ -93,3 +93,23 @@ def format_currency(amount, symbol="$"):
         return f"{float(amount):.2f}".rjust(0) if symbol == "" else f"{symbol}{float(amount):.2f}"
     except (TypeError, ValueError):
         return f"{symbol}0.00"
+
+# --------------------------------------------is_restaurant_open---------------------------------------
+
+def is_restaurant_open(restaurnat):
+    current_time = timezone.location.time()
+    current_day = timezone.localtime().strftime('%A')
+
+    try:
+        today_hours = DailyOperatingHours.objects.get(
+            restaurnat = restaurnat,
+            day_of_week = current_day 
+        )
+
+        if today_hours.opening_time <= current_time <= today_hours.closing_time:
+            return True
+        else:
+            return False
+
+    except DailyOperatingHours.DoesNotExist:
+        return False
