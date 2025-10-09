@@ -64,6 +64,7 @@ class Special(models.Model):
 # -----------------------------------------OpeningHour-----------------------------------
 
 class OpeningHour(models.Model):
+    
     DAY_CHOICES = [
         ('Monday', 'Monday'),
         ('Tuesday', 'Tuesday'),
