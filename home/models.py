@@ -82,7 +82,7 @@ class OpeningHour(models.Model):
         ordering = ['id']
     
     def __str__(self):
-        return f"{self.day}: {self.open_time.strftime('%I:%M %p')} - {self.close_time.strftime('%I:%M %p')}"
+        return f"{self.day}: {self.open_time.strftime('%I:%M %p')} - {self.close_time.strftime('%I:%M %p')}" 
 
 # ----------------------------------------------Chef----------------------------------------------
 
