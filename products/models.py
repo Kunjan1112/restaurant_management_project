@@ -42,6 +42,7 @@ class Review(models.Model):
 # ------------------------------------------Ingredient--------------------------------
 
 class Ingredient(models.Model):
+    
     name = models.CharField(max_length=100, unique=True)
     unit_of_measure = models.CharField(max_length=50)
 
