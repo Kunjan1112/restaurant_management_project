@@ -134,3 +134,16 @@ def get_daily_sales_total(target_date: date) -> float:
         or 0
     )
     return float(total)
+
+# -----------------------------------------calculate_estimated_prep_time-----------------------------------
+
+def calculate_estimated_prep_time(order_items):
+
+    total_prep_time = 0
+
+    for item in order_items:
+        prep_time = item.get('prep_time_minutes', 0)
+        quantity = item.get('quantity', 1)
+        total_prep_time += prep_time * quantity
+    
+    return int(total_prep_time)
