@@ -283,3 +283,14 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.unit_of_measure})"
+
+# --------------------------------------------MenuItem----------------------------------------
+
+class MenuItem(models.Model):
+    name = models.CharField(max_length=100)
+    cuisine = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
