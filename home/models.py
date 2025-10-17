@@ -294,3 +294,11 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.name
+
+# --------------------------------------------Submission--------------------------------------
+
+class Submission(models.Model):
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Submission at {self.submitted_at}"
