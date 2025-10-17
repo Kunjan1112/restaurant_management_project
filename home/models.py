@@ -233,12 +233,12 @@ class Table(models.Model):
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    capacity = models.IntegerField(default=0, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.name} (Capacity: {self.capacity})"
+    address = models.TextField()
+    contact_number = models.CharField(max_length=15)
+    max_capacity = models.IntegerField(null=True, blank=True)
         
+    def __str__(self):
+        return self.name
 # -------------------------------------DailySpecial--------------------------------------------
 
 class MenuItem(models.Model):
