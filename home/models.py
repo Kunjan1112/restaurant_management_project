@@ -22,7 +22,7 @@ class Feedback(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.comments[:20]
+        return self.comments[:20] 
 
 # -----------------------------------------ContactSubmission------------------------------
 
